@@ -72,8 +72,9 @@ public class MainFrame extends JFrame {
 		
 	    panCenter.add(panEntities, BorderLayout.CENTER);
 		add(panCenter, BorderLayout.CENTER);
-		
-		
+
+		MyStatusBar myStatusBar= new MyStatusBar();
+		this.add(myStatusBar,BorderLayout.SOUTH);
 	}
 	
 }
