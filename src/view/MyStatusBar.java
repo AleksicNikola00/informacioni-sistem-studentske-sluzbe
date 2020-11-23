@@ -3,11 +3,8 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -17,6 +14,10 @@ import javax.swing.JPanel;
 
 
 public class MyStatusBar extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel labela2=new JLabel();
 	
 	MyStatusBar(){

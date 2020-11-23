@@ -1,12 +1,7 @@
 package view;
 
-import java.awt.Dimension;
-
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
