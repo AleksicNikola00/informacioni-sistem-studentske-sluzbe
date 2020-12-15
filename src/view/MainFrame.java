@@ -2,25 +2,27 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Toolkit;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
 
 public class MainFrame extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
-	public MainFrame() {
+	private static MainFrame instance = null;
+
+	public static MainFrame getInstance() {
+		if (instance == null) {
+			instance = new MainFrame();
+		}
+		return instance;
+	}
+	
+	private MainFrame() {
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = kit.getScreenSize();
 		int screenHeight = screenSize.height;
@@ -29,30 +31,17 @@ public class MainFrame extends JFrame {
 		setTitle("Studentska služba");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
+		setVisible(true);
 		
+		inicijalizacija();
+	}
+	
+	private void inicijalizacija() {
 		MyMenuBar myMenuBar=new MyMenuBar();
 		this.setJMenuBar(myMenuBar);
 		
 		Toolbar toolbar = new Toolbar();
 		add(toolbar, BorderLayout.NORTH);
-		
-		JPanel panCenter = new JPanel();
-		panCenter.setLayout(new BorderLayout());
-		
-		Dimension dim = new Dimension(200, 30);
-		
-		JPanel panSearch = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		JTextField searchBox = new JTextField();
-        searchBox.setPreferredSize(dim);
-        searchBox.setToolTipText("Unesi tekst");
-		
-        JButton btnSearch = new JButton();
-		btnSearch.setToolTipText("Traži");
-		btnSearch.setIcon(new ImageIcon("images/pretrazi_22x22.png"));
-		
-		panSearch.add(searchBox);
-		panSearch.add(btnSearch);
-		panCenter.add(panSearch, BorderLayout.NORTH);
 		
 		JPanel firstPan = new JPanel();
 		JPanel secondPan = new JPanel();
@@ -68,8 +57,7 @@ public class MainFrame extends JFrame {
 		panEntities.add("Profesori", secondPan);
 		panEntities.add("Predmet", thirdPan);
 		
-	    panCenter.add(panEntities, BorderLayout.CENTER);
-		add(panCenter, BorderLayout.CENTER);
+		add(panEntities, BorderLayout.CENTER);
 
 		MyStatusBar myStatusBar= new MyStatusBar();
 		this.add(myStatusBar,BorderLayout.SOUTH);
