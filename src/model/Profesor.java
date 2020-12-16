@@ -1,7 +1,12 @@
 package model;
 
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
 
 public class Profesor {
 
@@ -11,15 +16,14 @@ public class Profesor {
 	private String adresaStanovanja;
 	private String telefon;
 	private String email;
+	private JPanel panelZvanja;
+	private JPanel panelTitule;
 	private String adresaKancelarije;
 	private String brojLicneKarte;
-	private String titula;
-	private String zvanje;
 	private ArrayList<Predmet> predmeti;
 	
 	public Profesor(String prezime, String ime, Calendar datumRodjenja, String adresaStanovanja, String telefon,
-			String email, String adresaKancelarije, String brojLicneKarte, String titula, String zvanje,
-			ArrayList<Predmet> predmeti) {
+			String email, String adresaKancelarije, String brojLicneKarte, ArrayList<Predmet> predmeti) {
 		super();
 		this.prezime = prezime;
 		this.ime = ime;
@@ -29,11 +33,27 @@ public class Profesor {
 		this.email = email;
 		this.adresaKancelarije = adresaKancelarije;
 		this.brojLicneKarte = brojLicneKarte;
-		this.titula = titula;
-		this.zvanje = zvanje;
 		this.predmeti = predmeti;
+		panelZvanja = new JPanel();
+		panelTitule = new JPanel();
+		comboZvanja();
+		comboTitule();
 	}
 
+	private void comboZvanja() {
+		String[] zvanja = {"Docent", "Vanredni profesor", "Redovni Profesor"};
+		final JComboBox<String> combo = new JComboBox<String>(zvanja);
+		panelZvanja.add(combo);
+		combo.setSelectedIndex(0);
+	}
+	
+	private void comboTitule() {
+		String[] titule = {"Doktor Nauka"};
+		final JComboBox<String> combo = new JComboBox<String>(titule);
+		panelTitule.add(combo);
+		combo.setSelectedIndex(0);
+	}
+	
 	public String getPrezime() {
 		return prezime;
 	}
@@ -96,22 +116,6 @@ public class Profesor {
 
 	public void setBrojLicneKarte(String brojLicneKarte) {
 		this.brojLicneKarte = brojLicneKarte;
-	}
-
-	public String getTitula() {
-		return titula;
-	}
-
-	public void setTitula(String titula) {
-		this.titula = titula;
-	}
-
-	public String getZvanje() {
-		return zvanje;
-	}
-
-	public void setZvanje(String zvanje) {
-		this.zvanje = zvanje;
 	}
 
 	public ArrayList<Predmet> getPredmeti() {
