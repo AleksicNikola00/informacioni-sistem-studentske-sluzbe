@@ -15,11 +15,11 @@ public class Profesor {
 	private String brojLicneKarte;
 	private String titula;
 	private String zvanje;
-	private ArrayList<String> predmeti = new ArrayList<String>();
+	private ArrayList<Predmet> predmeti;
 	
 	public Profesor(String prezime, String ime, Calendar datumRodjenja, String adresaStanovanja, String telefon,
 			String email, String adresaKancelarije, String brojLicneKarte, String titula, String zvanje,
-			ArrayList<String> predmeti) {
+			ArrayList<Predmet> predmeti) {
 		super();
 		this.prezime = prezime;
 		this.ime = ime;
@@ -114,11 +114,11 @@ public class Profesor {
 		this.zvanje = zvanje;
 	}
 
-	public ArrayList<String> getPredmeti() {
+	public ArrayList<Predmet> getPredmeti() {
 		return predmeti;
 	}
 
-	public void setPredmeti(ArrayList<String> predmeti) {
+	public void setPredmeti(ArrayList<Predmet> predmeti) {
 		this.predmeti = predmeti;
 	}
 	
