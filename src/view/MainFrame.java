@@ -7,7 +7,9 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 
 public class MainFrame extends JFrame {
 
@@ -21,6 +23,8 @@ public class MainFrame extends JFrame {
 		}
 		return instance;
 	}
+	
+	private JTable tabelaProfesora;
 	
 	private MainFrame() {
 		Toolkit kit = Toolkit.getDefaultToolkit();
@@ -36,6 +40,12 @@ public class MainFrame extends JFrame {
 		inicijalizacija();
 	}
 	
+	public void azurirajPrikaz() {
+		AbstractTableModelProfesori model = (AbstractTableModelProfesori) tabelaProfesora.getModel();
+		model.fireTableDataChanged();
+		validate();
+	}
+	
 	private void inicijalizacija() {
 		MyMenuBar myMenuBar=new MyMenuBar();
 		this.setJMenuBar(myMenuBar);
@@ -45,12 +55,11 @@ public class MainFrame extends JFrame {
 		
 		JPanel firstPan = new JPanel();
 		JPanel secondPan = new JPanel();
+		secondPan.setLayout(new BorderLayout());
 		JPanel thirdPan = new JPanel();
 		JLabel todoLbl1 = new JLabel("TODO: Prikaz studenata");
-		JLabel todoLbl2 = new JLabel("TODO: Prikaz profesora");
 		JLabel todoLbl3 = new JLabel("TODO: Prikaz predmeta");
-		firstPan.add(todoLbl1);
-		secondPan.add(todoLbl2);
+		firstPan.add(todoLbl1);	
 		thirdPan.add(todoLbl3);
 		JTabbedPane panEntities = new JTabbedPane();
 		panEntities.add("Studenti", firstPan);
@@ -61,6 +70,13 @@ public class MainFrame extends JFrame {
 
 		MyStatusBar myStatusBar= new MyStatusBar();
 		this.add(myStatusBar,BorderLayout.SOUTH);
+		
+		tabelaProfesora = new ProfesoriJTable();
+
+		JScrollPane scrollPane = new JScrollPane(tabelaProfesora);
+		secondPan.add(scrollPane, BorderLayout.CENTER);
+
+		this.azurirajPrikaz();
 	}
 	
 }

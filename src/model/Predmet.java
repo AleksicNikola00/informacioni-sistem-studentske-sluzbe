@@ -2,9 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-import javax.swing.JComboBox;
-import javax.swing.JPanel;
-
 public class Predmet {
 	
 	private String sifraPredmeta;
@@ -12,7 +9,6 @@ public class Predmet {
 	private String godinaStudija;
 	private Profesor profesor;
 	private String brojESPB;
-	private JPanel panelSemestar;
 	private ArrayList<Student> studentiKojiSuPoloziliPredmet;
 	private ArrayList<Student> studentiKojiNisuPoloziliPredmet;
 	
@@ -27,15 +23,6 @@ public class Predmet {
 		this.brojESPB = brojESPB;
 		this.studentiKojiSuPoloziliPredmet = studentiKojiSuPoloziliPredmet;
 		this.studentiKojiNisuPoloziliPredmet = studentiKojiNisuPoloziliPredmet;
-		panelSemestar = new JPanel();
-		comboSemestar();
-	}
-
-	private void comboSemestar() {
-		String[] semestar = {"Letnji", "Zimski"};
-		final JComboBox<String> combo = new JComboBox<String>(semestar);
-		panelSemestar.add(combo);
-		combo.setSelectedIndex(0);
 	}
 	
 	public String getSifraPredmeta() {

@@ -1,59 +1,52 @@
 package model;
 
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
-
-import javax.swing.JComboBox;
-import javax.swing.JPanel;
 
 public class Profesor {
 
 	private String prezime;
 	private String ime;
-	private Calendar datumRodjenja;
+	private LocalDate datumRodjenja;
 	private String adresaStanovanja;
 	private String telefon;
 	private String email;
-	private JPanel panelZvanja;
-	private JPanel panelTitule;
+	private String zvanje;
+	private String titula;
 	private String adresaKancelarije;
 	private String brojLicneKarte;
 	private ArrayList<Predmet> predmeti;
 	
-	public Profesor(String prezime, String ime, Calendar datumRodjenja, String adresaStanovanja, String telefon,
-			String email, String adresaKancelarije, String brojLicneKarte, ArrayList<Predmet> predmeti) {
-		super();
+	public Profesor(String ime, String prezime, String zvanje, String titula, LocalDate datumRodjenja, 
+			String adresaStanovanja, String telefon, String email, String adresaKancelarije, String brojLicneKarte) {
 		this.prezime = prezime;
 		this.ime = ime;
 		this.datumRodjenja = datumRodjenja;
 		this.adresaStanovanja = adresaStanovanja;
 		this.telefon = telefon;
 		this.email = email;
+		this.zvanje = zvanje;
+		this.titula = titula;
 		this.adresaKancelarije = adresaKancelarije;
 		this.brojLicneKarte = brojLicneKarte;
-		this.predmeti = predmeti;
-		panelZvanja = new JPanel();
-		panelTitule = new JPanel();
-		comboZvanja();
-		comboTitule();
+	}
+	
+	public String getZvanje() {
+		return zvanje;
 	}
 
-	private void comboZvanja() {
-		String[] zvanja = {"Docent", "Vanredni profesor", "Redovni Profesor"};
-		final JComboBox<String> combo = new JComboBox<String>(zvanja);
-		panelZvanja.add(combo);
-		combo.setSelectedIndex(0);
+	public void setZvanje(String zvanje) {
+		this.zvanje = zvanje;
 	}
-	
-	private void comboTitule() {
-		String[] titule = {"Doktor Nauka"};
-		final JComboBox<String> combo = new JComboBox<String>(titule);
-		panelTitule.add(combo);
-		combo.setSelectedIndex(0);
+
+	public String getTitula() {
+		return titula;
 	}
-	
+
+	public void setTitula(String titula) {
+		this.titula = titula;
+	}
+
 	public String getPrezime() {
 		return prezime;
 	}
@@ -70,11 +63,11 @@ public class Profesor {
 		this.ime = ime;
 	}
 
-	public Calendar getDatumRodjenja() {
+	public LocalDate getDatumRodjenja() {
 		return datumRodjenja;
 	}
 
-	public void setDatumRodjenja(Calendar datumRodjenja) {
+	public void setDatumRodjenja(LocalDate datumRodjenja) {
 		this.datumRodjenja = datumRodjenja;
 	}
 

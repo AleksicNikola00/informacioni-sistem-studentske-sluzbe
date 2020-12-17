@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -12,6 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
+
+import controller.ProfesoriController;
 
 public class Toolbar extends JToolBar {
 
@@ -65,6 +69,14 @@ public class Toolbar extends JToolBar {
 		toolbarRight.add(btnSearch);
 		
 		add(toolbarRight, BorderLayout.EAST);
+		
+		btnOpen.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ProfesoriController.getInstance().dodajProfesora();
+			}
+		});
 	}
 
 }
