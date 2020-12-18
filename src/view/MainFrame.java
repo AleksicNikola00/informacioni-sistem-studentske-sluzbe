@@ -1,7 +1,10 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.LayoutManager;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
@@ -27,6 +30,7 @@ public class MainFrame extends JFrame {
 	}
 	
 	private JTable tabelaProfesora;
+	private JTable tabelaStudenata;
 	private int selectedIndex;
 	
 	private MainFrame() {
@@ -46,6 +50,10 @@ public class MainFrame extends JFrame {
 	public void azurirajPrikaz() {
 		AbstractTableModelProfesori model = (AbstractTableModelProfesori) tabelaProfesora.getModel();
 		model.fireTableDataChanged();
+		
+		AbstractTableModelStudenti modelStudent=(AbstractTableModelStudenti) tabelaStudenata.getModel();
+		modelStudent.fireTableDataChanged();
+		
 		validate();
 	}
 	
@@ -58,11 +66,13 @@ public class MainFrame extends JFrame {
 		
 		JPanel firstPan = new JPanel();
 		JPanel secondPan = new JPanel();
-		secondPan.setLayout(new BorderLayout());
 		JPanel thirdPan = new JPanel();
-		JLabel todoLbl1 = new JLabel("TODO: Prikaz studenata");
+		secondPan.setLayout(new BorderLayout());
+		firstPan.setLayout(new BorderLayout());
+		thirdPan.setLayout(new BorderLayout());
+		//JLabel todoLbl1 = new JLabel("TODO: Prikaz studenata");
 		JLabel todoLbl3 = new JLabel("TODO: Prikaz predmeta");
-		firstPan.add(todoLbl1);	
+		//firstPan.add(todoLbl1);	
 		thirdPan.add(todoLbl3);
 		JTabbedPane panEntities = new JTabbedPane();
 		panEntities.add("Studenti", firstPan);
@@ -85,9 +95,13 @@ public class MainFrame extends JFrame {
 		this.add(myStatusBar,BorderLayout.SOUTH);
 		
 		tabelaProfesora = new ProfesoriJTable();
-
-		JScrollPane scrollPane = new JScrollPane(tabelaProfesora);
-		secondPan.add(scrollPane, BorderLayout.CENTER);
+		tabelaStudenata= new StudentiJTable();
+		
+		JScrollPane scrollPane1 = new JScrollPane(tabelaProfesora);
+		secondPan.add(scrollPane1, BorderLayout.CENTER);
+		
+		JScrollPane scrollPane2 = new JScrollPane(tabelaStudenata);
+		firstPan.add(scrollPane2, BorderLayout.CENTER);
 			
 		this.azurirajPrikaz();
 	}

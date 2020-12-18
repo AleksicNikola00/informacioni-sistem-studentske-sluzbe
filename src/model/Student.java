@@ -14,7 +14,7 @@ public class Student {
 	private Calendar datumRodjenja;
 	private String adresa;
 	private String email;
-	private int brojTelefona;
+	private String brojTelefona;
 	private String brojIndexa;
 	private int godinaUpisa;
 	private int trenutnaGodinaStudija;
@@ -31,7 +31,7 @@ public class Student {
 	
 	
 	
-	public Student(String ime, String prezime, Calendar datumRodjenja, String adresa, String email, int brojTelefona,
+	public Student(String ime, String prezime, Calendar datumRodjenja, String adresa, String email, String brojTelefona,
 			String brojIndexa, int godinaUpisa, int trenutnaGodinaStudija, Status status, double prosecnaOcena,
 			ArrayList<Ocena> spisakPolozenihIspita, ArrayList<Predmet> spisakNepolozenihIspita) {
 		super();
@@ -84,10 +84,10 @@ public class Student {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getBrojTelefona() {
+	public String getBrojTelefona() {
 		return brojTelefona;
 	}
-	public void setBrojTelefona(int brojTelefona) {
+	public void setBrojTelefona(String brojTelefona) {
 		this.brojTelefona = brojTelefona;
 	}
 	public String getBrojIndexa() {

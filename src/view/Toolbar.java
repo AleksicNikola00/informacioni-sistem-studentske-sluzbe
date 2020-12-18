@@ -16,6 +16,7 @@ import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
 import controller.ProfesoriController;
+import controller.StudentiController;
 
 public class Toolbar extends JToolBar {
 
@@ -70,14 +71,7 @@ public class Toolbar extends JToolBar {
 		
 		add(toolbarRight, BorderLayout.EAST);
 		
-		btnOpen.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(MainFrame.getInstance().getSelectedIndex() == 1)
-					ProfesoriController.getInstance().dodajProfesora();
-			}
-		});
+		btnOpen.addActionListener(new AddActionListener());
 	}
 
 }

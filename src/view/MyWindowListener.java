@@ -5,6 +5,7 @@ import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
 public class MyWindowListener implements WindowListener {
@@ -38,6 +39,8 @@ private static MyWindowListener instance=null;
 	@Override
 	public void windowClosing(WindowEvent arg0) {
 		JFrame frame =MainFrame.getInstance();
+		UIManager.put("OptionPane.yesButtonText", "Da");
+		UIManager.put("OptionPane.noButtonText", "Ne");
 		int code = JOptionPane.showConfirmDialog(frame, "Da li ste sigurni da želite da zatvorite aplikaciju?",
 				"Zatvaranje aplikacije?", JOptionPane.YES_NO_OPTION);
 		if (code != JOptionPane.YES_OPTION) {
