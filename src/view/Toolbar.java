@@ -74,7 +74,8 @@ public class Toolbar extends JToolBar {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ProfesoriController.getInstance().dodajProfesora();
+				if(MainFrame.getInstance().getSelectedIndex() == 1)
+					ProfesoriController.getInstance().dodajProfesora();
 			}
 		});
 	}

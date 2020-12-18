@@ -10,8 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-
-
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class MainFrame extends JFrame {
 
@@ -27,6 +27,7 @@ public class MainFrame extends JFrame {
 	}
 	
 	private JTable tabelaProfesora;
+	private int selectedIndex;
 	
 	private MainFrame() {
 		Toolkit kit = Toolkit.getDefaultToolkit();
@@ -69,6 +70,16 @@ public class MainFrame extends JFrame {
 		panEntities.add("Predmet", thirdPan);
 		
 		add(panEntities, BorderLayout.CENTER);
+		
+		panEntities.addChangeListener(new ChangeListener() {
+
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				JTabbedPane tabbedPane = (JTabbedPane) e.getSource();
+		        selectedIndex = tabbedPane.getSelectedIndex();
+			}
+		});
+		
 		addWindowListener(MyWindowListener.getInstance());
 		MyStatusBar myStatusBar= new MyStatusBar();
 		this.add(myStatusBar,BorderLayout.SOUTH);
@@ -79,6 +90,10 @@ public class MainFrame extends JFrame {
 		secondPan.add(scrollPane, BorderLayout.CENTER);
 			
 		this.azurirajPrikaz();
+	}
+
+	public int getSelectedIndex() {
+		return selectedIndex;
 	}
 	
 }
