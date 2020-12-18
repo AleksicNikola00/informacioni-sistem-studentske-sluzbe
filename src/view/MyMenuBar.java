@@ -37,8 +37,6 @@ public class MyMenuBar extends JMenuBar {
 		fClose.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,ActionEvent.CTRL_MASK));
 		fClose.setIcon(new ImageIcon("images/Screenshot_2.jpg"));
 		fClose.addActionListener(new MyActionListener3());
-		//fClose.add(new ExitAction());
-		//ExitAction ew=new ExitAction();
 		file.add(fNew);
 		file.add(fClose);
 		

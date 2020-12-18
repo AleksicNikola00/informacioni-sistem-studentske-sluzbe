@@ -7,7 +7,7 @@ import java.util.Calendar;
 
 public class Student {
 	
-	private enum Status{B,S}//B-budzet S-samofinansiranje
+	public enum Status{B,S}//B-budzet S-samofinansiranje
 	
 	private String ime;
 	private String prezime;
@@ -15,7 +15,7 @@ public class Student {
 	private String adresa;
 	private String email;
 	private int brojTelefona;
-	private int brojIndexa;
+	private String brojIndexa;
 	private int godinaUpisa;
 	private int trenutnaGodinaStudija;
 	private Status status;
@@ -32,7 +32,7 @@ public class Student {
 	
 	
 	public Student(String ime, String prezime, Calendar datumRodjenja, String adresa, String email, int brojTelefona,
-			int brojIndexa, int godinaUpisa, int trenutnaGodinaStudija, Status status, double prosecnaOcena,
+			String brojIndexa, int godinaUpisa, int trenutnaGodinaStudija, Status status, double prosecnaOcena,
 			ArrayList<Ocena> spisakPolozenihIspita, ArrayList<Predmet> spisakNepolozenihIspita) {
 		super();
 		this.ime = ime;
@@ -90,10 +90,10 @@ public class Student {
 	public void setBrojTelefona(int brojTelefona) {
 		this.brojTelefona = brojTelefona;
 	}
-	public int getBrojIndexa() {
+	public String getBrojIndexa() {
 		return brojIndexa;
 	}
-	public void setBrojIndexa(int brojIndexa) {
+	public void setBrojIndexa(String brojIndexa) {
 		this.brojIndexa = brojIndexa;
 	}
 	public int getGodinaUpisa() {
