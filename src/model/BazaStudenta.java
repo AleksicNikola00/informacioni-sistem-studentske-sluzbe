@@ -21,6 +21,8 @@ public class BazaStudenta {
 	
 	private BazaStudenta() {
 		
+		initStudenti();
+		
 		this.kolone=new ArrayList<String>();
 		this.kolone.add("Indeks");
 		this.kolone.add("Ime");
@@ -33,7 +35,9 @@ public class BazaStudenta {
 	private void initStudenti() {
 		this.studenti=new ArrayList<Student>();
 		//TO DO DODAJ STUDENTE!!
-		studenti.add(new Student());
+		studenti.add(new Student("Nikola", "Aleksic",  Calendar.getInstance(), "Zmaj Jovina 16/8",
+				"aleksamigojoni@stcable.rs", "069-731235", "RA-24-2018", 2018,3,Status.B, 9.24, new ArrayList<Ocena>(), 
+				new ArrayList<Predmet>()));
 	}
 
 	public List<Student> getStudenti() {
@@ -85,7 +89,7 @@ public class BazaStudenta {
 		}
 	}
 	
-	public void dodajStudenta(String ime, String prezime, Calendar datumRodjenja, String adresa, String email, int brojTelefona,
+	public void dodajStudenta(String ime, String prezime, Calendar datumRodjenja, String adresa, String email, String brojTelefona,
 			String brojIndexa, int godinaUpisa, int trenutnaGodinaStudija, Status status, double prosecnaOcena,
 			ArrayList<Ocena> spisakPolozenihIspita, ArrayList<Predmet> spisakNepolozenihIspita) {
 		
@@ -101,7 +105,7 @@ public class BazaStudenta {
 		}
 	}
 	
-	public void izmeniStudenta(String ime, String prezime, Calendar datumRodjenja, String adresa, String email, int brojTelefona,
+	public void izmeniStudenta(String ime, String prezime, Calendar datumRodjenja, String adresa, String email, String brojTelefona,
 			String brojIndexa, int godinaUpisa, int trenutnaGodinaStudija, Status status, double prosecnaOcena,
 			ArrayList<Ocena> spisakPolozenihIspita, ArrayList<Predmet> spisakNepolozenihIspita) {
 		

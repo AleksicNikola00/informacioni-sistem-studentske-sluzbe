@@ -1,10 +1,7 @@
 package view;
  
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.LayoutManager;
 import java.awt.Toolkit;
  
 import javax.swing.JFrame;
@@ -17,7 +14,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
  
 public class MainFrame extends JFrame {
- 
+	
         private static final long serialVersionUID = 1L;
        
         private static MainFrame instance = null;

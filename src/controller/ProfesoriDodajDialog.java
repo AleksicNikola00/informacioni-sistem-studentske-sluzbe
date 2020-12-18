@@ -9,7 +9,6 @@ import javax.swing.Box;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
 public class ProfesoriDodajDialog extends JDialog {
