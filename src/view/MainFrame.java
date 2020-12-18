@@ -11,6 +11,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 
+
+
 public class MainFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -67,7 +69,7 @@ public class MainFrame extends JFrame {
 		panEntities.add("Predmet", thirdPan);
 		
 		add(panEntities, BorderLayout.CENTER);
-
+		addWindowListener(MyWindowListener.getInstance());
 		MyStatusBar myStatusBar= new MyStatusBar();
 		this.add(myStatusBar,BorderLayout.SOUTH);
 		
@@ -75,7 +77,7 @@ public class MainFrame extends JFrame {
 
 		JScrollPane scrollPane = new JScrollPane(tabelaProfesora);
 		secondPan.add(scrollPane, BorderLayout.CENTER);
-
+			
 		this.azurirajPrikaz();
 	}
 	

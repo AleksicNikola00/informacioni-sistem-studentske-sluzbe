@@ -1,17 +1,26 @@
 package view;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
+import javax.swing.UIManager;
+import javax.swing.WindowConstants;
+
 
 
 public class MyMenuBar extends JMenuBar {
-
+	
 	/**
 	 * 
 	 */
@@ -27,6 +36,9 @@ public class MyMenuBar extends JMenuBar {
 		JMenuItem fClose= new JMenuItem("Close",KeyEvent.VK_C);
 		fClose.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,ActionEvent.CTRL_MASK));
 		fClose.setIcon(new ImageIcon("images/Screenshot_2.jpg"));
+		fClose.addActionListener(new MyActionListener3());
+		//fClose.add(new ExitAction());
+		//ExitAction ew=new ExitAction();
 		file.add(fNew);
 		file.add(fClose);
 		
@@ -46,9 +58,11 @@ public class MyMenuBar extends JMenuBar {
 		JMenuItem hHelp=new JMenuItem("Help",KeyEvent.VK_H);
 		hHelp.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H,ActionEvent.CTRL_MASK));
 		hHelp.setIcon(new ImageIcon("images/help.jpg"));
+		hHelp.addActionListener(new MyActionListener1());
 		JMenuItem hAbout=new JMenuItem("About",KeyEvent.VK_A);
 		hAbout.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,ActionEvent.CTRL_MASK));
 		hAbout.setIcon(new ImageIcon("images/about.jpg"));
+		hAbout.addActionListener(new MyActionListener2());
 		help.add(hHelp);
 		help.add(hAbout);
 		
@@ -56,4 +70,33 @@ public class MyMenuBar extends JMenuBar {
 		add(edit);
 		add(help);
 	}
+	
+	public class MyActionListener1 implements ActionListener{
+		String message="TO DO detaljan opis aplikacije!";
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			UIManager.put("OptionPane.minimumSize", new Dimension(300,200));
+			JOptionPane.showMessageDialog(MainFrame.getInstance(), message,"Help Dijalog",JOptionPane.PLAIN_MESSAGE);
+			
+		}
+	}
+	
+	public class MyActionListener2 implements ActionListener{
+		String message="TO DO aplikacija i biografija autora!";
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			UIManager.put("OptionPane.minimumSize", new Dimension(300,200));
+			JOptionPane.showMessageDialog(MainFrame.getInstance(), message,"Help Dijalog",JOptionPane.INFORMATION_MESSAGE);
+			
+		}
+	}
+	
+	public class MyActionListener3 implements ActionListener{
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			MyWindowListener.getInstance().windowClosing(null);
+		}	
+	}
+
 }
