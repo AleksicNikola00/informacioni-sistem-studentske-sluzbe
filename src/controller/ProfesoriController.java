@@ -1,11 +1,9 @@
 package controller;
 
-import java.time.LocalDate;
-
 import javax.swing.JFrame;
 
-import model.BazaProfesora;
 import view.MainFrame;
+import view.ProfesoriDodajDialog;
 
 public class ProfesoriController {
 	
@@ -24,8 +22,6 @@ public class ProfesoriController {
 	public void dodajProfesora() {
 		ProfesoriDodajDialog dialog = new ProfesoriDodajDialog(parent, "Dodavanje profesora", true);
 		dialog.setVisible(true);
-		BazaProfesora.getInstance().dodajProfesora("Pero", "Periæ", "Docent", "Doktor nauka", LocalDate.of(1990, 3, 28), "Ulica Vojvode Stepe", 
-				"064-152-4141", "mikamikic@gmail.com", "Ulica cara Dušana", "A65F21GH0");
 		MainFrame.getInstance().azurirajPrikaz();
 	}
 }
