@@ -12,12 +12,12 @@ import controller.Validate;
 
 public class MyFocusListener implements FocusListener {
 	
-	private static ArrayList<JTextField> txtFieldArray;//niz textFieldova iz dijaloga
-	private static JButton btnPotvrdi;//button na koji dodajemo entitet u listu u slucaju da su polja sa textom validna
+	private  ArrayList<JTextField> txtFieldArray;//niz textFieldova iz dijaloga
+	private  JButton btnPotvrdi;//button na koji dodajemo entitet u listu u slucaju da su polja sa textom validna
 	
 	public MyFocusListener(ArrayList<JTextField> txtFieldArray,JButton btnPotvrdi){
-		MyFocusListener.txtFieldArray=txtFieldArray;
-		MyFocusListener.btnPotvrdi=btnPotvrdi;
+		this.txtFieldArray=txtFieldArray;
+		this.btnPotvrdi=btnPotvrdi;
 	}
 	
 	@Override
