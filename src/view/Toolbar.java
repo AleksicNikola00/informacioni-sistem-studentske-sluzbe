@@ -32,22 +32,22 @@ public class Toolbar extends JToolBar {
 		
 		JButton btnOpen = new JButton();
 		btnOpen.setToolTipText("Kreiraj");
-		btnOpen.setIcon(new ImageIcon("images/kreiraj_22x22.png"));
+		btnOpen.setIcon(new ImageIcon("images/kreiraj.jpg"));
 		toolbarLeft.add(btnOpen);
 		
 		addSeparator();
 
 		JButton btnEdit = new JButton();
 		btnEdit.setToolTipText("Izmeni");
-		btnEdit.setIcon(new ImageIcon("images/izmeni_22x22.png"));
+		btnEdit.setIcon(new ImageIcon("images/izmeni.jpg"));
 		toolbarLeft.add(btnEdit);
 		
 		
 		addSeparator();
 
 		JButton btnDelete = new JButton();
-		btnDelete.setToolTipText("Obriöi");
-		btnDelete.setIcon(new ImageIcon("images/obrisi_22x22.png"));
+		btnDelete.setToolTipText("Obri≈°i");
+		btnDelete.setIcon(new ImageIcon("images/obrisi.jpg"));
 		toolbarLeft.add(btnDelete);
 		
 		add(toolbarLeft, BorderLayout.WEST);
@@ -60,8 +60,8 @@ public class Toolbar extends JToolBar {
         searchBox.setToolTipText("Unesi tekst");
 		
         JButton btnSearch = new JButton();
-		btnSearch.setToolTipText("Traûi");
-		btnSearch.setIcon(new ImageIcon("images/pretrazi_22x22.png"));
+		btnSearch.setToolTipText("Tra≈æi");
+		btnSearch.setIcon(new ImageIcon("images/pretrazi.jpg"));
 		
 		toolbarRight.add(searchBox);
 		toolbarRight.add(btnSearch);

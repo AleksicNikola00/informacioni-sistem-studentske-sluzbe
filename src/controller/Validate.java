@@ -1,7 +1,5 @@
 package controller;
 
-import javax.swing.JTextField;
-
 public class Validate {
 	public static boolean validateYear(String s,int length) {
 		boolean valid=true;
@@ -49,5 +47,17 @@ public class Validate {
 		return valid;
 	}
 	
-	
+	public static boolean validateIDCardNumber(String s,int length) {
+		boolean valid=true;
+		if (length < 6 || length > 13) {
+			valid = false;
+		}
+		
+		for (int i = 0; i < length; i++) {
+	        if (!(Character.isDigit(s.charAt(i)) == true || Character.isUpperCase(s.charAt(i)) == true)) {
+	        	valid = false;
+	        }
+	    }
+		return valid;
+	}
 }

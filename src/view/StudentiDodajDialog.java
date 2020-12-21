@@ -1,14 +1,11 @@
 package view;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -16,16 +13,13 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.StudentiController;
 import listeners.MyFocusListener;
 import listeners.SwitchTxtFieldListener;
-import model.Student.Status;
 
-//import com.sun.tools.javac.launcher.Main;
 
 
 
@@ -37,8 +31,8 @@ public class StudentiDodajDialog extends JDialog{
 	private static final long serialVersionUID = 1L;
 	
 	private static StudentiDodajDialog instance=null;
-	private static ArrayList<JTextField> listaTxt=new ArrayList<JTextField>();//lista txt polja unutar dijaloga
-	private static JButton btnPotvrdi=new JButton("Potvrdi");//btn potvrde koji enable/disable u zavisnosti od validnosti txt polja
+	private static ArrayList<JTextField> listaTxt; //lista txt polja unutar dijaloga
+	private static JButton btnPotvrdi;//btn potvrde koji enable/disable u zavisnosti od validnosti txt polja
 	private static JComboBox<String> trenutnaGodinaComboBox;//combo boxovi izdvojeni da bismo mogli da im pristupamo iz kontrolera
 	private static JComboBox<String> nacinFinasiranjaComboBox;
 	
@@ -66,10 +60,10 @@ public class StudentiDodajDialog extends JDialog{
 	}
 	
 	private StudentiDodajDialog() {
-		super(MainFrame.getInstance(),"Dodaj Studenta",true);
+		super(MainFrame.getInstance(),"Dodaj studenta",true);
 		//
-		ArrayList<JTextField> listaTxt=new ArrayList<JTextField>();
-		JButton btnPotvrdi=new JButton("Potvrdi");
+		listaTxt=new ArrayList<JTextField>();
+		btnPotvrdi=new JButton("Potvrdi");
 		//
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = kit.getScreenSize();
@@ -117,7 +111,7 @@ public class StudentiDodajDialog extends JDialog{
 		
 		//datRodj
 		JPanel panDatumRodj = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblDatumRodj = new JLabel("Datum rodjenja*");
+		JLabel lblDatumRodj = new JLabel("Datum rođenja*");
 		lblDatumRodj.setPreferredSize(dim);
 		JTextField txtDatumRodj = new JTextField();
 		txtDatumRodj.setPreferredSize(dim);
@@ -147,7 +141,7 @@ public class StudentiDodajDialog extends JDialog{
 		lblBrojTel.setPreferredSize(dim);
 		JTextField txtBrojTel = new JTextField();
 		txtBrojTel.setPreferredSize(dim);
-		txtBrojTel.setText("063265456");
+		txtBrojTel.setText("066439698");
 		txtBrojTel.setName("txtBroj");
 		txtBrojTel.addFocusListener(proveraUnosa);
 		txtBrojTel.addActionListener(new SwitchTxtFieldListener());

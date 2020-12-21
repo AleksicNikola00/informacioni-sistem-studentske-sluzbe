@@ -6,18 +6,20 @@ public class Predmet {
 	
 	private String sifraPredmeta;
 	private String nazivPredmeta;
+	private String semestar;
 	private String godinaStudija;
 	private Profesor profesor;
 	private String brojESPB;
 	private ArrayList<Student> studentiKojiSuPoloziliPredmet;
 	private ArrayList<Student> studentiKojiNisuPoloziliPredmet;
 	
-	public Predmet(String sifraPredmeta, String nazivPredmeta, String godinaStudija,
+	public Predmet(String sifraPredmeta, String nazivPredmeta, String semestar, String godinaStudija,
 			Profesor profesor, String brojESPB, ArrayList<Student> studentiKojiSuPoloziliPredmet,
 			ArrayList<Student> studentiKojiNisuPoloziliPredmet) {
 		super();
 		this.sifraPredmeta = sifraPredmeta;
 		this.nazivPredmeta = nazivPredmeta;
+		this.semestar = semestar;
 		this.godinaStudija = godinaStudija;
 		this.profesor = profesor;
 		this.brojESPB = brojESPB;
@@ -39,6 +41,14 @@ public class Predmet {
 
 	public void setNazivPredmeta(String nazivPredmeta) {
 		this.nazivPredmeta = nazivPredmeta;
+	}
+
+	public String getSemestar() {
+		return semestar;
+	}
+
+	public void setSemestar(String semestar) {
+		this.semestar = semestar;
 	}
 
 	public String getGodinaStudija() {

@@ -30,11 +30,11 @@ public class MyMenuBar extends JMenuBar {
 		file.setMnemonic(KeyEvent.VK_F);
 		JMenuItem fNew= new JMenuItem("New",KeyEvent.VK_N);
 		fNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,ActionEvent.CTRL_MASK));
-		fNew.setIcon(new ImageIcon("images/Screenshot_1.jpg"));
+		fNew.setIcon(new ImageIcon("images/kreiraj.jpg"));
 		fNew.addActionListener(new AddActionListener());
 		JMenuItem fClose= new JMenuItem("Close",KeyEvent.VK_C);
 		fClose.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,ActionEvent.CTRL_MASK));
-		fClose.setIcon(new ImageIcon("images/Screenshot_2.jpg"));
+		fClose.setIcon(new ImageIcon("images/zatvori.jpg"));
 		fClose.addActionListener(new MyActionListener3());
 		file.add(fNew);
 		file.add(fClose);
@@ -43,10 +43,10 @@ public class MyMenuBar extends JMenuBar {
 		edit.setMnemonic(KeyEvent.VK_E);
 		JMenuItem eEdit=new JMenuItem("Edit",KeyEvent.VK_E);
 		eEdit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E,ActionEvent.CTRL_MASK));
-		eEdit.setIcon(new ImageIcon("images/edit.jpg"));
+		eEdit.setIcon(new ImageIcon("images/izmeni.jpg"));
 		JMenuItem eDelete=new JMenuItem("Delete",KeyEvent.VK_D);
 		eDelete.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,ActionEvent.CTRL_MASK));;
-		eDelete.setIcon(new ImageIcon("images/delete.jpg"));
+		eDelete.setIcon(new ImageIcon("images/obrisi.jpg"));
 		edit.add(eEdit);
 		edit.add(eDelete);
 		

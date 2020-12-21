@@ -3,23 +3,21 @@ package listeners;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import controller.Validate;
-import view.StudentiDodajDialog;
 
 public class MyFocusListener implements FocusListener {
 	
-	private static ArrayList<JTextField> txtFieldArray=null;//niz textFieldova iz dijaloga
-	private static JButton btnPotvrdi=null;//button na koji dodajemo entitet u listu u slucaju da su polja sa textom validna
+	private static ArrayList<JTextField> txtFieldArray;//niz textFieldova iz dijaloga
+	private static JButton btnPotvrdi;//button na koji dodajemo entitet u listu u slucaju da su polja sa textom validna
 	
 	public MyFocusListener(ArrayList<JTextField> txtFieldArray,JButton btnPotvrdi){
-		this.txtFieldArray=txtFieldArray;
-		this.btnPotvrdi=btnPotvrdi;
+		MyFocusListener.txtFieldArray=txtFieldArray;
+		MyFocusListener.btnPotvrdi=btnPotvrdi;
 	}
 	
 	@Override
@@ -58,7 +56,7 @@ public class MyFocusListener implements FocusListener {
 		case "txtAdresa":
 			if(length==0) {
 				txt.setText("");
-				JOptionPane.showMessageDialog(null, "Neispravna adresa!");
+				JOptionPane.showMessageDialog(null, "Neispravna adresa stanovanja!");
 				btnPotvrdi.setEnabled(false);
 			}
 			break;
@@ -87,6 +85,20 @@ public class MyFocusListener implements FocusListener {
 			if(!Validate.validateYear(s, length)) {
 				txt.setText("");
 				JOptionPane.showMessageDialog(null, "Neispravna godina upisa!");
+				btnPotvrdi.setEnabled(false);
+			}
+			break;
+		case "txtAdresaKancelarije":
+			if(length==0) {
+				txt.setText("");
+				JOptionPane.showMessageDialog(null, "Neispravna adresa kancelarije!");
+				btnPotvrdi.setEnabled(false);
+			}
+			break;
+		case "txtBrojLK":
+			if(!Validate.validateIDCardNumber(s, length)) {
+				txt.setText("");
+				JOptionPane.showMessageDialog(null, "Neispravan broj lične karte!");
 				btnPotvrdi.setEnabled(false);
 			}
 			break;

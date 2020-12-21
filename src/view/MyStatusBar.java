@@ -26,7 +26,7 @@ public class MyStatusBar extends JPanel{
 		clock();
 		
 		
-		JLabel labela1=new JLabel("Studentska sluûba");
+		JLabel labela1=new JLabel("Studentska slu≈æba");
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		setLayout(new BorderLayout());
 		add(labela1,BorderLayout.WEST);

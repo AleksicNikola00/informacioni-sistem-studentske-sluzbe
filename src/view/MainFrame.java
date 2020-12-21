@@ -36,7 +36,7 @@ public class MainFrame extends JFrame {
 		int screenHeight = screenSize.height;
 		int screenWidth = screenSize.width;
 		setSize(3 * screenWidth / 4, 3 * screenHeight / 4);
-		setTitle("Studentska sluûba");
+		setTitle("Studentska slu≈æba");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setVisible(true);
@@ -67,9 +67,7 @@ public class MainFrame extends JFrame {
 		secondPan.setLayout(new BorderLayout());
 		firstPan.setLayout(new BorderLayout());
 		thirdPan.setLayout(new BorderLayout());
-		//JLabel todoLbl1 = new JLabel("TODO: Prikaz studenata");
 		JLabel todoLbl3 = new JLabel("TODO: Prikaz predmeta");
-		//firstPan.add(todoLbl1);	
 		thirdPan.add(todoLbl3);
 		JTabbedPane panEntities = new JTabbedPane();
 		panEntities.add("Studenti", firstPan);

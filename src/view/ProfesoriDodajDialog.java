@@ -1,11 +1,10 @@
 package view;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Frame;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -13,11 +12,12 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import model.BazaProfesora;
+import controller.ProfesoriController;
+import listeners.MyFocusListener;
+import listeners.SwitchTxtFieldListener;
 
 public class ProfesoriDodajDialog extends JDialog {
 
@@ -25,20 +25,47 @@ public class ProfesoriDodajDialog extends JDialog {
 	 * 
 	 */
 	private static final long serialVersionUID = 4195495952053849388L;
-	private JPanel panZvanjeComboBox;
-	private JPanel panTitulaComboBox;
-	private JComboBox<String> combo1;
-	private JComboBox<String> combo2;
 	
-	public ProfesoriDodajDialog(Frame parent, String title, boolean modal) {
-		super(parent, title, modal);
+	private static ProfesoriDodajDialog instance = null;
+	private static ArrayList<JTextField> listaTxt;
+	private static JButton btnPotvrdi;
+	private static JComboBox<String> zvanjaComboBox;
+	private static JComboBox<String> tituleComboBox;
+	
+	public static ArrayList<JTextField> getListaTxt() {
+		return listaTxt;
+	}
 
+	public static JButton getBtnPotvrdi() {
+		return btnPotvrdi;
+	}
+
+	public static JComboBox<String> getZvanjaComboBox() {
+		return zvanjaComboBox;
+	}
+
+	public static JComboBox<String> getTituleComboBox() {
+		return tituleComboBox;
+	}
+	
+	public static ProfesoriDodajDialog getInstance() {
+		if(instance==null)
+			instance=new ProfesoriDodajDialog();
+		
+		return instance;
+	}
+	
+	private ProfesoriDodajDialog() {
+		super(MainFrame.getInstance(),"Dodaj profesora", true);
+		listaTxt=new ArrayList<JTextField>();
+		btnPotvrdi=new JButton("Potvrdi");
+		
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = kit.getScreenSize();
 		int screenHeight = screenSize.height;
 		int screenWidth = screenSize.width;
 		setSize(3 * screenWidth / 4 - 500, 3 * screenHeight / 4 - 25);
-		setLocationRelativeTo(parent);
+		setLocationRelativeTo(MainFrame.getInstance());
 		
 		inicijalizacija();
 	}
@@ -47,98 +74,135 @@ public class ProfesoriDodajDialog extends JDialog {
 		JPanel panel = new JPanel();
 		add(panel);
 		Dimension dim = new Dimension(200, 30);
+		MyFocusListener proveraUnosa= new MyFocusListener(listaTxt, btnPotvrdi);
 		
+		//ime
 		JPanel panIme = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblIme = new JLabel("Ime*");
 		lblIme.setPreferredSize(dim);
 		JTextField txtIme = new JTextField();
 		txtIme.setPreferredSize(dim);
-		txtIme.setText("pr. Pero");
+		txtIme.setText("Pero");
+		txtIme.setName("txtIme");
+		txtIme.addFocusListener(proveraUnosa);
+		txtIme.addActionListener(new SwitchTxtFieldListener());
 		panIme.add(lblIme);
 		panIme.add(txtIme);
 		
+		//prezime
 		JPanel panPrezime = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblPrezime = new JLabel("Prezime*");
 		lblPrezime.setPreferredSize(dim);
 		JTextField txtPrezime = new JTextField();
 		txtPrezime.setPreferredSize(dim);
-		txtPrezime.setText("pr. PeriÊ");
+		txtPrezime.setText("Periƒá");
+		txtPrezime.setName("txtPrz");
+		txtPrezime.addFocusListener(proveraUnosa);
+		txtPrezime.addActionListener(new SwitchTxtFieldListener());
 		panPrezime.add(lblPrezime);
 		panPrezime.add(txtPrezime);
 		
+		//datum rodjenja
 		JPanel panDatumRodj = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblDatumRodj = new JLabel("Datum roenja*");
+		JLabel lblDatumRodj = new JLabel("Datum roƒëenja*");
 		lblDatumRodj.setPreferredSize(dim);
 		JTextField txtDatumRodj = new JTextField();
 		txtDatumRodj.setPreferredSize(dim);
-		txtDatumRodj.setText("pr. 25.2.1980.");
+		txtDatumRodj.setText("25.2.1980.");
+		txtDatumRodj.setName("datRodj");
+		txtDatumRodj.addFocusListener(proveraUnosa);
+		txtDatumRodj.addActionListener(new SwitchTxtFieldListener());
 		panDatumRodj.add(lblDatumRodj);
 		panDatumRodj.add(txtDatumRodj);
 		
+		//adresa stanovanja
 		JPanel panAdresaStan = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblAdresaStan = new JLabel("Adresa stanovanja*");
 		lblAdresaStan.setPreferredSize(dim);
 		JTextField txtAdresaStan = new JTextField();
 		txtAdresaStan.setPreferredSize(dim);
-		txtAdresaStan.setText("pr. Ulica Alekse äantiÊa 4");
+		txtAdresaStan.setText("Ulica Alekse ≈†antiƒáa 4");
+		txtAdresaStan.setName("txtAdresa");
+		txtAdresaStan.addFocusListener(proveraUnosa);
+		txtAdresaStan.addActionListener(new SwitchTxtFieldListener());
 		panAdresaStan.add(lblAdresaStan);
 		panAdresaStan.add(txtAdresaStan);
 		
+		//broj telefona
 		JPanel panBrojTel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblBrojTel = new JLabel("Broj telefona*");
 		lblBrojTel.setPreferredSize(dim);
 		JTextField txtBrojTel = new JTextField();
 		txtBrojTel.setPreferredSize(dim);
-		txtBrojTel.setText("pr. 063265456");
+		txtBrojTel.setText("066439698");
+		txtBrojTel.setName("txtBroj");
+		txtBrojTel.addFocusListener(proveraUnosa);
+		txtBrojTel.addActionListener(new SwitchTxtFieldListener());
 		panBrojTel.add(lblBrojTel);
 		panBrojTel.add(txtBrojTel);
 		
+		// email
 		JPanel panEmail = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblEmail = new JLabel("E-mail adresa*");
 		lblEmail.setPreferredSize(dim);
 		JTextField txtEmail = new JTextField();
 		txtEmail.setPreferredSize(dim);
-		txtEmail.setText("pr. pero.peric@uns.ac.rs");
+		txtEmail.setText("pero.peric@uns.ac.rs");
+		txtEmail.setName("txtEmail");
+		txtEmail.addFocusListener(proveraUnosa);
+		txtEmail.addActionListener(new SwitchTxtFieldListener());
 		panEmail.add(lblEmail);
 		panEmail.add(txtEmail);
 		
+		// adresa kancelarije
 		JPanel panAdresaKanc = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblAdresaKanc = new JLabel("Adresa kancelarije*");
 		lblAdresaKanc.setPreferredSize(dim);
 		JTextField txtAdresaKanc = new JTextField();
 		txtAdresaKanc.setPreferredSize(dim);
-		txtAdresaKanc.setText("pr. Ulica Alekse äantiÊa 4");
+		txtAdresaKanc.setText("Ulica Alekse ≈†antiƒáa 4");
+		txtAdresaKanc.setName("txtAdresaKancelarije");
+		txtAdresaKanc.addFocusListener(proveraUnosa);
+		txtAdresaKanc.addActionListener(new SwitchTxtFieldListener());
 		panAdresaKanc.add(lblAdresaKanc);
 		panAdresaKanc.add(txtAdresaKanc);
 		
+		// broj liƒçne karte
 		JPanel panBrojLK = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblBrojLK = new JLabel("Broj liËne karte*");
+		JLabel lblBrojLK = new JLabel("Broj liƒçne karte*");
 		lblBrojLK.setPreferredSize(dim);
 		JTextField txtBrojLK = new JTextField();
 		txtBrojLK.setPreferredSize(dim);
-		txtBrojLK.setText("pr. A54FG5HJ3M");
+		txtBrojLK.setText("A54FG5HJ3M");
+		txtBrojLK.setName("txtBrojLK");
+		txtBrojLK.addFocusListener(proveraUnosa);
+		txtBrojLK.addActionListener(new SwitchTxtFieldListener());
 		panBrojLK.add(lblBrojLK);
 		panBrojLK.add(txtBrojLK);
 		
+		//zvanje
 		JPanel panZvanje = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblZvanje = new JLabel("Zvanje*");
-		lblZvanje.setPreferredSize(new Dimension(195, 30));
+		lblZvanje.setPreferredSize(new Dimension(dim));
 		panZvanje.add(lblZvanje);
-		panZvanjeComboBox = new JPanel();
-		zvanjeComboBox();
-		panZvanje.add(panZvanjeComboBox);
+		String[] zvanja = {"Docent", "Vanredni profesor", "Redovni profesor"};
+		zvanjaComboBox = new JComboBox<String>(zvanja);
+		zvanjaComboBox.setPreferredSize(new Dimension(dim));
+		panZvanje.add(zvanjaComboBox);
 		
+		//titula
 		JPanel panTitula = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblTitula = new JLabel("Titula*");
-		lblTitula.setPreferredSize(new Dimension(195, 30));
+		lblTitula.setPreferredSize(new Dimension(dim));
 		panTitula.add(lblTitula);
-		panTitulaComboBox = new JPanel();
-		titulaComboBox();
-		panTitula.add(panTitulaComboBox);
+		String[] titule = {"Doktor nauka"};
+		tituleComboBox = new JComboBox<String>(titule);
+		tituleComboBox.setPreferredSize(new Dimension(dim));
+		panTitula.add(tituleComboBox);
+		
 		
 		JPanel panBtn = new JPanel();
 		panBtn.setLayout(new BoxLayout(panBtn, BoxLayout.X_AXIS));
-		JButton btnPotvrdi = new JButton("Potvrdi");
 		JButton btnOdustani = new JButton("Odustani");
 		panBtn.add(btnPotvrdi);
 		panBtn.add(Box.createHorizontalStrut(25));
@@ -155,224 +219,21 @@ public class ProfesoriDodajDialog extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String s = txtIme.getText().trim();
-				int length = s.length();
-				
-				if (length == 0) {
-					JOptionPane.showMessageDialog(null, "Neispravno ime!");
-					return;
+				if(proveraUnosa.validateTxtFields()) {
+					ProfesoriController.getInstance().dodajProfesora();
+					dispose();
 				}
-				else if (Character.isUpperCase(s.charAt(0)) == false) {
-					JOptionPane.showMessageDialog(null, "Neispravno ime!");
-					return;
-				}
-				
-				for (int i = 1; i < length; i++) {
-			        if (Character.isLowerCase(s.charAt(i)) == false) {
-			        	JOptionPane.showMessageDialog(null, "Neispravno ime!");
-						return;
-			        }
-			    }
-				
-				s = txtPrezime.getText().trim();
-				length = s.length();
-				
-				if (length == 0) {
-					JOptionPane.showMessageDialog(null, "Neispravno prezime");
-					return;
-				}
-				else if (Character.isUpperCase(s.charAt(0)) == false) {
-					JOptionPane.showMessageDialog(null, "Neispravno prezime!");
-					return;
-				}
-				
-				for (int i = 1; i < length; i++) {
-			        if (Character.isLowerCase(s.charAt(i)) == false) {
-			        	JOptionPane.showMessageDialog(null, "Neispravno prezime!");
-						return;
-			        }
-			    }
-				
-				s = txtDatumRodj.getText().trim();
-				length = s.length();
-				
-				if (length == 0) {
-					JOptionPane.showMessageDialog(null, "Neispravan datum roenja!");
-					return;
-				}
-				
-				for (int i = 0; i < length; i++) {
-			        if (Character.isDigit(s.charAt(i)) == false && s.charAt(i) != '.') {
-			        	JOptionPane.showMessageDialog(null, "Neispravan datum roenja!");
-						return;
-			        }
-			    }
-				
-				int brojTacaka = 0;
-				for (int i = 0; i < length; i++) {
-			        if (s.charAt(i) == '.')
-			        	brojTacaka++;
-			    }
-				if (brojTacaka != 3) {
-		        	JOptionPane.showMessageDialog(null, "Neispravan datum roenja!");
-					return;
-				}
-				
-				String datum[] = s.split("\\.", 4);
-				int day = Integer.parseInt(datum[0]);
-				int month = Integer.parseInt(datum[1]);
-				int year = Integer.parseInt(datum[2]);
-				if (!(day >= 1 && day <= 31)) {
-		        	JOptionPane.showMessageDialog(null, "Neispravan datum roenja!");
-					return;
-				}
-				if (!(month >= 1 && month <= 12)) {
-		        	JOptionPane.showMessageDialog(null, "Neispravan datum roenja!");
-					return;
-				}
-				if (!(year >= 1950 && year <= 2000)) {
-		        	JOptionPane.showMessageDialog(null, "Neispravan datum roenja!");
-					return;
-				}
-				if (!(datum[3].trim().equals(""))) {
-		        	JOptionPane.showMessageDialog(null, "Neispravan datum roenja!");
-					return;
-				}
-				
-				s = txtAdresaStan.getText().trim();
-				length = s.length();
-				
-				if (length == 0) {
-					JOptionPane.showMessageDialog(null, "Neispravna adresa stanovanja!");
-					return;
-				}
-				
-				for (int i = 0; i < length; i++) {
-			        if (!(Character.isDigit(s.charAt(i)) == true || Character.isLetter(s.charAt(i)) == true || s.charAt(i) == ' ' )) {
-			        	JOptionPane.showMessageDialog(null, "Neispravan adresa stanovanja!");
-						return;
-			        }
-			    }
-				
-				s = txtBrojTel.getText().trim();
-				length = s.length();
-				
-				if (length < 9 || length > 13) {
-					JOptionPane.showMessageDialog(null, "Neispravan broj telefona!");
-					return;
-				}
-				
-				for (int i = 0; i < length; i++) {
-			        if (Character.isDigit(s.charAt(i)) == false) {
-			        	JOptionPane.showMessageDialog(null, "Neispravan broj telefona!");
-						return;
-			        }
-			    }
-				
-				s = txtEmail.getText().trim();
-				length = s.length();
-
-				int brojLudoA = 0;
-				for (int i = 0; i < length; i++) {
-			        if (s.charAt(i) == '@') {
-			        	brojLudoA++;
-			        }
-			    }
-				if (brojLudoA != 1) {
-		        	JOptionPane.showMessageDialog(null, "Neispravna email adresa!");
-					return;
-		        }
-				
-				for (int i = 0; i < length; i++) {
-			        if (!(Character.isDigit(s.charAt(i)) == true || Character.isLetter(s.charAt(i)) == true || s.charAt(i) == '.' || s.charAt(i) == '@')) {
-			        	JOptionPane.showMessageDialog(null, "Neispravna email adresa!");
-						return;
-			        }
-			    }
-				
-				String mail[] = s.split("@", 2);
-				
-				length = mail[0].length();
-				brojTacaka = 0;
-				for (int i = 0; i < length; i++) {
-			        if (mail[0].charAt(i) == '.') {
-			        	brojTacaka++;
-			        }
-			    }
-				
-				String prefiks[] = mail[0].split("\\.", brojTacaka + 1);
-				for (int i = 0; i < brojTacaka + 1; i++) {
-			        if (prefiks[i].equals("")) {
-			        	JOptionPane.showMessageDialog(null, "Neispravna email adresa!");
-						return;
-			        }
-			    }
-				
-				length = mail[1].length();
-				brojTacaka = 0;
-				for (int i = 0; i < length; i++) {
-			        if (mail[1].charAt(i) == '.') {
-			        	brojTacaka++;
-			        }
-			    }
-				if (brojTacaka == 0){
-		        	JOptionPane.showMessageDialog(null, "Neispravna email adresa!");
-					return;
-		        }
-				
-				String domen[] = mail[1].split("\\.", brojTacaka + 1);
-				for (int i = 0; i < brojTacaka + 1; i++) {
-			        if (domen[i].equals("")) {
-			        	JOptionPane.showMessageDialog(null, "Neispravna email adresa!");
-						return;
-			        }
-			    }
-				
-				if (domen[brojTacaka].length() <= 1){
-		        	JOptionPane.showMessageDialog(null, "Neispravna email adresa!");
-					return;
-		        }
-				
-				
-				s = txtAdresaKanc.getText().trim();
-				length = s.length();
-				
-				if (length == 0) {
-					JOptionPane.showMessageDialog(null, "Neispravna adresa kancelarije!");
-					return;
-				}
-				
-				for (int i = 0; i < length; i++) {
-			        if (!(Character.isDigit(s.charAt(i)) == true || Character.isLetter(s.charAt(i)) == true || s.charAt(i) == ' ' )) {
-			        	JOptionPane.showMessageDialog(null, "Neispravna adresa kancelarije!");
-						return;
-			        }
-			    }
-				
-				s = txtBrojLK.getText().trim();
-				length = s.length();
-				
-				if (length < 6 || length > 13) {
-					JOptionPane.showMessageDialog(null, "Neispravan broj liËne karte!");
-					return;
-				}
-				
-				for (int i = 0; i < length; i++) {
-			        if (!(Character.isDigit(s.charAt(i)) == true || Character.isUpperCase(s.charAt(i)) == true)) {
-			        	JOptionPane.showMessageDialog(null, "Neispravan broj liËne karte!");
-						return;
-			        }
-			    }
-				
-				String zvanje = combo1.getSelectedItem().toString();
-				String titula = combo2.getSelectedItem().toString();
-				
-				BazaProfesora.getInstance().dodajProfesora(txtIme.getText().trim(), txtPrezime.getText().trim(), zvanje, titula, LocalDate.of(year, month, day),
-						txtAdresaStan.getText().trim(), txtBrojTel.getText().trim(), txtEmail.getText().trim(), txtAdresaKanc.getText().trim(), txtBrojLK.getText().trim());
-				dispose();
 			}
 		});
 		
+		listaTxt.add(txtIme);
+		listaTxt.add(txtPrezime);
+		listaTxt.add(txtDatumRodj);
+		listaTxt.add(txtAdresaStan);
+		listaTxt.add(txtBrojTel);
+		listaTxt.add(txtEmail);
+		listaTxt.add(txtAdresaKanc);
+		listaTxt.add(txtBrojLK);
 		
 		Box box = Box.createVerticalBox();
 		box.add(panIme);
@@ -391,23 +252,4 @@ public class ProfesoriDodajDialog extends JDialog {
 		panel.add(box);
 	}
 
-	private void zvanjeComboBox() {
-		String[] zvanja = {"Docent", "Vanredni profesor", "Redovni profesor"};
-		combo1 = new JComboBox<String>(zvanja);
-		combo1.setPreferredSize(new Dimension(200, 30));
-
-		this.panZvanjeComboBox.add(combo1);
-
-		combo1.setSelectedIndex(0);
-	}
-	
-	private void titulaComboBox() {
-		String[] titule = {"Doktor nauka"};
-		combo2 = new JComboBox<String>(titule);
-		combo2.setPreferredSize(new Dimension(200, 30));
-
-		this.panTitulaComboBox.add(combo2);
-
-		combo2.setSelectedIndex(0);
-	}
 }

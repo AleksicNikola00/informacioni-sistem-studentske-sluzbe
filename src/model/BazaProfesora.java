@@ -19,17 +19,13 @@ public class BazaProfesora {
 	private ArrayList<String> kolone;
 
 	private BazaProfesora() {
-		initProfesore();
+		this.profesori = new ArrayList<Profesor>();
 
 		this.kolone = new ArrayList<String>();
 		this.kolone.add("IME");
 		this.kolone.add("PREZIME");
 		this.kolone.add("ZVANJE");
 		this.kolone.add("TITULA");
-	}
-
-	private void initProfesore() {
-		this.profesori = new ArrayList<Profesor>();
 	}
 
 	public ArrayList<Profesor> getProfesori() {
@@ -69,8 +65,8 @@ public class BazaProfesora {
 	}
 
 	public void dodajProfesora(String ime, String prezime, String zvanje, String titula, LocalDate datumRodjenja, String adresaStanovanja, String telefon,
-			String email, String adresaKancelarije, String brojLicneKarte) {
-		this.profesori.add(new Profesor(ime, prezime, zvanje, titula, datumRodjenja, adresaStanovanja, telefon, email, adresaKancelarije, brojLicneKarte));
+			String email, String adresaKancelarije, String brojLicneKarte, ArrayList<Predmet> predmeti ) {
+		this.profesori.add(new Profesor(ime, prezime, zvanje, titula, datumRodjenja, adresaStanovanja, telefon, email, adresaKancelarije, brojLicneKarte, predmeti));
 	}
 
 }
