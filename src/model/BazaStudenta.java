@@ -35,9 +35,10 @@ public class BazaStudenta {
 	private void initStudenti() {
 		this.studenti=new ArrayList<Student>();
 		//TO DO DODAJ STUDENTE!!
+		/*
 		studenti.add(new Student("Nikola", "Aleksic",  Calendar.getInstance(), "Zmaj Jovina 16/8",
 				"aleksamigojoni@stcable.rs", "069-731235", "RA-24-2018", 2018,3,Status.B, 9.24, new ArrayList<Ocena>(), 
-				new ArrayList<Predmet>()));
+				new ArrayList<Predmet>()));*/
 	}
 
 	public List<Student> getStudenti() {

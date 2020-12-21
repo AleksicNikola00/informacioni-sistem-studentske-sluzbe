@@ -22,9 +22,11 @@ public class StudentiController {
 	
 	private  StudentiController() {}
 	
-	public void dodajStudenta() {
-		BazaStudenta.getInstance().dodajStudenta("Nikola", "Aleksic",  Calendar.getInstance(), "Zmaj Jovina 16/8",
-				"aleksamigojoni@stcable.rs", "069-731235", "RA-24-2018", 2018,3,Status.B, 9.24, new ArrayList<Ocena>(), 
+	public void dodajStudenta(String ime, String prezime, Calendar datumRodjenja, String adresa, String email, String brojTelefona,
+			String brojIndexa, int godinaUpisa, int trenutnaGodinaStudija, Status status) {
+		
+		BazaStudenta.getInstance().dodajStudenta(ime, prezime,  datumRodjenja, adresa,
+				email, brojTelefona, brojIndexa, godinaUpisa,trenutnaGodinaStudija,status, 0, new ArrayList<Ocena>(), 
 				new ArrayList<Predmet>());
 		//arzuriraj prikaz
 		MainFrame.getInstance().azurirajPrikaz();

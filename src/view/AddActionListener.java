@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Dialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,7 +17,9 @@ public class AddActionListener implements ActionListener {
 			ProfesoriController.getInstance().dodajProfesora();
 		}else if(MainFrame.getInstance().getSelectedIndex() == 0) 
 		{
-			StudentiController.getInstance().dodajStudenta();
+			StudentiDodajDialog.getInstance().setVisible(true);
+			
+			//StudentiController.getInstance().dodajStudenta();
 		}
 
 	}
