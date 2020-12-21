@@ -13,6 +13,8 @@ import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
+import listeners.AddActionListener;
+
 public class Toolbar extends JToolBar {
 
 	/**

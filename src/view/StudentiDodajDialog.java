@@ -21,6 +21,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.StudentiController;
+import listeners.MyFocusListener;
+import listeners.SwitchTxtFieldListener;
 import model.Student.Status;
 
 //import com.sun.tools.javac.launcher.Main;
@@ -35,8 +37,10 @@ public class StudentiDodajDialog extends JDialog{
 	private static final long serialVersionUID = 1L;
 	
 	private static StudentiDodajDialog instance=null;
-	private static ArrayList<JTextField> listaTxt=new ArrayList<JTextField>();
-	private static JButton btnPotvrdi=new JButton("Potvrdi");
+	private static ArrayList<JTextField> listaTxt=new ArrayList<JTextField>();//lista txt polja unutar dijaloga
+	private static JButton btnPotvrdi=new JButton("Potvrdi");//btn potvrde koji enable/disable u zavisnosti od validnosti txt polja
+	private static JComboBox<String> trenutnaGodinaComboBox;//combo boxovi izdvojeni da bismo mogli da im pristupamo iz kontrolera
+	private static JComboBox<String> nacinFinasiranjaComboBox;
 	
 	public static StudentiDodajDialog getInstance() {
 		if(instance==null)
@@ -51,7 +55,15 @@ public class StudentiDodajDialog extends JDialog{
 	
 	public static JButton getBtn() {
 			return btnPotvrdi;
-		}
+	}
+	
+	public static JComboBox<String> getTrenutnaGodinaComboBox(){
+		return trenutnaGodinaComboBox;
+	}
+	
+	public static JComboBox<String> getNacinFinansiranjaComboBox(){
+		return nacinFinasiranjaComboBox;
+	}
 	
 	private StudentiDodajDialog() {
 		super(MainFrame.getInstance(),"Dodaj Studenta",true);
@@ -73,10 +85,9 @@ public class StudentiDodajDialog extends JDialog{
 	
 	private void inicijalizacija() {
 		JPanel panel = new JPanel();
-		//panel.setBackground(Color.black);
 		add(panel);
 		Dimension dim = new Dimension(200, 30);
-		MyFocusListener proveraUnosa= new MyFocusListener();
+		MyFocusListener proveraUnosa= new MyFocusListener(listaTxt,btnPotvrdi);
 		
 		//ime
 		JPanel panIme = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -87,6 +98,7 @@ public class StudentiDodajDialog extends JDialog{
 		txtIme.setText("Pero");
 		txtIme.setName("txtIme");
 		txtIme.addFocusListener(proveraUnosa);
+		txtIme.addActionListener(new SwitchTxtFieldListener());
 		panIme.add(lblIme);
 		panIme.add(txtIme);
 		
@@ -99,6 +111,7 @@ public class StudentiDodajDialog extends JDialog{
 		txtPrezime.setText("Perić");
 		txtPrezime.setName("txtPrz"); //isto kao i ime zbog provere!
 		txtPrezime.addFocusListener(proveraUnosa);
+		txtPrezime.addActionListener(new SwitchTxtFieldListener());
 		panPrezime.add(lblPrezime);
 		panPrezime.add(txtPrezime);
 		
@@ -111,6 +124,7 @@ public class StudentiDodajDialog extends JDialog{
 		txtDatumRodj.setText("25.02.1980.");
 		txtDatumRodj.setName("datRodj");
 		txtDatumRodj.addFocusListener(proveraUnosa);
+		txtDatumRodj.addActionListener(new SwitchTxtFieldListener());
 		panDatumRodj.add(lblDatumRodj);
 		panDatumRodj.add(txtDatumRodj);
 		
@@ -123,6 +137,7 @@ public class StudentiDodajDialog extends JDialog{
 		txtAdresaStan.setText("Ulica Alekse Šantića 4");
 		txtAdresaStan.setName("txtAdresa");
 		txtAdresaStan.addFocusListener(proveraUnosa);
+		txtAdresaStan.addActionListener(new SwitchTxtFieldListener());
 		panAdresaStan.add(lblAdresaStan);
 		panAdresaStan.add(txtAdresaStan);
 		
@@ -135,6 +150,7 @@ public class StudentiDodajDialog extends JDialog{
 		txtBrojTel.setText("063265456");
 		txtBrojTel.setName("txtBroj");
 		txtBrojTel.addFocusListener(proveraUnosa);
+		txtBrojTel.addActionListener(new SwitchTxtFieldListener());
 		panBrojTel.add(lblBrojTel);
 		panBrojTel.add(txtBrojTel);
 		
@@ -147,6 +163,7 @@ public class StudentiDodajDialog extends JDialog{
 		txtEmail.setText("pero.peric@uns.ac.rs");
 		txtEmail.setName("txtEmail");
 		txtEmail.addFocusListener(proveraUnosa);
+		txtEmail.addActionListener(new SwitchTxtFieldListener());
 		panEmail.add(lblEmail);
 		panEmail.add(txtEmail);
 		
@@ -158,6 +175,7 @@ public class StudentiDodajDialog extends JDialog{
 		txtBrIndexa.setPreferredSize(dim);
 		txtBrIndexa.setName("txtIndex");
 		txtBrIndexa.addFocusListener(proveraUnosa);
+		txtBrIndexa.addActionListener(new SwitchTxtFieldListener());
 		panBrIndexa.add(lblBrIndexa);
 		panBrIndexa.add(txtBrIndexa);
 		
@@ -169,6 +187,7 @@ public class StudentiDodajDialog extends JDialog{
 		txtGodinaUpisa.setPreferredSize(dim);
 		txtGodinaUpisa.setName("txtGodinaUpisa");
 		txtGodinaUpisa.addFocusListener(proveraUnosa);
+		txtGodinaUpisa.addActionListener(new SwitchTxtFieldListener());
 		panGodinaUpisa.add(lblGodUpisa);
 		panGodinaUpisa.add(txtGodinaUpisa);
 		
@@ -178,7 +197,7 @@ public class StudentiDodajDialog extends JDialog{
 		lblTrenutnaGodinaStudija.setPreferredSize(dim);
 		panTrenutnaGodinaStudija.add(lblTrenutnaGodinaStudija);
 		String[] godinaStudiranja= {"I (prva)","II (druga)","III (treća)","IV (četvrta)","Master","Doktorske"};
-		JComboBox<String> trenutnaGodinaComboBox = new JComboBox<String>(godinaStudiranja);
+		trenutnaGodinaComboBox = new JComboBox<String>(godinaStudiranja);
 		trenutnaGodinaComboBox.setPreferredSize(dim);
 		panTrenutnaGodinaStudija.add(trenutnaGodinaComboBox);
 		
@@ -188,7 +207,7 @@ public class StudentiDodajDialog extends JDialog{
 		lblNacinFinansiranja.setPreferredSize(dim);
 		panNacinFinansiranja.add(lblNacinFinansiranja);
 		String[] nacinFinansiranja= {"Budžet","Samofinansiranje"};
-		JComboBox<String> nacinFinasiranjaComboBox = new JComboBox<String>(nacinFinansiranja);
+		nacinFinasiranjaComboBox = new JComboBox<String>(nacinFinansiranja);
 		nacinFinasiranjaComboBox.setPreferredSize(dim);
 		panNacinFinansiranja.add(nacinFinasiranjaComboBox);
 
@@ -206,33 +225,13 @@ public class StudentiDodajDialog extends JDialog{
 				return;
 			}
 		});
-		
+
 		btnPotvrdi.addActionListener(new ActionListener() {
 			@Override
+			
 			public void actionPerformed(ActionEvent e) {
 				if(proveraUnosa.validateTxtFields()) {
-					//String ime, String prezime, Calendar datumRodjenja, String adresa, String email, String brojTelefona,
-					//String brojIndexa, int godinaUpisa, int trenutnaGodinaStudija, Status status
-					Status s;
-					if(nacinFinasiranjaComboBox.getSelectedIndex()==0)
-						s=Status.B;
-					else
-						s=Status.S;
-				
-					int godina=0;
-					if(trenutnaGodinaComboBox.getSelectedItem().equals("I (prva)"))
-						godina=1;
-					else if(trenutnaGodinaComboBox.getSelectedItem().equals("II (druga)"))
-						godina=2;
-					else if(trenutnaGodinaComboBox.getSelectedItem().equals("III (treća)"))
-						godina=3;
-					else
-						godina=4;
-					
-					String[] datum=txtDatumRodj.getText().split("\\.", 4);
-					StudentiController.getInstance().dodajStudenta(txtIme.getText(),txtPrezime.getText(),new GregorianCalendar(Integer.parseInt(datum[2]),Integer.parseInt(datum[1]), Integer.parseInt(datum[0])),
-							txtAdresaStan.getText(),txtEmail.getText(),txtBrojTel.getText(),txtBrIndexa.getText(),Integer.parseInt(txtGodinaUpisa.getText()),godina,
-							s);
+					StudentiController.getInstance().dodajStudenta();
 					dispose();
 					return;
 				}
@@ -247,9 +246,8 @@ public class StudentiDodajDialog extends JDialog{
 		listaTxt.add(txtEmail);
 		listaTxt.add(txtBrIndexa);
 		listaTxt.add(txtGodinaUpisa);
-		
 	
-		
+		//uredi view
 		Box box=Box.createVerticalBox();
 		box.add(panIme);
 		box.add(panPrezime);
