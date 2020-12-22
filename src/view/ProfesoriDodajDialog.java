@@ -67,13 +67,13 @@ public class ProfesoriDodajDialog extends JDialog {
 		setSize(3 * screenWidth / 4 - 500, 3 * screenHeight / 4 - 25);
 		setLocationRelativeTo(MainFrame.getInstance());
 		
-		inicijalizacija();
+		inicijalizacija(screenWidth, screenHeight);
 	}
 	
-	private void inicijalizacija() {
+	private void inicijalizacija(int screenWidth, int screenHeight) {
 		JPanel panel = new JPanel();
 		add(panel);
-		Dimension dim = new Dimension(200, 30);
+		Dimension dim = new Dimension((int)(screenWidth / 6.83), (int)(screenHeight / 25.6));
 		MyFocusListener proveraUnosa= new MyFocusListener(listaTxt, btnPotvrdi);
 		
 		//ime
@@ -222,6 +222,7 @@ public class ProfesoriDodajDialog extends JDialog {
 				if(proveraUnosa.validateTxtFields()) {
 					ProfesoriController.getInstance().dodajProfesora();
 					dispose();
+					return;
 				}
 			}
 		});

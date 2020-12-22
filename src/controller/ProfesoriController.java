@@ -10,7 +10,6 @@ import model.BazaProfesora;
 import model.Predmet;
 import view.MainFrame;
 import view.ProfesoriDodajDialog;
-import view.StudentiDodajDialog;
 
 public class ProfesoriController {
 	
@@ -26,7 +25,7 @@ public class ProfesoriController {
 	private ProfesoriController() {}
 	
 	public void dodajProfesora() {
-		ArrayList<JTextField> txtFieldArray = StudentiDodajDialog.getTxtFields();
+		ArrayList<JTextField> txtFieldArray = ProfesoriDodajDialog.getListaTxt();
 		String[] datum = txtFieldArray.get(2).getText().split("\\.", 4);
 		int day = Integer.parseInt(datum[0]);
 		int month = Integer.parseInt(datum[1]);
