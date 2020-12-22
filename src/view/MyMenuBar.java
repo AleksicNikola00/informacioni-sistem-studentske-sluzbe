@@ -69,21 +69,28 @@ public class MyMenuBar extends JMenuBar {
 	}
 	
 	public class MyActionListener1 implements ActionListener{
-		String message="TO DO detaljan opis aplikacije!";
+		String message="Kreiranje novog entiteta:\n    Selektujte tab čiji entitet želite da dodate.\n    "
+				+ "Da bi se otvorio dijalog potrebno je da uradite jednu od tri stvari:\n        1. Kliknite na dugme Kreiraj (znak +) na tulbaru"
+				+ "\n        2. Iz menija izaberite File -> New\n        3. Pomoću prečice CTRL + N\n        4. Pomoću prečice ALT + F + N\n    "
+				+ "Unesite validne podatke u polja po uzoru na predefinisane vrednosti, te pritisnite dugme Potvrdi.";
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			UIManager.put("OptionPane.minimumSize", new Dimension(300,200));
-			JOptionPane.showMessageDialog(MainFrame.getInstance(), message,"Help Dijalog",JOptionPane.PLAIN_MESSAGE);
+			JOptionPane.showMessageDialog(MainFrame.getInstance(), message,"Help Dijalog",JOptionPane.INFORMATION_MESSAGE);
 			
 		}
 	}
 	
 	public class MyActionListener2 implements ActionListener{
-		String message="TO DO aplikacija i biografija autora!";
+		String message="STUDENTSKA SLUŽBA v1.0\n\nStudentska služba je aplikacija namenjena za upotrebu od strane referenta "
+				+ "studentske službe\nFakulteta tehničkih nauka "
+				+ "u cilju lakšeg upravljanja nad entitetima fakulteta.\n\nAutori:\nNikola Aleksić - "
+				+ "student, dobar vodja i učinkovit u radu, u slobodno vreme trenira\nAleksandar Savić - "
+				+ "student, vredan, pozitivnim stavom podstiče na uspeh tima, u slobodno vreme igra video igrice";
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			UIManager.put("OptionPane.minimumSize", new Dimension(300,200));
-			JOptionPane.showMessageDialog(MainFrame.getInstance(), message,"Help Dijalog",JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(MainFrame.getInstance(), message,"About Dijalog",JOptionPane.INFORMATION_MESSAGE);
 			
 		}
 	}
