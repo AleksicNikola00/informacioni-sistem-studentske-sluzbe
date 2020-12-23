@@ -65,7 +65,7 @@ public class ProfesoriDodajDialog extends JDialog {
 		Dimension screenSize = kit.getScreenSize();
 		int screenHeight = screenSize.height;
 		int screenWidth = screenSize.width;
-		setSize((3*screenWidth/7) , 3 * screenHeight / 5 );
+		setSize((3*screenWidth/7) , 3 * screenHeight / 4 - screenHeight / 30);
 		setLocationRelativeTo(MainFrame.getInstance());
 		
 		inicijalizacija(screenWidth, screenHeight);
