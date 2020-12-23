@@ -70,7 +70,7 @@ public class MyMenuBar extends JMenuBar {
 	
 	public class MyActionListener1 implements ActionListener{
 		String message="Kreiranje novog entiteta:\n    Selektujte tab čiji entitet želite da dodate.\n    "
-				+ "Da bi se otvorio dijalog potrebno je da uradite jednu od tri stvari:\n        1. Kliknite na dugme Kreiraj (znak +) na tulbaru"
+				+ "Da bi se otvorio dijalog potrebno je da uradite jednu od četiri stvari:\n        1. Kliknite na dugme Kreiraj (znak +) na traci sa alatkama"
 				+ "\n        2. Iz menija izaberite File -> New\n        3. Pomoću prečice CTRL + N\n        4. Pomoću prečice ALT + F + N\n    "
 				+ "Unesite validne podatke u polja po uzoru na predefinisane vrednosti, te pritisnite dugme Potvrdi.";
 		@Override
