@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -11,8 +10,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
-import javax.swing.UIManager;
-
 import listeners.AddActionListener;
 
 
@@ -75,7 +72,7 @@ public class MyMenuBar extends JMenuBar {
 				+ "Unesite validne podatke u polja po uzoru na predefinisane vrednosti, te pritisnite dugme Potvrdi.";
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			UIManager.put("OptionPane.minimumSize", new Dimension(300,200));
+			//UIManager.put("OptionPane.minimumSize", new Dimension(300,200));
 			JOptionPane.showMessageDialog(MainFrame.getInstance(), message,"Help Dijalog",JOptionPane.INFORMATION_MESSAGE);
 			
 		}
@@ -85,11 +82,11 @@ public class MyMenuBar extends JMenuBar {
 		String message="STUDENTSKA SLUŽBA v1.0\n\nStudentska služba je aplikacija namenjena za upotrebu od strane referenta "
 				+ "studentske službe\nFakulteta tehničkih nauka "
 				+ "u cilju lakšeg upravljanja nad entitetima fakulteta.\n\nAutori:\nNikola Aleksić - "
-				+ "student, dobar vodja i učinkovit u radu, u slobodno vreme trenira\nAleksandar Savić - "
-				+ "student, vredan, pozitivnim stavom podstiče na uspeh tima, u slobodno vreme igra video igrice";
+				+ "student 3. godine fakulteta tehničkih nauka u Novom Sadu, github: https://github.com/AleksicNikola00\nAleksandar Savić - "
+				+ "student 3. godine fakulteta tehničkih nauka u Novom Sadu, github: https://github.com/AleksandarSavicRA8-2018";
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			UIManager.put("OptionPane.minimumSize", new Dimension(300,200));
+			//UIManager.put("OptionPane.minimumSize", new Dimension(300,200));
 			JOptionPane.showMessageDialog(MainFrame.getInstance(), message,"About Dijalog",JOptionPane.INFORMATION_MESSAGE);
 			
 		}

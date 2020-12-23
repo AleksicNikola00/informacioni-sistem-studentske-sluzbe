@@ -14,15 +14,17 @@ public class MyFocusListener implements FocusListener {
 	
 	private  ArrayList<JTextField> txtFieldArray;//niz textFieldova iz dijaloga
 	private  JButton btnPotvrdi;//button na koji dodajemo entitet u listu u slucaju da su polja sa textom validna
+	private JButton btnOdustani;//button nakon kojeg ne ispisujemo greske pri validaciji
 	
-	public MyFocusListener(ArrayList<JTextField> txtFieldArray,JButton btnPotvrdi){
+	public MyFocusListener(ArrayList<JTextField> txtFieldArray,JButton btnPotvrdi,JButton btnOdustani){
 		this.txtFieldArray=txtFieldArray;
 		this.btnPotvrdi=btnPotvrdi;
+		this.btnOdustani=btnOdustani;
 	}
 	
 	@Override
 	public void focusGained(FocusEvent arg0) {
-		// TODO Auto-generated method stub
+		//System.out.println(arg0.getComponent().getName());
 	}
 
 	@Override
@@ -34,34 +36,34 @@ public class MyFocusListener implements FocusListener {
 		int length=s.length();//duzina texta unutar polja
 		switch (name) {
 		case "txtIme":
-			if(!Validate.validateString(s,length)) {
+			if(!Validate.validateString(s,length) && arg0.getOppositeComponent()!=btnOdustani) {
 				txt.setText("");
 				JOptionPane.showMessageDialog(null, "Neispravno ime!");
 				btnPotvrdi.setEnabled(false);
 			}
 			break;
 		case "txtPrz":
-			if(!Validate.validateString(s,length)) {
+			if(!Validate.validateString(s,length)  && arg0.getOppositeComponent()!=btnOdustani) {
 				txt.setText("");
 				JOptionPane.showMessageDialog(null, "Neispravno prezime!");
 			}
 			break;
 		case "datRodj":
-			if (!s.matches("([0-9]{2})\\.([0-9]{2})\\.([0-9]{4}).")) {
+			if (!s.matches("([0-9]{2})\\.([0-9]{2})\\.([0-9]{4}).")  && arg0.getOppositeComponent()!=btnOdustani) {
 				txt.setText("");
 				JOptionPane.showMessageDialog(null, "Neispravan format datuma! \nVALIDAN FORMAT: (dd.mm.yyyy.)");
 				btnPotvrdi.setEnabled(false);
 			}
 			break;
 		case "txtAdresa":
-			if(length==0) {
+			if(length==0  && arg0.getOppositeComponent()!=btnOdustani) {
 				txt.setText("");
 				JOptionPane.showMessageDialog(null, "Neispravna adresa stanovanja!");
 				btnPotvrdi.setEnabled(false);
 			}
 			break;
 		case "txtBroj":
-			if(!Validate.validatePhoneNumber(s, length)) {
+			if(!Validate.validatePhoneNumber(s, length)  && arg0.getOppositeComponent()!=btnOdustani) {
 				txt.setText("");
 				JOptionPane.showMessageDialog(null, "Neispravan broj telefona!");
 				btnPotvrdi.setEnabled(false);
@@ -75,28 +77,28 @@ public class MyFocusListener implements FocusListener {
 			}
 			break;
 		case "txtIndex":
-			if(length==0) {
+			if(length==0  && arg0.getOppositeComponent()!=btnOdustani) {
 				txt.setText("");
 				JOptionPane.showMessageDialog(null, "Neispravan broj indexa!");
 				btnPotvrdi.setEnabled(false);
 			}
 			break;
 		case "txtGodinaUpisa":
-			if(!Validate.validateYear(s, length)) {
+			if(!Validate.validateYear(s, length)  && arg0.getOppositeComponent()!=btnOdustani) {
 				txt.setText("");
 				JOptionPane.showMessageDialog(null, "Neispravna godina upisa!");
 				btnPotvrdi.setEnabled(false);
 			}
 			break;
 		case "txtAdresaKancelarije":
-			if(length==0) {
+			if(length==0  && arg0.getOppositeComponent()!=btnOdustani) {
 				txt.setText("");
 				JOptionPane.showMessageDialog(null, "Neispravna adresa kancelarije!");
 				btnPotvrdi.setEnabled(false);
 			}
 			break;
 		case "txtBrojLK":
-			if(!Validate.validateIDCardNumber(s, length)) {
+			if(!Validate.validateIDCardNumber(s, length)  && arg0.getOppositeComponent()!=btnOdustani) {
 				txt.setText("");
 				JOptionPane.showMessageDialog(null, "Neispravan broj lične karte!");
 				btnPotvrdi.setEnabled(false);

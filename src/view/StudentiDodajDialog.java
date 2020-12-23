@@ -33,6 +33,7 @@ public class StudentiDodajDialog extends JDialog{
 	private static StudentiDodajDialog instance=null;
 	private static ArrayList<JTextField> listaTxt; //lista txt polja unutar dijaloga
 	private static JButton btnPotvrdi;//btn potvrde koji enable/disable u zavisnosti od validnosti txt polja
+	private static JButton btnOdustani;
 	private static JComboBox<String> trenutnaGodinaComboBox;//combo boxovi izdvojeni da bismo mogli da im pristupamo iz kontrolera
 	private static JComboBox<String> nacinFinasiranjaComboBox;
 	
@@ -64,12 +65,13 @@ public class StudentiDodajDialog extends JDialog{
 		//
 		listaTxt=new ArrayList<JTextField>();
 		btnPotvrdi=new JButton("Potvrdi");
+		btnOdustani = new JButton("Odustani");
 		//
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = kit.getScreenSize();
 		int screenHeight = screenSize.height;
 		int screenWidth = screenSize.width;
-		setSize(3 * screenWidth / 4 - 500, 3 * screenHeight / 4 - 25);
+		setSize((3*screenWidth/7) , 3 * screenHeight / 5 );
 		setLocationRelativeTo(MainFrame.getInstance());
 			
 		inicijalizacija(screenWidth, screenHeight);
@@ -80,8 +82,8 @@ public class StudentiDodajDialog extends JDialog{
 	private void inicijalizacija(int screenWidth, int screenHeight) {
 		JPanel panel = new JPanel();
 		add(panel);
-		Dimension dim = new Dimension((int)(screenWidth / 6.83), (int)(screenHeight / 25.6));
-		MyFocusListener proveraUnosa= new MyFocusListener(listaTxt,btnPotvrdi);
+		Dimension dim = new Dimension((int)(screenWidth / 7), (int)(screenHeight / 25));
+		MyFocusListener proveraUnosa= new MyFocusListener(listaTxt,btnPotvrdi,btnOdustani);
 		
 		//ime
 		JPanel panIme = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -208,7 +210,7 @@ public class StudentiDodajDialog extends JDialog{
 		//dugmad
 		JPanel panBtn = new JPanel();
 		panBtn.setLayout(new BoxLayout(panBtn, BoxLayout.X_AXIS));
-		JButton btnOdustani = new JButton("Odustani");
+		//JButton btnOdustani = new JButton("Odustani");
 		panBtn.add(btnPotvrdi);
 		panBtn.add(Box.createHorizontalStrut(25));
 		panBtn.add(btnOdustani);

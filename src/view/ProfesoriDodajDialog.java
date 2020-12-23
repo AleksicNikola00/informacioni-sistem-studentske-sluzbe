@@ -29,6 +29,7 @@ public class ProfesoriDodajDialog extends JDialog {
 	private static ProfesoriDodajDialog instance = null;
 	private static ArrayList<JTextField> listaTxt;
 	private static JButton btnPotvrdi;
+	JButton btnOdustani;
 	private static JComboBox<String> zvanjaComboBox;
 	private static JComboBox<String> tituleComboBox;
 	
@@ -59,12 +60,12 @@ public class ProfesoriDodajDialog extends JDialog {
 		super(MainFrame.getInstance(),"Dodaj profesora", true);
 		listaTxt=new ArrayList<JTextField>();
 		btnPotvrdi=new JButton("Potvrdi");
-		
+		btnOdustani = new JButton("Odustani");
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = kit.getScreenSize();
 		int screenHeight = screenSize.height;
 		int screenWidth = screenSize.width;
-		setSize(3 * screenWidth / 4 - 500, 3 * screenHeight / 4 - 25);
+		setSize((3*screenWidth/7) , 3 * screenHeight / 5 );
 		setLocationRelativeTo(MainFrame.getInstance());
 		
 		inicijalizacija(screenWidth, screenHeight);
@@ -73,8 +74,8 @@ public class ProfesoriDodajDialog extends JDialog {
 	private void inicijalizacija(int screenWidth, int screenHeight) {
 		JPanel panel = new JPanel();
 		add(panel);
-		Dimension dim = new Dimension((int)(screenWidth / 6.83), (int)(screenHeight / 25.6));
-		MyFocusListener proveraUnosa= new MyFocusListener(listaTxt, btnPotvrdi);
+		Dimension dim = new Dimension((int)(screenWidth / 7), (int)(screenHeight / 25));
+		MyFocusListener proveraUnosa= new MyFocusListener(listaTxt, btnPotvrdi,btnOdustani);
 		
 		//ime
 		JPanel panIme = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -203,7 +204,7 @@ public class ProfesoriDodajDialog extends JDialog {
 		
 		JPanel panBtn = new JPanel();
 		panBtn.setLayout(new BoxLayout(panBtn, BoxLayout.X_AXIS));
-		JButton btnOdustani = new JButton("Odustani");
+		//JButton btnOdustani = new JButton("Odustani");
 		panBtn.add(btnPotvrdi);
 		panBtn.add(Box.createHorizontalStrut(25));
 		panBtn.add(btnOdustani);
