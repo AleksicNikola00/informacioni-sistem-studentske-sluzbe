@@ -16,7 +16,6 @@ import view.PredmetiDodajDialog;
 public class DodajPredmetProfesoruListener implements ActionListener {
 
 	//https://stackoverflow.com/questions/13334198/java-custom-buttons-in-showinputdialog  
-	@SuppressWarnings("deprecation")
 	//http://www.java2s.com/Tutorials/Java/Swing_How_to/JList/Add_String_item_to_JList.htm   
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
@@ -34,11 +33,19 @@ public class DodajPredmetProfesoruListener implements ActionListener {
 		}
 		
 		
+		if(list.getModel().getSize()==0) {
+			JOptionPane.showMessageDialog(null, "Unesite prvo profesore, spisak profesora je prazan!");
+			return;
+		}
+			
+		
 		int result=JOptionPane.showOptionDialog(PredmetiDodajDialog.getInstance(), list, "Odaberi profesora",
                 JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
                 null, buttons, null);
-		if (result == JOptionPane.YES_OPTION){
+		if (result == JOptionPane.YES_OPTION && list.getSelectedValue()!=null){
            PredmetiDodajDialog.getTxtProfesor().setText(list.getSelectedValue());
+           PredmetiDodajDialog.getBtnPlus().setEnabled(false);
+           PredmetiDodajDialog.getBtnMinus().setEnabled(true);
 		}
 		
 	}

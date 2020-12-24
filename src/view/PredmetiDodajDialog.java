@@ -31,6 +31,8 @@ public class PredmetiDodajDialog extends JDialog{
 	private static ArrayList<JTextField> listaTxt;
 	private static JButton btnPotvrdi;
 	private static JButton btnOdustani;
+	private static JButton btnPlus;
+	private static JButton btnMinus;
 	private static JComboBox<Integer> godinaStudijaComboBox;
 	private static JComboBox<String> semestarComboBox;
 	private static JTextField txtProfesor;
@@ -40,6 +42,14 @@ public class PredmetiDodajDialog extends JDialog{
 			instance=new PredmetiDodajDialog();
 	
 		return instance;
+	}
+	
+	public static JButton getBtnMinus() {
+		return btnMinus;
+	}
+	
+	public static JButton getBtnPlus() {
+		return btnPlus;
 	}
 	
 	public static JTextField getTxtProfesor() {
@@ -68,6 +78,8 @@ public class PredmetiDodajDialog extends JDialog{
 		listaTxt=new ArrayList<JTextField>();
 		btnPotvrdi=new JButton("Potvrdi");
 		btnOdustani = new JButton("Odustani");
+		btnPlus = new JButton("+");
+		btnMinus= new JButton("-");
 		
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = kit.getScreenSize();
@@ -154,17 +166,20 @@ public class PredmetiDodajDialog extends JDialog{
 		panProfesor.add(lblProfesor);
 		panProfesor.add(txtProfesor);
 		panProfesor.add(Box.createHorizontalStrut(10));
-		JButton btnPlus = new JButton("+");
+		//JButton btnPlus = new JButton("+");
 		btnPlus.addActionListener(new DodajPredmetProfesoruListener());
 		
 		panProfesor.add(btnPlus);
 		panProfesor.add(Box.createHorizontalStrut(10));
-		JButton btnMinus=new JButton("-");
+		//JButton btnMinus=new JButton("-");
+		btnMinus.setEnabled(false);
 		btnMinus.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 					txtProfesor.setText("");
+					btnPlus.setEnabled(true);
+					btnMinus.setEnabled(false);
 				
 			}
 		});
