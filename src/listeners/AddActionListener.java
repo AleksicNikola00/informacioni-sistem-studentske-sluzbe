@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import view.MainFrame;
+import view.PredmetiDodajDialog;
 import view.ProfesoriDodajDialog;
 import view.StudentiDodajDialog;
 
@@ -20,6 +21,9 @@ public class AddActionListener implements ActionListener {
 		{
 			StudentiDodajDialog.getInstance().setVisible(true);
 			StudentiDodajDialog.getInstance().setLocationRelativeTo(MainFrame.getInstance());
+		}else if(MainFrame.getInstance().getSelectedIndex() == 2) {
+			PredmetiDodajDialog.getInstance().setVisible(true);
+			PredmetiDodajDialog.getInstance().setLocationRelativeTo(MainFrame.getInstance());
 		}
 
 	}
