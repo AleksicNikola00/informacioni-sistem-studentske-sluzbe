@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
  
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -28,6 +27,7 @@ public class MainFrame extends JFrame {
 	
 	private JTable tabelaProfesora;
 	private JTable tabelaStudenata;
+	private JTable tabelaPredmeta;
 	private int selectedIndex;
 	
 	private MainFrame() {
@@ -45,11 +45,14 @@ public class MainFrame extends JFrame {
 	}
 	
 	public void azurirajPrikaz() {
-		AbstractTableModelProfesori model = (AbstractTableModelProfesori) tabelaProfesora.getModel();
-		model.fireTableDataChanged();
+		AbstractTableModelProfesori modelProfesor = (AbstractTableModelProfesori) tabelaProfesora.getModel();
+		modelProfesor.fireTableDataChanged();
 		
 		AbstractTableModelStudenti modelStudent=(AbstractTableModelStudenti) tabelaStudenata.getModel();
 		modelStudent.fireTableDataChanged();
+		
+		AbstractTableModelPredmeti modelPredmet = (AbstractTableModelPredmeti) tabelaPredmeta.getModel();
+		modelPredmet.fireTableDataChanged();
 		
 		validate();
 	}
@@ -67,8 +70,6 @@ public class MainFrame extends JFrame {
 		secondPan.setLayout(new BorderLayout());
 		firstPan.setLayout(new BorderLayout());
 		thirdPan.setLayout(new BorderLayout());
-		JLabel todoLbl3 = new JLabel("TODO: Prikaz predmeta");
-		thirdPan.add(todoLbl3);
 		JTabbedPane panEntities = new JTabbedPane();
 		panEntities.add("Studenti", firstPan);
 		panEntities.add("Profesori", secondPan);
@@ -91,12 +92,16 @@ public class MainFrame extends JFrame {
 		
 		tabelaProfesora = new ProfesoriJTable();
 		tabelaStudenata= new StudentiJTable();
+		tabelaPredmeta = new PredmetiJTable();
 		
 		JScrollPane scrollPane1 = new JScrollPane(tabelaProfesora);
 		secondPan.add(scrollPane1, BorderLayout.CENTER);
 		
 		JScrollPane scrollPane2 = new JScrollPane(tabelaStudenata);
 		firstPan.add(scrollPane2, BorderLayout.CENTER);
+		
+		JScrollPane scrollPane3 = new JScrollPane(tabelaPredmeta);
+		thirdPan.add(scrollPane3, BorderLayout.CENTER);
 			
 		this.azurirajPrikaz();
 	}
