@@ -55,9 +55,9 @@ public class BazaPredmeta {
 		case 1:
 			return predmet.getNazivPredmeta();
 		case 2:
-			return predmet.getBrojESPB();
+			return Integer.toString(predmet.getBrojESPB());
 		case 3:
-			return predmet.getGodinaStudija();
+			return  Integer.toString(predmet.getGodinaStudija());
 		case 4:
 			return predmet.getSemestar();
 		default:
@@ -65,8 +65,8 @@ public class BazaPredmeta {
 		}
 	}
 
-	public void dodajPredmet(String sifraPredmeta, String nazivPredmeta, String semestar, String godinaStudija,
-			Profesor profesor, String brojESPB, ArrayList<Student> studentiKojiSuPoloziliPredmet,
+	public void dodajPredmet(String sifraPredmeta, String nazivPredmeta, String semestar, int godinaStudija,
+			Profesor profesor, int brojESPB, ArrayList<Student> studentiKojiSuPoloziliPredmet,
 			ArrayList<Student> studentiKojiNisuPoloziliPredmet) {
 		this.predmeti.add(new Predmet(sifraPredmeta, nazivPredmeta, semestar, godinaStudija, profesor, brojESPB, 
 				studentiKojiSuPoloziliPredmet, studentiKojiNisuPoloziliPredmet));

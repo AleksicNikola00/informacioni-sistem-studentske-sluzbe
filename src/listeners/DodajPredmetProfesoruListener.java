@@ -15,6 +15,11 @@ import view.PredmetiDodajDialog;
 
 public class DodajPredmetProfesoruListener implements ActionListener {
 
+	private MyFocusListener myFocusListener;
+	
+	public DodajPredmetProfesoruListener(MyFocusListener myFocusListener) {
+		this.myFocusListener=myFocusListener;
+	}
 	//https://stackoverflow.com/questions/13334198/java-custom-buttons-in-showinputdialog  
 	//http://www.java2s.com/Tutorials/Java/Swing_How_to/JList/Add_String_item_to_JList.htm   
 	@Override
@@ -46,6 +51,8 @@ public class DodajPredmetProfesoruListener implements ActionListener {
            PredmetiDodajDialog.getTxtProfesor().setText(list.getSelectedValue());
            PredmetiDodajDialog.getBtnPlus().setEnabled(false);
            PredmetiDodajDialog.getBtnMinus().setEnabled(true);
+           if(myFocusListener.validateTxtFields())
+        	   PredmetiDodajDialog.getBtn().setEnabled(true);
 		}
 		
 	}

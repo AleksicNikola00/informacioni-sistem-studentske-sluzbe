@@ -7,14 +7,14 @@ public class Predmet {
 	private String sifraPredmeta;
 	private String nazivPredmeta;
 	private String semestar;
-	private String godinaStudija;
+	private int godinaStudija;
 	private Profesor profesor;
-	private String brojESPB;
+	private int brojESPB;
 	private ArrayList<Student> studentiKojiSuPoloziliPredmet;
 	private ArrayList<Student> studentiKojiNisuPoloziliPredmet;
 	
-	public Predmet(String sifraPredmeta, String nazivPredmeta, String semestar, String godinaStudija,
-			Profesor profesor, String brojESPB, ArrayList<Student> studentiKojiSuPoloziliPredmet,
+	public Predmet(String sifraPredmeta, String nazivPredmeta, String semestar, int godinaStudija,
+			Profesor profesor, int brojESPB, ArrayList<Student> studentiKojiSuPoloziliPredmet,
 			ArrayList<Student> studentiKojiNisuPoloziliPredmet) {
 		super();
 		this.sifraPredmeta = sifraPredmeta;
@@ -51,11 +51,11 @@ public class Predmet {
 		this.semestar = semestar;
 	}
 
-	public String getGodinaStudija() {
+	public int getGodinaStudija() {
 		return godinaStudija;
 	}
 
-	public void setGodinaStudija(String godinaStudija) {
+	public void setGodinaStudija(int godinaStudija) {
 		this.godinaStudija = godinaStudija;
 	}
 
@@ -67,11 +67,11 @@ public class Predmet {
 		this.profesor = profesor;
 	}
 
-	public String getBrojESPB() {
+	public int getBrojESPB() {
 		return brojESPB;
 	}
 
-	public void setBrojESPB(String brojESPB) {
+	public void setBrojESPB(int brojESPB) {
 		this.brojESPB = brojESPB;
 	}
 

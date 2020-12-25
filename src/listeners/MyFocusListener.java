@@ -35,6 +35,35 @@ public class MyFocusListener implements FocusListener {
 		String s=txt.getText().trim();//text unutar polja nad kojim se pozvao focus lost
 		int length=s.length();//duzina texta unutar polja
 		switch (name) {
+		case "txtSifraPredmeta":
+			if(length==0  && arg0.getOppositeComponent()!=btnOdustani) {
+				txt.setText("");
+				JOptionPane.showMessageDialog(null, "Neispravna šifra predmeta!");
+				btnPotvrdi.setEnabled(false);
+			}
+			break;
+		case "txtNazivPredmeta":
+			if(length==0  && arg0.getOppositeComponent()!=btnOdustani) {
+				txt.setText("");
+				JOptionPane.showMessageDialog(null, "Neispravno ime predmeta!");
+				btnPotvrdi.setEnabled(false);
+			}
+			break;
+		case "txtESPB":
+			if(!Validate.validateESPB(s, length)  && arg0.getOppositeComponent()!=btnOdustani) {
+				txt.setText("");
+				JOptionPane.showMessageDialog(null, "Neispravno uneti ESPB bodovi!");
+				btnPotvrdi.setEnabled(false);
+			}
+			break;
+			/*
+		case "txtProfesor":
+			if(length==0  && arg0.getOppositeComponent()!=btnOdustani) {
+				txt.setText("");
+				JOptionPane.showMessageDialog(null, "Odaberite predmetnog profesora!");
+				btnPotvrdi.setEnabled(false);
+			}
+			break;*/
 		case "txtIme":
 			if(!Validate.validateString(s,length) && arg0.getOppositeComponent()!=btnOdustani) {
 				txt.setText("");

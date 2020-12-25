@@ -11,10 +11,13 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controller.PredmetiController;
 import listeners.DodajPredmetProfesoruListener;
+import listeners.MyFocusListener;
 import listeners.SwitchTxtFieldListener;
 
 import java.awt.Toolkit;
@@ -65,11 +68,11 @@ public class PredmetiDodajDialog extends JDialog{
 	}
 	
 	
-	public static JComboBox<Integer> godinaStudijaComboBox(){
+	public static JComboBox<Integer> getGodinaStudijaComboBox(){
 		return godinaStudijaComboBox;
 	}
 	
-	public static JComboBox<String> semestarComboBox(){
+	public static JComboBox<String> getSemestarComboBox(){
 		return semestarComboBox;
 	}
 	
@@ -96,6 +99,7 @@ public class PredmetiDodajDialog extends JDialog{
 		add(panel);
 		Dimension dim = new Dimension((int)(screenWidth / 7), (int)(screenHeight / 25));
 		Dimension dimProfesor=new Dimension((int)(screenWidth / 12),(int)(screenHeight / 25));
+		MyFocusListener proveraUnosa= new MyFocusListener(listaTxt,btnPotvrdi,btnOdustani);
 		
 		//sifra predmeta
 		JPanel panSifra = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -107,6 +111,7 @@ public class PredmetiDodajDialog extends JDialog{
 		txtSifra.setName("txtSifraPredmeta");
 		//txtIme.addFocusListener(proveraUnosa);
 		txtSifra.addActionListener(new SwitchTxtFieldListener());
+		txtSifra.addFocusListener(proveraUnosa);
 		panSifra.add(lblSifra);
 		panSifra.add(txtSifra);
 		
@@ -120,6 +125,7 @@ public class PredmetiDodajDialog extends JDialog{
 		txtIme.setName("txtNazivPredmeta");
 		//txtIme.addFocusListener(proveraUnosa);
 		txtIme.addActionListener(new SwitchTxtFieldListener());
+		txtIme.addFocusListener(proveraUnosa);
 		panIme.add(lblIme);
 		panIme.add(txtIme);
 		
@@ -149,8 +155,11 @@ public class PredmetiDodajDialog extends JDialog{
 		lblESPB.setPreferredSize(dim);
 		JTextField txtESPB=new JTextField();
 		txtESPB.setPreferredSize(dim);
+		txtESPB.setText("9");
+		txtESPB.setName("txtESPB");
 		//
 		txtESPB.addActionListener(new SwitchTxtFieldListener());
+		txtESPB.addFocusListener(proveraUnosa);
 		panESPB.add(lblESPB);
 		panESPB.add(txtESPB);
 		
@@ -160,14 +169,16 @@ public class PredmetiDodajDialog extends JDialog{
 		lblProfesor.setPreferredSize(dim);
 		txtProfesor=new JTextField();
 		txtProfesor.setPreferredSize(dimProfesor);
+		txtProfesor.setName("txtProfesor");
 		txtProfesor.setText("");
 		txtProfesor.setEditable(false);
 		txtProfesor.setBackground(Color.WHITE);
+		txtProfesor.addFocusListener(proveraUnosa);
 		panProfesor.add(lblProfesor);
 		panProfesor.add(txtProfesor);
 		panProfesor.add(Box.createHorizontalStrut(10));
 		//JButton btnPlus = new JButton("+");
-		btnPlus.addActionListener(new DodajPredmetProfesoruListener());
+		btnPlus.addActionListener(new DodajPredmetProfesoruListener(proveraUnosa));
 		
 		panProfesor.add(btnPlus);
 		panProfesor.add(Box.createHorizontalStrut(10));
@@ -190,6 +201,7 @@ public class PredmetiDodajDialog extends JDialog{
 				JPanel panBtn = new JPanel();
 				panBtn.setLayout(new BoxLayout(panBtn, BoxLayout.X_AXIS));
 				//JButton btnOdustani = new JButton("Odustani");
+				btnPotvrdi.setEnabled(false);
 				panBtn.add(btnPotvrdi);
 				panBtn.add(Box.createHorizontalStrut(25));
 				panBtn.add(btnOdustani);
@@ -201,8 +213,29 @@ public class PredmetiDodajDialog extends JDialog{
 					}
 				});
 				
+				btnPotvrdi.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						// TODO Auto-generated method stub
+						if(proveraUnosa.validateTxtFields()) {
+							PredmetiController.getInstance().dodajPredmet();
+							dispose();
+							return;
+						}else {
+							if(txtProfesor.getText().equals("")) {
+								JOptionPane.showMessageDialog(null, "Odaberite predmetnog profesora!");
+								btnPotvrdi.setEnabled(false);
+							}
+						}
+					}
+				});
+				
+				
 		listaTxt.add(txtSifra);
 		listaTxt.add(txtIme);
+		listaTxt.add(txtESPB);
+		listaTxt.add(txtProfesor);
 		
 		//uredi view
 		Box box=Box.createVerticalBox();

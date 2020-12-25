@@ -1,6 +1,24 @@
 package controller;
 
 public class Validate {
+	
+	public static boolean validateESPB(String s,int length) {
+		boolean valid=true;
+		if(length==0)
+			valid=false;
+		try {
+			int brojESPB=Integer.parseInt(s);
+			if(brojESPB<1 || brojESPB>60)
+				valid=false;
+		}
+		catch(NumberFormatException e) {
+			valid=false;
+		}
+		
+		
+		return valid;
+	}
+	
 	public static boolean validateYear(String s,int length) {
 		boolean valid=true;
 		if (length == 0) {
