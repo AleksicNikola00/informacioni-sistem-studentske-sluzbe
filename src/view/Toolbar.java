@@ -14,6 +14,7 @@ import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
 import listeners.AddActionListener;
+import listeners.EditActionListener;
 
 public class Toolbar extends JToolBar {
 
@@ -40,6 +41,7 @@ public class Toolbar extends JToolBar {
 		JButton btnEdit = new JButton();
 		btnEdit.setToolTipText("Izmeni");
 		btnEdit.setIcon(new ImageIcon("images/izmeni.jpg"));
+		btnEdit.addActionListener(new EditActionListener());
 		toolbarLeft.add(btnEdit);
 		
 		

@@ -7,8 +7,6 @@ import javax.swing.JTextField;
 
 import model.BazaPredmeta;
 import model.BazaProfesora;
-import model.BazaStudenta;
-import model.Predmet;
 import model.Profesor;
 import model.Student;
 import view.MainFrame;
@@ -51,7 +49,7 @@ private static PredmetiController instance = null;
 			return;
 		}
 		
-		Predmet predmet= BazaPredmeta.getInstance().getRow(rowSelectedIndex);
+		//Predmet predmet= BazaPredmeta.getInstance().getRow(rowSelectedIndex);
 		//BazaStudenta.getInstance().izbrisiStudenta(predmet.getSifraPredmeta());
 		MainFrame.getInstance().azurirajPrikaz();
 	}

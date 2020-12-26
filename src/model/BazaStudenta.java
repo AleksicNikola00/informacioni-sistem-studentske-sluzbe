@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import model.Student.Status;
@@ -34,11 +33,6 @@ public class BazaStudenta {
 	
 	private void initStudenti() {
 		this.studenti=new ArrayList<Student>();
-		//TO DO DODAJ STUDENTE!!
-		/*
-		studenti.add(new Student("Nikola", "Aleksic",  Calendar.getInstance(), "Zmaj Jovina 16/8",
-				"aleksamigojoni@stcable.rs", "069-731235", "RA-24-2018", 2018,3,Status.B, 9.24, new ArrayList<Ocena>(), 
-				new ArrayList<Predmet>()));*/
 	}
 
 	public List<Student> getStudenti() {
@@ -90,9 +84,10 @@ public class BazaStudenta {
 		}
 	}
 	
-	public void dodajStudenta(String ime, String prezime, Calendar datumRodjenja, String adresa, String email, String brojTelefona,
+	public void dodajStudenta(String ime, String prezime, String datumRodjenja, String adresa, String email, String brojTelefona,
 			String brojIndexa, int godinaUpisa, int trenutnaGodinaStudija, Status status, double prosecnaOcena,
 			ArrayList<Ocena> spisakPolozenihIspita, ArrayList<Predmet> spisakNepolozenihIspita) {
+		
 		
 		this.studenti.add(new Student(ime,prezime,datumRodjenja,adresa,email,brojTelefona,brojIndexa,godinaUpisa,trenutnaGodinaStudija,status,prosecnaOcena,
 				spisakPolozenihIspita,spisakNepolozenihIspita));
@@ -106,19 +101,19 @@ public class BazaStudenta {
 		}
 	}
 	
-	public void izmeniStudenta(String ime, String prezime, Calendar datumRodjenja, String adresa, String email, String brojTelefona,
+	public void izmeniStudenta(String stariIndex,String ime, String prezime, String datumRodjenja, String adresa, String email, String brojTelefona,
 			String brojIndexa, int godinaUpisa, int trenutnaGodinaStudija, Status status, double prosecnaOcena,
 			ArrayList<Ocena> spisakPolozenihIspita, ArrayList<Predmet> spisakNepolozenihIspita) {
 		
 		for (Student student : studenti) {
-			if(student.getBrojIndexa().equals(brojIndexa)) {
+			if(student.getBrojIndexa().equals(stariIndex)) {
 				student.setIme(ime);
 				student.setPrezime(prezime);
 				student.setDatumRodjenja(datumRodjenja);
 				student.setAdresa(adresa);
 				student.setEmail(email);
 				student.setBrojTelefona(brojTelefona);
-				//student.setBrojIndexa(brojIndexa);
+				student.setBrojIndexa(brojIndexa);
 				student.setGodinaUpisa(godinaUpisa);
 				student.setTrenutnaGodinaStudija(trenutnaGodinaStudija);
 				student.setStatus(status);

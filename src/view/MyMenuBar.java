@@ -11,6 +11,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import listeners.AddActionListener;
+import listeners.EditActionListener;
 
 
 
@@ -41,6 +42,7 @@ public class MyMenuBar extends JMenuBar {
 		JMenuItem eEdit=new JMenuItem("Edit",KeyEvent.VK_E);
 		eEdit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E,ActionEvent.CTRL_MASK));
 		eEdit.setIcon(new ImageIcon("images/izmeni.jpg"));
+		eEdit.addActionListener(new EditActionListener());
 		JMenuItem eDelete=new JMenuItem("Delete",KeyEvent.VK_D);
 		eDelete.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,ActionEvent.CTRL_MASK));;
 		eDelete.setIcon(new ImageIcon("images/obrisi.jpg"));

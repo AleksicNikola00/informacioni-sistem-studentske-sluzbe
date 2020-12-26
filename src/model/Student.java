@@ -2,7 +2,7 @@ package model;
 
 
 import java.util.ArrayList;
-import java.util.Calendar;
+
 
 
 public class Student {
@@ -11,7 +11,7 @@ public class Student {
 	
 	private String ime;
 	private String prezime;
-	private Calendar datumRodjenja;
+	private String datumRodjenja;
 	private String adresa;
 	private String email;
 	private String brojTelefona;
@@ -31,7 +31,7 @@ public class Student {
 	
 	
 	
-	public Student(String ime, String prezime, Calendar datumRodjenja, String adresa, String email, String brojTelefona,
+	public Student(String ime, String prezime, String datumRodjenja, String adresa, String email, String brojTelefona,
 			String brojIndexa, int godinaUpisa, int trenutnaGodinaStudija, Status status, double prosecnaOcena,
 			ArrayList<Ocena> spisakPolozenihIspita, ArrayList<Predmet> spisakNepolozenihIspita) {
 		super();
@@ -66,10 +66,10 @@ public class Student {
 	public void setPrezime(String prezime) {
 		this.prezime = prezime;
 	}
-	public Calendar getDatumRodjenja() {
+	public String getDatumRodjenja() {
 		return datumRodjenja;
 	}
-	public void setDatumRodjenja(Calendar datumRodjenja) {
+	public void setDatumRodjenja(String datumRodjenja) {
 		this.datumRodjenja = datumRodjenja;
 	}
 	public String getAdresa() {

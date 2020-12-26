@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
  
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -65,6 +66,8 @@ public class MainFrame extends JFrame {
 		add(toolbar, BorderLayout.NORTH);
 		
 		JPanel firstPan = new JPanel();
+		JLabel todoLbl3 = new JLabel("TODO: Prikaz predmeta");
+		firstPan.add(todoLbl3);
 		JPanel secondPan = new JPanel();
 		JPanel thirdPan = new JPanel();
 		secondPan.setLayout(new BorderLayout());
@@ -73,7 +76,7 @@ public class MainFrame extends JFrame {
 		JTabbedPane panEntities = new JTabbedPane();
 		panEntities.add("Studenti", firstPan);
 		panEntities.add("Profesori", secondPan);
-		panEntities.add("Predmet", thirdPan);
+		panEntities.add("Predmeti", thirdPan);
 		
 		add(panEntities, BorderLayout.CENTER);
 		
@@ -91,7 +94,7 @@ public class MainFrame extends JFrame {
 		this.add(myStatusBar,BorderLayout.SOUTH);
 		
 		tabelaProfesora = new ProfesoriJTable();
-		tabelaStudenata= new StudentiJTable();
+		tabelaStudenata= StudentiJTable.getInstance();//new StudentiJTable();
 		tabelaPredmeta = new PredmetiJTable();
 		
 		JScrollPane scrollPane1 = new JScrollPane(tabelaProfesora);
