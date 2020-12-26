@@ -18,6 +18,7 @@ public class EditActionListener implements ActionListener {
 			if(StudentiJTable.getInstance().getSelectedRow()==-1)
 				JOptionPane.showMessageDialog(null, "Odaberite studenta!");
 			else {
+				IzmenaStudentaDialog.getInstance().refreshStudentPanel();
 				IzmenaStudentaDialog.getInstance().setVisible(true);
 				IzmenaStudentaDialog.getInstance().setLocationRelativeTo(MainFrame.getInstance());
 			}

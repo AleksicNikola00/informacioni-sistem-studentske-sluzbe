@@ -22,6 +22,7 @@ import listeners.MyFocusListener;
 import listeners.SwitchTxtFieldListener;
 import model.BazaStudenta;
 import model.Student;
+import model.Student.Status;
 
 
 public class StudentPanel extends JPanel {
@@ -100,22 +101,14 @@ public class StudentPanel extends JPanel {
 	private void inicijalizacija(int screenWidth, int screenHeight) {
 		Dimension dim = new Dimension((int)(screenWidth / 7), (int)(screenHeight / 25));
 		MyFocusListener proveraUnosa= new MyFocusListener(listaTxt,btnPotvrdi,btnOdustani);
-		//za edit mode
-		int selectedIndex=StudentiJTable.getInstance().getSelectedRow();
-		Student student=null;
-		if(!mode)
-			student=BazaStudenta.getInstance().getRow(selectedIndex);
-		//
 		//ime
 				JPanel panIme = new JPanel(new FlowLayout(FlowLayout.LEFT));
 				JLabel lblIme = new JLabel("Ime*");
 				lblIme.setPreferredSize(dim);
 				JTextField txtIme = new JTextField();
 				txtIme.setPreferredSize(dim);
-				if(mode)
+				//if(mode)
 					txtIme.setText("Pero");
-				else
-					txtIme.setText(student.getIme());
 				txtIme.setName("txtIme");
 				txtIme.addFocusListener(proveraUnosa);
 				txtIme.addActionListener(new SwitchTxtFieldListener());
@@ -129,10 +122,7 @@ public class StudentPanel extends JPanel {
 				lblPrezime.setPreferredSize(dim);
 				JTextField txtPrezime = new JTextField();
 				txtPrezime.setPreferredSize(dim);
-				if(mode)
-					txtPrezime.setText("Perić");
-				else
-					txtPrezime.setText(student.getPrezime());
+				txtPrezime.setText("Perić");
 				txtPrezime.setName("txtPrz"); //isto kao i ime zbog provere!
 				txtPrezime.addFocusListener(proveraUnosa);
 				txtPrezime.addActionListener(new SwitchTxtFieldListener());
@@ -145,10 +135,7 @@ public class StudentPanel extends JPanel {
 				lblDatumRodj.setPreferredSize(dim);
 				JTextField txtDatumRodj = new JTextField();
 				txtDatumRodj.setPreferredSize(dim);
-				if(mode)
-					txtDatumRodj.setText("25.02.1980.");
-				else
-					txtDatumRodj.setText(student.getDatumRodjenja());
+				txtDatumRodj.setText("25.02.1980.");
 				txtDatumRodj.setName("datRodj");
 				txtDatumRodj.addFocusListener(proveraUnosa);
 				txtDatumRodj.addActionListener(new SwitchTxtFieldListener());
@@ -161,10 +148,7 @@ public class StudentPanel extends JPanel {
 				lblAdresaStan.setPreferredSize(dim);
 				JTextField txtAdresaStan = new JTextField();
 				txtAdresaStan.setPreferredSize(dim);
-				if(mode)
-					txtAdresaStan.setText("Ulica Alekse Šantića 4");
-				else
-					txtAdresaStan.setText(student.getAdresa());
+				txtAdresaStan.setText("Ulica Alekse Šantića 4");
 				txtAdresaStan.setName("txtAdresa");
 				txtAdresaStan.addFocusListener(proveraUnosa);
 				txtAdresaStan.addActionListener(new SwitchTxtFieldListener());
@@ -177,10 +161,7 @@ public class StudentPanel extends JPanel {
 				lblBrojTel.setPreferredSize(dim);
 				JTextField txtBrojTel = new JTextField();
 				txtBrojTel.setPreferredSize(dim);
-				if(mode)
-					txtBrojTel.setText("066439698");
-				else
-					txtBrojTel.setText(student.getBrojTelefona());
+				txtBrojTel.setText("066439698");
 				txtBrojTel.setName("txtBroj");
 				txtBrojTel.addFocusListener(proveraUnosa);
 				txtBrojTel.addActionListener(new SwitchTxtFieldListener());
@@ -193,10 +174,7 @@ public class StudentPanel extends JPanel {
 				lblEmail.setPreferredSize(dim);
 				JTextField txtEmail = new JTextField();
 				txtEmail.setPreferredSize(dim);
-				if(mode)
-					txtEmail.setText("pero.peric@uns.ac.rs");
-				else
-					txtEmail.setText(student.getEmail());;
+				txtEmail.setText("pero.peric@uns.ac.rs");
 				txtEmail.setName("txtEmail");
 				txtEmail.addFocusListener(proveraUnosa);
 				txtEmail.addActionListener(new SwitchTxtFieldListener());
@@ -210,10 +188,10 @@ public class StudentPanel extends JPanel {
 				JTextField txtBrIndexa=new JTextField();
 				txtBrIndexa.setName("txtIndex");
 				txtBrIndexa.setPreferredSize(dim);
-				if(mode)
+				
 					txtBrIndexa.setText("RA-24/2018");
-				else
-					txtBrIndexa.setText(student.getBrojIndexa());
+				//else
+					//txtBrIndexa.setText(student.getBrojIndexa());
 				txtBrIndexa.addFocusListener(proveraUnosa);
 				txtBrIndexa.addActionListener(new SwitchTxtFieldListener());
 				panBrIndexa.add(lblBrIndexa);
@@ -225,10 +203,7 @@ public class StudentPanel extends JPanel {
 				lblGodUpisa.setPreferredSize(dim);
 				JTextField txtGodinaUpisa=new JTextField();
 				txtGodinaUpisa.setPreferredSize(dim);
-				if(mode)
-					txtGodinaUpisa.setText("2018");
-				else
-					txtGodinaUpisa.setText(Integer.toString(student.getGodinaUpisa()));
+				txtGodinaUpisa.setText("2018");
 				txtGodinaUpisa.setName("txtGodinaUpisa");
 				txtGodinaUpisa.addFocusListener(proveraUnosa);
 				txtGodinaUpisa.addActionListener(new SwitchTxtFieldListener());
@@ -258,7 +233,6 @@ public class StudentPanel extends JPanel {
 				//dugmad
 				JPanel panBtn = new JPanel();
 				panBtn.setLayout(new BoxLayout(panBtn, BoxLayout.X_AXIS));
-				//JButton btnOdustani = new JButton("Odustani");
 				panBtn.add(btnPotvrdi);
 				panBtn.add(Box.createHorizontalStrut(25));
 				panBtn.add(btnOdustani);
@@ -280,11 +254,11 @@ public class StudentPanel extends JPanel {
 					public void actionPerformed(ActionEvent e) {
 						if(proveraUnosa.validateTxtFields()) {
 							if(mode) {
-								StudentiController.getInstance().dodajStudenta(getPanel());
+								StudentiController.getInstance().dodajStudenta();
 								StudentiDodajDialog.getInstance().dispose();
 							}
 							else {
-								StudentiController.getInstance().izmeniStudenta(selectedIndex,getPanel());
+								StudentiController.getInstance().izmeniStudenta(StudentiJTable.getInstance().getSelectedRow());
 								IzmenaStudentaDialog.getInstance().dispose();
 							}
 							return;
@@ -294,24 +268,22 @@ public class StudentPanel extends JPanel {
 				
 				//dodaj txtfieldove u niz
 				listaTxt.add(txtIme);
-				
 				listaTxt.add(txtPrezime);
-				
 				listaTxt.add(txtDatumRodj);
 				listaTxt.add(txtAdresaStan);
 				listaTxt.add(txtBrojTel);
 				listaTxt.add(txtEmail);
 				listaTxt.add(txtBrIndexa);
 				listaTxt.add(txtGodinaUpisa);
-			
+				//
+				if(!mode) {
+					refreshJTxtFields();
+				}
 				
 				//uredi view
 				Box box=Box.createVerticalBox();
 				box.add(panIme);
-				
 				box.add(panPrezime);
-			
-				
 				box.add(panDatumRodj);
 				box.add(panAdresaStan);
 				box.add(panBrojTel);
@@ -325,6 +297,27 @@ public class StudentPanel extends JPanel {
 				box.add(Box.createGlue());
 				this.add(box);
 
+	}
+	//pri editu
+	public void refreshJTxtFields() {
+		int selectedIndex=StudentiJTable.getInstance().getSelectedRow();
+		Student student=BazaStudenta.getInstance().getRow(selectedIndex);
+		//setuj 
+		listaTxt.get(0).setText(student.getIme());
+		listaTxt.get(1).setText(student.getPrezime());
+		listaTxt.get(2).setText(student.getDatumRodjenja());
+		listaTxt.get(3).setText(student.getAdresa());
+		listaTxt.get(4).setText(student.getBrojTelefona());
+		listaTxt.get(5).setText(student.getEmail());
+		listaTxt.get(6).setText(student.getBrojIndexa());
+		listaTxt.get(7).setText(Integer.toString(student.getGodinaUpisa()));
+		//int trenutnaGodinaStudija
+		trenutnaGodinaComboBox.setSelectedIndex(student.getTrenutnaGodinaStudija()-1);
+		if(student.getStatus()==Status.B)
+			nacinFinasiranjaComboBox.setSelectedIndex(0);
+		else
+			nacinFinasiranjaComboBox.setSelectedIndex(1);
+		
 	}
 	
 }

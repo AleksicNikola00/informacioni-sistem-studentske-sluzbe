@@ -19,6 +19,7 @@ public class StudentiDodajDialog extends JDialog{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static StudentPanel panelDodaj;
 	
 	private static StudentiDodajDialog instance=null;
 	public static StudentiDodajDialog getInstance() {
@@ -26,6 +27,10 @@ public class StudentiDodajDialog extends JDialog{
 			instance=new StudentiDodajDialog();
 		
 		return instance;
+	}
+	
+	public StudentPanel getStudentPanelDodaj(){
+		return panelDodaj;
 	}
 
 	private StudentiDodajDialog() {
@@ -44,8 +49,8 @@ public class StudentiDodajDialog extends JDialog{
 	
 	
 	private void inicijalizacija(int screenWidth, int screenHeight) {
-		StudentPanel panel=new StudentPanel(true);	//true-otvaramo u mod-u dodavanja
-		add(panel);
+		 panelDodaj=new StudentPanel(true);	//true-otvaramo u mod-u dodavanja
+		add(panelDodaj);
 	}
 	
 }

@@ -11,15 +11,15 @@ import model.Ocena;
 import model.Predmet;
 import model.Student;
 import model.Student.Status;
+import view.IzmenaStudentaDialog;
 import view.MainFrame;
-import view.StudentPanel;
+import view.StudentiDodajDialog;
 
 
 public class StudentiController {
 	private static StudentiController instance=null;
 	
 	//
-	private StudentPanel studentPanel;
 	private ArrayList<JTextField> txtFieldArray;
 	private String ime,prezime,adresa,brIndexa,brTelefona,email,datum;
 	Status status;
@@ -36,9 +36,8 @@ public class StudentiController {
 	
 	private  StudentiController() {}
 	
-	public void dodajStudenta(StudentPanel studentPanel) {
-		this.studentPanel=studentPanel;
-		loadFromView();
+	public void dodajStudenta() {
+		loadFromView(true);
 		BazaStudenta.getInstance().dodajStudenta(ime, prezime,datum,
 				adresa,email, brTelefona, brIndexa, godinaUpisa,trenutnaGodinaStudija,status, 0, new ArrayList<Ocena>(), 
 				new ArrayList<Predmet>());
@@ -56,14 +55,13 @@ public class StudentiController {
 		MainFrame.getInstance().azurirajPrikaz();
 	}
 	
-	public void izmeniStudenta(int rowSelectedIndex,StudentPanel studentPanel) {
+	public void izmeniStudenta(int rowSelectedIndex) {
 		if (rowSelectedIndex < 0) {
 			return;
 		}
-		this.studentPanel=studentPanel;
 		Student student=BazaStudenta.getInstance().getRow(rowSelectedIndex);
 		//
-		loadFromView();
+		loadFromView(false);
 		//
 		BazaStudenta.getInstance().izmeniStudenta(student.getBrojIndexa(), ime, prezime,datum,
 				adresa,brTelefona, email, brIndexa, godinaUpisa,trenutnaGodinaStudija,status, 0, new ArrayList<Ocena>(), 
@@ -72,14 +70,20 @@ public class StudentiController {
 		MainFrame.getInstance().azurirajPrikaz();
 	}
 	
-	public void loadFromView() {
+	public void loadFromView(boolean mode) {//true-add,false-edit
 		
-		 txtFieldArray=studentPanel.getListaTxt();
-		datum=txtFieldArray.get(2).getText();
-		trenutnaGodinaComboBox=studentPanel.getTrenutnaGodinaComboBox();
-		 nacinFinasiranjaComboBox=studentPanel.getNacinFinasiranjaComboBox();
+		if(!mode) {
+			txtFieldArray=IzmenaStudentaDialog.getInstance().getStudentPanel().getListaTxt(); //studentPanel.getListaTxt();
+			trenutnaGodinaComboBox=IzmenaStudentaDialog.getInstance().getStudentPanel().getTrenutnaGodinaComboBox();
+			 nacinFinasiranjaComboBox=IzmenaStudentaDialog.getInstance().getStudentPanel().getNacinFinasiranjaComboBox();
+		}else {
+			txtFieldArray=StudentiDodajDialog.getInstance().getStudentPanelDodaj().getListaTxt();
+			trenutnaGodinaComboBox=StudentiDodajDialog.getInstance().getStudentPanelDodaj().getTrenutnaGodinaComboBox();
+			nacinFinasiranjaComboBox=StudentiDodajDialog.getInstance().getStudentPanelDodaj().getNacinFinasiranjaComboBox();
+		}
 		
 		ime=txtFieldArray.get(0).getText();
+		datum=txtFieldArray.get(2).getText();
 		prezime=txtFieldArray.get(1).getText();
 		adresa=txtFieldArray.get(3).getText();
 		brTelefona=txtFieldArray.get(4).getText();
@@ -99,7 +103,9 @@ public class StudentiController {
 			trenutnaGodinaStudija=3;
 		else if(trenutnaGodinaComboBox.getSelectedItem().equals("IV (četvrta)"))
 			trenutnaGodinaStudija=4;
-		else
+		else if(trenutnaGodinaComboBox.getSelectedItem().equals("Master"))
 			trenutnaGodinaStudija=5;
+		else
+			trenutnaGodinaStudija=6;
 	}
 }

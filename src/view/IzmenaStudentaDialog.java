@@ -18,6 +18,8 @@ public class IzmenaStudentaDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 	
 	private static IzmenaStudentaDialog instance=null;
+	private static StudentPanel firstPan;
+	//private StudentPanel firstPan;
 	
 	public static IzmenaStudentaDialog getInstance() {
 		if(instance==null)
@@ -40,12 +42,21 @@ public class IzmenaStudentaDialog extends JDialog {
 		inicijalizacija(screenWidth, screenHeight);
 	}
 	
-	private void inicijalizacija(int screenWidth, int screenHeight) {
-		JPanel panel = new JPanel();
+	public void refreshStudentPanel() {
+		firstPan.refreshJTxtFields();
+	}
+	public StudentPanel getStudentPanel() {
+		return firstPan;
+	}
+
+	
+	public void inicijalizacija(int screenWidth, int screenHeight) {
+		JPanel panel=new JPanel();
 		add(panel);
 		//Dimension dim = new Dimension((int)(screenWidth / 7), (int)(screenHeight / 25));
-
-		StudentPanel firstPan=new StudentPanel(false);
+		
+		
+		firstPan=new StudentPanel(false);
 		JPanel secondPan = new JPanel();
 		JPanel thirdPan = new JPanel();
 
