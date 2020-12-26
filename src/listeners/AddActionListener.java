@@ -22,6 +22,9 @@ public class AddActionListener implements ActionListener {
 			StudentiDodajDialog.getInstance().setVisible(true);
 			StudentiDodajDialog.getInstance().setLocationRelativeTo(MainFrame.getInstance());
 		}else if(MainFrame.getInstance().getSelectedIndex() == 2) {
+			PredmetiDodajDialog.getInstance();
+			PredmetiDodajDialog.setMode(true);
+			PredmetiDodajDialog.getInstance().refreshPredmetPanel();
 			PredmetiDodajDialog.getInstance().setVisible(true);
 			PredmetiDodajDialog.getInstance().setLocationRelativeTo(MainFrame.getInstance());
 		}

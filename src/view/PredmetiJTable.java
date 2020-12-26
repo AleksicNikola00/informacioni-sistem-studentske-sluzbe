@@ -13,8 +13,17 @@ public class PredmetiJTable extends JTable {
 	 * 
 	 */
 	private static final long serialVersionUID = 3058486598894713122L;
+	
+	private static PredmetiJTable instance=null;
 
-	public PredmetiJTable() {
+	public static PredmetiJTable getInstance() {
+		if(instance==null)
+			instance=new PredmetiJTable();
+		
+		return instance;
+	}
+	
+	private PredmetiJTable() {
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

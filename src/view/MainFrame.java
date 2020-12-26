@@ -95,7 +95,7 @@ public class MainFrame extends JFrame {
 		
 		tabelaProfesora = new ProfesoriJTable();
 		tabelaStudenata= StudentiJTable.getInstance();//new StudentiJTable();
-		tabelaPredmeta = new PredmetiJTable();
+		tabelaPredmeta = PredmetiJTable.getInstance();
 		
 		JScrollPane scrollPane1 = new JScrollPane(tabelaProfesora);
 		secondPan.add(scrollPane1, BorderLayout.CENTER);

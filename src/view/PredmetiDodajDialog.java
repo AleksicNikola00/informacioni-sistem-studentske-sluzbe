@@ -19,6 +19,8 @@ import controller.PredmetiController;
 import listeners.DodajPredmetProfesoruListener;
 import listeners.MyFocusListener;
 import listeners.SwitchTxtFieldListener;
+import model.BazaPredmeta;
+import model.Predmet;
 
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -39,6 +41,7 @@ public class PredmetiDodajDialog extends JDialog{
 	private static JComboBox<Integer> godinaStudijaComboBox;
 	private static JComboBox<String> semestarComboBox;
 	private static JTextField txtProfesor;
+	private static boolean mode;//true-dodaj false-izmeni
 	
 	public static PredmetiDodajDialog getInstance() {
 		if(instance==null)
@@ -75,6 +78,7 @@ public class PredmetiDodajDialog extends JDialog{
 	public static JComboBox<String> getSemestarComboBox(){
 		return semestarComboBox;
 	}
+	
 	
 	private PredmetiDodajDialog() {
 		super(MainFrame.getInstance(),"Dodaj predmet",true);
@@ -219,7 +223,10 @@ public class PredmetiDodajDialog extends JDialog{
 					public void actionPerformed(ActionEvent arg0) {
 						// TODO Auto-generated method stub
 						if(proveraUnosa.validateTxtFields()) {
-							PredmetiController.getInstance().dodajPredmet();
+							if(getMode())
+								PredmetiController.getInstance().dodajPredmet();
+							else
+								PredmetiController.getInstance().izmeniPredmet(PredmetiJTable.getInstance().getSelectedRow());
 							dispose();
 							return;
 						}else {
@@ -230,6 +237,7 @@ public class PredmetiDodajDialog extends JDialog{
 						}
 					}
 				});
+				
 				
 				
 		listaTxt.add(txtSifra);
@@ -250,15 +258,34 @@ public class PredmetiDodajDialog extends JDialog{
 		box.add(Box.createGlue());
 		panel.add(box);
 	}
+
+	public static boolean getMode() {
+		return mode;
+	}
+
+	public static void setMode(boolean mode) {
+		PredmetiDodajDialog.mode = mode;
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public  void refreshPredmetPanel() {
+		if(!mode)
+		{
+			int indexPredmeta=PredmetiJTable.getInstance().getSelectedRow();
+			Predmet predmet=BazaPredmeta.getInstance().getRow(indexPredmeta);
+			setTitle("Izmeni predmet");
+			listaTxt.get(0).setText(predmet.getSifraPredmeta());
+			listaTxt.get(1).setText(predmet.getNazivPredmeta());
+			listaTxt.get(2).setText(Integer.toString(predmet.getBrojESPB()));
+			listaTxt.get(3).setText(predmet.getProfesor().getIme()+" "+predmet.getProfesor().getPrezime());
+			godinaStudijaComboBox.setSelectedIndex(predmet.getGodinaStudija()-1);
+			if(predmet.getSemestar().equals("letnji"))
+				semestarComboBox.setSelectedIndex(0);//letnji
+			else
+				semestarComboBox.setSelectedIndex(1);
+		}
+		else
+			setTitle("Dodaj predmet");
+
+
+	}
 }

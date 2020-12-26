@@ -71,4 +71,24 @@ public class BazaPredmeta {
 		this.predmeti.add(new Predmet(sifraPredmeta, nazivPredmeta, semestar, godinaStudija, profesor, brojESPB, 
 				studentiKojiSuPoloziliPredmet, studentiKojiNisuPoloziliPredmet));
 	}
+	
+	public void izmeniPredmet(String staraSifraPredmeta,String sifraPredmeta, String nazivPredmeta, String semestar, int godinaStudija,
+			Profesor profesor, int brojESPB, ArrayList<Student> studentiKojiSuPoloziliPredmet,
+			ArrayList<Student> studentiKojiNisuPoloziliPredmet) {
+		for (Predmet predmet : predmeti) {
+			if(predmet.getSifraPredmeta().equals(staraSifraPredmeta)) {
+				predmet.setSifraPredmeta(sifraPredmeta);
+				predmet.setNazivPredmeta(nazivPredmeta);
+				predmet.setSemestar(semestar);
+				predmet.setGodinaStudija(godinaStudija);
+				predmet.setProfesor(profesor);
+				predmet.setBrojESPB(brojESPB);
+				predmet.setStudentiKojiSuPoloziliPredmet(studentiKojiSuPoloziliPredmet);
+				predmet.setStudentiKojiNisuPoloziliPredmet(studentiKojiNisuPoloziliPredmet);
+				
+				break;
+			}
+			
+		}
+	}
 }
