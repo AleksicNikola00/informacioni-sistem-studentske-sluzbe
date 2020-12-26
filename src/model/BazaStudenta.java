@@ -97,6 +97,7 @@ public class BazaStudenta {
 		for (Student student : studenti) {
 			if(student.getBrojIndexa().equals(brojIndexa)) {
 				studenti.remove(student);
+				break;
 			}
 		}
 	}

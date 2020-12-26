@@ -50,6 +50,7 @@ public class StudentiController {
 			return;
 		}
 		Student student =BazaStudenta.getInstance().getRow(rowSelectedIndex);
+		//System.out.println(student.getBrojIndexa());
 		BazaStudenta.getInstance().izbrisiStudenta(student.getBrojIndexa());
 		//arzuriraj prikaz
 		MainFrame.getInstance().azurirajPrikaz();

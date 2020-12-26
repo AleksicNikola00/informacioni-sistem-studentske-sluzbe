@@ -14,6 +14,7 @@ import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
 import listeners.AddActionListener;
+import listeners.DeleteActionListener;
 import listeners.EditActionListener;
 
 public class Toolbar extends JToolBar {
@@ -50,6 +51,7 @@ public class Toolbar extends JToolBar {
 		JButton btnDelete = new JButton();
 		btnDelete.setToolTipText("Obriši");
 		btnDelete.setIcon(new ImageIcon("images/obrisi.jpg"));
+		btnDelete.addActionListener(new DeleteActionListener());
 		toolbarLeft.add(btnDelete);
 		
 		add(toolbarLeft, BorderLayout.WEST);
