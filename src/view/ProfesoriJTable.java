@@ -13,8 +13,17 @@ public class ProfesoriJTable extends JTable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	public ProfesoriJTable() {
+	
+	private static ProfesoriJTable instance=null;
+	
+	public static ProfesoriJTable getInstance() {
+		if(instance==null)
+			instance=new ProfesoriJTable();
+		
+		return instance;
+	}
+	
+	private ProfesoriJTable() {
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

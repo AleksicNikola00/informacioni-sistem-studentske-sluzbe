@@ -76,5 +76,14 @@ public class BazaProfesora {
 			String email, String adresaKancelarije, String brojLicneKarte, ArrayList<Predmet> predmeti ) {
 		this.profesori.add(new Profesor(ime, prezime, zvanje, titula, datumRodjenja, adresaStanovanja, telefon, email, adresaKancelarije, brojLicneKarte, predmeti));
 	}
+	
+	public void izbrisiProfesora(String brojLicneKarte) {
+		for (Profesor profesor : profesori) {
+			if(profesor.getBrojLicneKarte().equals(brojLicneKarte)) {
+				profesori.remove(profesor);
+				break;
+			}
+		}
+	}
 
 }

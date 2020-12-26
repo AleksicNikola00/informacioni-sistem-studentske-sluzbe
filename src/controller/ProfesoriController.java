@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 
 import model.BazaProfesora;
 import model.Predmet;
+import model.Profesor;
 import view.MainFrame;
 import view.ProfesoriDodajDialog;
 
@@ -51,6 +52,16 @@ public class ProfesoriController {
 		
 		BazaProfesora.getInstance().dodajProfesora(ime, prezime, zvanje, titula, LocalDate.of(year, month, day), 
 				adresaStan, brTel, email, adresaKanc, brLK, new ArrayList<Predmet>());
+		
+		MainFrame.getInstance().azurirajPrikaz();
+	}
+	
+	public void izbrisiProfesora(int rowSelectedIndex) {
+		if (rowSelectedIndex < 0) {
+			return;
+		}
+		Profesor profesor=BazaProfesora.getInstance().getRow(rowSelectedIndex);
+		BazaProfesora.getInstance().izbrisiProfesora(profesor.getBrojLicneKarte());
 		
 		MainFrame.getInstance().azurirajPrikaz();
 	}

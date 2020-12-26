@@ -93,7 +93,7 @@ public class MainFrame extends JFrame {
 		MyStatusBar myStatusBar= new MyStatusBar();
 		this.add(myStatusBar,BorderLayout.SOUTH);
 		
-		tabelaProfesora = new ProfesoriJTable();
+		tabelaProfesora = ProfesoriJTable.getInstance();
 		tabelaStudenata= StudentiJTable.getInstance();//new StudentiJTable();
 		tabelaPredmeta = PredmetiJTable.getInstance();
 		
