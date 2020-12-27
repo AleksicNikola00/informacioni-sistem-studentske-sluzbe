@@ -20,6 +20,7 @@ public class StudentiIzmenaDialog extends JDialog {
 	private static StudentiIzmenaDialog instance=null;
 	private static StudentPanel firstPan;
 	private static PolozeniPredmetiPanel secondPan;
+	private static NepolozeniPredmetiPanel thirdPan;
 	//private StudentPanel firstPan;
 	
 	public static StudentiIzmenaDialog getInstance() {
@@ -37,7 +38,7 @@ public class StudentiIzmenaDialog extends JDialog {
 		Dimension screenSize = kit.getScreenSize();
 		int screenHeight = screenSize.height;
 		int screenWidth = screenSize.width;
-		setSize((3*screenWidth/7) , (3*screenHeight/5));
+		setSize((3*screenWidth/7) , 3 * screenHeight / 4 - screenHeight / 30);
 		setLocationRelativeTo(MainFrame.getInstance());
 			
 		inicijalizacija(screenWidth, screenHeight);
@@ -57,7 +58,7 @@ public class StudentiIzmenaDialog extends JDialog {
 		
 		firstPan=new StudentPanel(false);
 		secondPan =PolozeniPredmetiPanel.getInstance();
-		JPanel thirdPan = new JPanel();
+		thirdPan = NepolozeniPredmetiPanel.getInstance();
 
 		//secondPan.setLayout(new BorderLayout());
 		//firstPan.setLayout(new BorderLayout());

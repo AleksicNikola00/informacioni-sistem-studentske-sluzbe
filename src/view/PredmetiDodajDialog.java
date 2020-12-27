@@ -92,7 +92,7 @@ public class PredmetiDodajDialog extends JDialog{
 		Dimension screenSize = kit.getScreenSize();
 		int screenHeight = screenSize.height;
 		int screenWidth = screenSize.width;
-		setSize((3*screenWidth/7) , 3 * screenHeight / 7 );
+		setSize((3*screenWidth/7) , 3 * screenHeight / 6 );
 		setLocationRelativeTo(MainFrame.getInstance());
 			
 		inicijalizacija(screenWidth, screenHeight);

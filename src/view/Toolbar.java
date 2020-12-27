@@ -35,6 +35,7 @@ public class Toolbar extends JToolBar {
 		JButton btnOpen = new JButton();
 		btnOpen.setToolTipText("Kreiraj");
 		btnOpen.setIcon(new ImageIcon("images/kreiraj.jpg"));
+		btnOpen.addActionListener(new AddActionListener());
 		toolbarLeft.add(btnOpen);
 		
 		addSeparator();
@@ -72,7 +73,6 @@ public class Toolbar extends JToolBar {
 		
 		add(toolbarRight, BorderLayout.EAST);
 		
-		btnOpen.addActionListener(new AddActionListener());
 	}
 
 }

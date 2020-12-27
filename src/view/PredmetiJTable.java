@@ -23,7 +23,7 @@ public class PredmetiJTable extends JTable {
 		return instance;
 	}
 	
-	private PredmetiJTable() {
+	PredmetiJTable() {
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
