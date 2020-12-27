@@ -46,11 +46,15 @@ public class StudentiIzmenaDialog extends JDialog {
 	
 	public void refreshStudentPanel() {
 		firstPan.refreshJTxtFields();
+		secondPan.refreshPanel();
 	}
 	public StudentPanel getStudentPanel() {
 		return firstPan;
 	}
-
+	public void refreshPolozeniPanel() {
+		secondPan.refreshPanel();
+	}
+	
 	
 	public void inicijalizacija(int screenWidth, int screenHeight) {
 		JPanel panel=new JPanel();

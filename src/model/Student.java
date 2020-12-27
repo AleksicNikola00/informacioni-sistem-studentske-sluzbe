@@ -18,10 +18,12 @@ public class Student {
 	private String brojIndexa;
 	private int godinaUpisa;
 	private int trenutnaGodinaStudija;
+	private int brojESPB;
 	private Status status;
 	private double prosecnaOcena;
-	ArrayList<Ocena> spisakPolozenihIspita;
-	ArrayList<Predmet> spisakNepolozenihIspita;
+	private ArrayList<Ocena> spisakPolozenihIspita;
+	private ArrayList<Predmet> spisakNepolozenihIspita;
+
 	
 	public Student() {
 		// TODO Auto-generated constructor stub
@@ -51,6 +53,19 @@ public class Student {
 	}
 
 
+
+	
+	public int getBrojESPB() {
+		brojESPB=0;		
+		for (Ocena ocena : spisakPolozenihIspita) {
+			brojESPB+=ocena.getPredmet().getBrojESPB();
+		}
+		return brojESPB;
+	}
+
+	public void setBrojESPB(int brojESPB) {
+		this.brojESPB = brojESPB;
+	}
 
 
 
@@ -115,6 +130,13 @@ public class Student {
 		this.status = status;
 	}
 	public double getProsecnaOcena() {
+		if(spisakPolozenihIspita.size()==0)
+			return 0;
+		double sum=0;
+		for (Ocena ocena : spisakPolozenihIspita) {
+			sum+=ocena.getOcena();
+		}
+		prosecnaOcena= sum/spisakPolozenihIspita.size();
 		return prosecnaOcena;
 	}
 	public void setProsecnaOcena(double prosecnaOcena) {
