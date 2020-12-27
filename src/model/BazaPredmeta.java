@@ -65,6 +65,14 @@ public class BazaPredmeta {
 		}
 	}
 
+	public Predmet getPredmet(String sifraPredmeta) {
+		for (Predmet predmet : predmeti) {
+			if(predmet.getSifraPredmeta().equals(sifraPredmeta))
+				return predmet;
+		}
+		return null;
+	}
+	
 	public void dodajPredmet(String sifraPredmeta, String nazivPredmeta, String semestar, int godinaStudija,
 			Profesor profesor, int brojESPB, ArrayList<Student> studentiKojiSuPoloziliPredmet,
 			ArrayList<Student> studentiKojiNisuPoloziliPredmet) {

@@ -10,26 +10,26 @@ import javax.swing.JTabbedPane;
 
 
 
-public class IzmenaStudentaDialog extends JDialog {
+public class StudentiIzmenaDialog extends JDialog {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private static IzmenaStudentaDialog instance=null;
+	private static StudentiIzmenaDialog instance=null;
 	private static StudentPanel firstPan;
 	private static PolozeniPredmetiPanel secondPan;
 	//private StudentPanel firstPan;
 	
-	public static IzmenaStudentaDialog getInstance() {
+	public static StudentiIzmenaDialog getInstance() {
 		if(instance==null)
-			instance=new IzmenaStudentaDialog();
+			instance=new StudentiIzmenaDialog();
 		
 		return instance;
 	}
 	
-	private IzmenaStudentaDialog() {
+	private StudentiIzmenaDialog() {
 		super(MainFrame.getInstance(),"Izmeni studenta",true);
 		//
 		//

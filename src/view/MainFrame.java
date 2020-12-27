@@ -10,8 +10,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+import listeners.MyWindowListener;
  
 public class MainFrame extends JFrame {
 
@@ -32,6 +35,8 @@ public class MainFrame extends JFrame {
 	private int selectedIndex;
 	
 	private MainFrame() {
+		UIManager.put("OptionPane.yesButtonText", "Da");
+		UIManager.put("OptionPane.noButtonText", "Ne");
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = kit.getScreenSize();
 		int screenHeight = screenSize.height;

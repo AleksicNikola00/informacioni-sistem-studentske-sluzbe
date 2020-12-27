@@ -243,7 +243,7 @@ public class StudentPanel extends JPanel {
 						if(mode)
 							StudentiDodajDialog.getInstance().dispose();
 						else
-							IzmenaStudentaDialog.getInstance().dispose();
+							StudentiIzmenaDialog.getInstance().dispose();
 						return;
 					}
 				});
@@ -259,7 +259,7 @@ public class StudentPanel extends JPanel {
 							}
 							else {
 								StudentiController.getInstance().izmeniStudenta(StudentiJTable.getInstance().getSelectedRow());
-								IzmenaStudentaDialog.getInstance().dispose();
+								StudentiIzmenaDialog.getInstance().dispose();
 							}
 							return;
 						}

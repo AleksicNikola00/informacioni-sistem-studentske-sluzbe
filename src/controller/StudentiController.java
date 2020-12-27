@@ -11,7 +11,7 @@ import model.Ocena;
 import model.Predmet;
 import model.Student;
 import model.Student.Status;
-import view.IzmenaStudentaDialog;
+import view.StudentiIzmenaDialog;
 import view.MainFrame;
 import view.StudentiDodajDialog;
 
@@ -74,9 +74,9 @@ public class StudentiController {
 	public void loadFromView(boolean mode) {//true-add,false-edit
 		
 		if(!mode) {
-			txtFieldArray=IzmenaStudentaDialog.getInstance().getStudentPanel().getListaTxt(); //studentPanel.getListaTxt();
-			trenutnaGodinaComboBox=IzmenaStudentaDialog.getInstance().getStudentPanel().getTrenutnaGodinaComboBox();
-			 nacinFinasiranjaComboBox=IzmenaStudentaDialog.getInstance().getStudentPanel().getNacinFinasiranjaComboBox();
+			txtFieldArray=StudentiIzmenaDialog.getInstance().getStudentPanel().getListaTxt(); //studentPanel.getListaTxt();
+			trenutnaGodinaComboBox=StudentiIzmenaDialog.getInstance().getStudentPanel().getTrenutnaGodinaComboBox();
+			 nacinFinasiranjaComboBox=StudentiIzmenaDialog.getInstance().getStudentPanel().getNacinFinasiranjaComboBox();
 		}else {
 			txtFieldArray=StudentiDodajDialog.getInstance().getStudentPanelDodaj().getListaTxt();
 			trenutnaGodinaComboBox=StudentiDodajDialog.getInstance().getStudentPanelDodaj().getTrenutnaGodinaComboBox();
