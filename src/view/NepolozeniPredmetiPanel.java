@@ -72,7 +72,7 @@ public class NepolozeniPredmetiPanel extends JPanel {
 		AbstractTableModelPredmeti model= (AbstractTableModelPredmeti)tabelaNepolozenihPredmeta.getModel();
 		model.fireTableDataChanged();
 		validate();
-		BazaPredmeta.getInstance().setSviPredmeti();
+		
 		BazaPredmeta.getInstance().setNepolozeniPredmeti(student.getSpisakNepolozenihIspita());
 		BazaPredmeta.getInstance().setPredmeti(false);
 	}

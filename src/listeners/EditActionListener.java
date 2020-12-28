@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
+import model.BazaPredmeta;
 import view.StudentiIzmenaDialog;
 import view.MainFrame;
 import view.PredmetiDodajDialog;
@@ -22,6 +23,7 @@ public class EditActionListener implements ActionListener {
 			if(StudentiJTable.getInstance().getSelectedRow()==-1)
 				JOptionPane.showMessageDialog(null, "Odaberite studenta!");
 			else {
+				BazaPredmeta.getInstance().setSviPredmeti();
 				StudentiIzmenaDialog.getInstance().refreshStudentPanel();
 				StudentiIzmenaDialog.getInstance().setVisible(true);
 				StudentiIzmenaDialog.getInstance().setLocationRelativeTo(MainFrame.getInstance());
