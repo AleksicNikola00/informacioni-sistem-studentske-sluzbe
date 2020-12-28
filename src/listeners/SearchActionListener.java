@@ -22,17 +22,17 @@ public class SearchActionListener implements ActionListener {
 		if(MainFrame.getInstance().getSelectedIndex() == 0) 
 		{
 			String[] niz=Toolbar.getInstance().getSearchBox().getText().split(" ");
-			String ime=niz[0];
+			String prezime=niz[0];
 	
 			AbstractTableModelStudenti model=(AbstractTableModelStudenti) MainFrame.getInstance().getTabelaStudenata().getModel();
 			TableRowSorter<AbstractTableModelStudenti> sorter=new TableRowSorter<AbstractTableModelStudenti>(model);
 			java.util.List<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(3);
 			//"(?i)"-case insensitive flag!
-			filters.add(RowFilter.regexFilter(".*"+"(?i)"+ime+".*",1));
+			filters.add(RowFilter.regexFilter(".*"+"(?i)"+prezime+".*",2));
 			if(niz.length>=2) 
 			{
-				String prezime=niz[1];
-				filters.add(RowFilter.regexFilter(".*"+"(?i)"+prezime+".*",2));
+				String ime=niz[1];
+				filters.add(RowFilter.regexFilter(".*"+"(?i)"+ime+".*",1));
 				if(niz.length==3)
 				{
 					String index=niz[2];
