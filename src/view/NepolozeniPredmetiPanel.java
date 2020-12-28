@@ -69,11 +69,11 @@ public class NepolozeniPredmetiPanel extends JPanel {
 	public void refreshPanel() {
 		student = BazaStudenta.getInstance().getRow(StudentiJTable.getInstance().getSelectedRow()); 
 		
+		BazaPredmeta.getInstance().setNepolozeniPredmeti(student.getSpisakNepolozenihIspita());
+		BazaPredmeta.getInstance().setPredmeti(false);
+		
 		AbstractTableModelPredmeti model= (AbstractTableModelPredmeti)tabelaNepolozenihPredmeta.getModel();
 		model.fireTableDataChanged();
 		validate();
-		
-		BazaPredmeta.getInstance().setNepolozeniPredmeti(student.getSpisakNepolozenihIspita());
-		BazaPredmeta.getInstance().setPredmeti(false);
 	}
 }

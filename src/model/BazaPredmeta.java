@@ -17,16 +17,14 @@ public class BazaPredmeta {
 	private ArrayList<Predmet> sviPredmeti;
 	private ArrayList<Predmet> nepolozeniPredmeti;
 	private ArrayList<String> kolone;
+	private boolean mode;
 	
 	public void setPredmeti(boolean mode) {
+		this.mode = mode;
 		if(mode)
 			predmeti = sviPredmeti;
 		else
 			predmeti = nepolozeniPredmeti;
-	}
-	
-	public void setSviPredmeti() {
-		this.sviPredmeti = this.predmeti;
 	}
 
 	public void setNepolozeniPredmeti(ArrayList<Predmet> nepolozeniPredmeti) {
@@ -109,6 +107,8 @@ public class BazaPredmeta {
 			ArrayList<Student> studentiKojiNisuPoloziliPredmet) {
 		this.predmeti.add(new Predmet(sifraPredmeta, nazivPredmeta, semestar, godinaStudija, profesor, brojESPB, 
 				studentiKojiSuPoloziliPredmet, studentiKojiNisuPoloziliPredmet));
+		if(mode)
+			sviPredmeti = predmeti;
 	}
 	
 	public void izmeniPredmet(String staraSifraPredmeta,String sifraPredmeta, String nazivPredmeta, String semestar, int godinaStudija,
@@ -129,5 +129,8 @@ public class BazaPredmeta {
 			}
 			
 		}
+		
+		if(mode)
+			sviPredmeti = predmeti;
 	}
 }
