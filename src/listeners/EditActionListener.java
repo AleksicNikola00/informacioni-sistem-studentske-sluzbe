@@ -9,7 +9,7 @@ import view.StudentiIzmenaDialog;
 import view.MainFrame;
 import view.PredmetiDodajDialog;
 import view.PredmetiJTable;
-import view.ProfesoriDodajDialog;
+
 import view.ProfesoriJTable;
 import view.StudentiJTable;
 

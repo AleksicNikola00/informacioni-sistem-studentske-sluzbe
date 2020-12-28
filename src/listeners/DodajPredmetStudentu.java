@@ -34,6 +34,7 @@ public class DodajPredmetStudentu implements ActionListener {
 		 listaPolozenihPredmeta=student.getSpisakPolozenihIspita();
 		//lista koju prikazujemo
 		 listaPredmeta=BazaPredmeta.getInstance().getSviPredmeti();
+		 //System.out.println(listaPredmeta.size());
 		DefaultListModel<String> dlm=new DefaultListModel<String>();
 		JList<String> list =new JList<String>(dlm);
 		for (Predmet predmet : listaPredmeta) {
@@ -65,7 +66,6 @@ public class DodajPredmetStudentu implements ActionListener {
 		for (Ocena ocena : listaPolozenihPredmeta) {
 			if(predmet.getSifraPredmeta().equals(ocena.getPredmet().getSifraPredmeta())) {
 				exists=true;
-				System.out.println("polozeni");
 				break;
 			}
 		}
@@ -77,7 +77,6 @@ public class DodajPredmetStudentu implements ActionListener {
 		for (Predmet predmet1 : listaNepolozenihPredmeta) {
 			if(predmet1.getSifraPredmeta().equals(predmet.getSifraPredmeta())) {
 				exists=true;
-				System.out.println("nepolozeni");
 				break;
 			}
 		}
