@@ -15,6 +15,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import listeners.MyWindowListener;
+import model.BazaPredmeta;
  
 public class MainFrame extends JFrame {
 
@@ -95,6 +96,9 @@ public class MainFrame extends JFrame {
 			public void stateChanged(ChangeEvent e) {
 				JTabbedPane tabbedPane = (JTabbedPane) e.getSource();
 		        selectedIndex = tabbedPane.getSelectedIndex();
+		        if(selectedIndex == 2)
+		        	BazaPredmeta.getInstance().setPredmeti(true);
+			
 			}
 		});
 		

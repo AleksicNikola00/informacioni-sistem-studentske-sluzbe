@@ -14,11 +14,38 @@ public class BazaPredmeta {
 	}
 	
 	private ArrayList<Predmet> predmeti;
+	private ArrayList<Predmet> sviPredmeti;
+	private ArrayList<Predmet> nepolozeniPredmeti;
 	private ArrayList<String> kolone;
+	
+	public void setPredmeti(boolean mode) {
+		if(mode)
+			predmeti = sviPredmeti;
+		else
+			predmeti = nepolozeniPredmeti;
+	}
+	
+	public void setSviPredmeti() {
+		this.sviPredmeti = this.predmeti;
+	}
 
+	public void setNepolozeniPredmeti(ArrayList<Predmet> nepolozeniPredmeti) {
+		this.nepolozeniPredmeti = nepolozeniPredmeti;
+	}
+
+	public ArrayList<Predmet> getSviPredmeti() {
+		return sviPredmeti;
+	}
+
+	public ArrayList<Predmet> getNepolozeniPredmeti() {
+		return nepolozeniPredmeti;
+	}
+	
 	private BazaPredmeta() {
 		this.predmeti = new ArrayList<Predmet>();
-
+		this.nepolozeniPredmeti = new ArrayList<Predmet>();
+		this.sviPredmeti = new ArrayList<Predmet>();
+		
 		this.kolone = new ArrayList<String>();
 		this.kolone.add("ŠIFRA");
 		this.kolone.add("NAZIV");
@@ -29,10 +56,6 @@ public class BazaPredmeta {
 
 	public ArrayList<Predmet> getPredmeti() {
 		return predmeti;
-	}
-
-	public void setPredmeti(ArrayList<Predmet> predmeti) {
-		this.predmeti = predmeti;
 	}
 
 	public int getColumnCount() {

@@ -20,6 +20,7 @@ import java.awt.event.ActionListener;
 
 import listeners.MyFocusListener;
 import listeners.SwitchTxtFieldListener;
+import model.BazaPredmeta;
 import model.BazaStudenta;
 import model.Student;
 import model.Student.Status;
@@ -242,8 +243,10 @@ public class StudentPanel extends JPanel {
 					public void actionPerformed(ActionEvent e) {
 						if(mode)
 							StudentiDodajDialog.getInstance().dispose();
-						else
+						else {
 							StudentiIzmenaDialog.getInstance().dispose();
+							BazaPredmeta.getInstance().setPredmeti(true);
+						}
 						return;
 					}
 				});
@@ -260,6 +263,7 @@ public class StudentPanel extends JPanel {
 							else {
 								StudentiController.getInstance().izmeniStudenta(StudentiJTable.getInstance().getSelectedRow());
 								StudentiIzmenaDialog.getInstance().dispose();
+								BazaPredmeta.getInstance().setPredmeti(true);
 							}
 							return;
 						}

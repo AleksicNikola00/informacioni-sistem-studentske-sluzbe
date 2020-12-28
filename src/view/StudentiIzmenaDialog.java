@@ -47,6 +47,7 @@ public class StudentiIzmenaDialog extends JDialog {
 	public void refreshStudentPanel() {
 		firstPan.refreshJTxtFields();
 		secondPan.refreshPanel();
+		thirdPan.refreshPanel();
 	}
 	public StudentPanel getStudentPanel() {
 		return firstPan;
