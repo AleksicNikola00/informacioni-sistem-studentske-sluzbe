@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import listeners.DodajPredmetStudentu;
 import model.BazaPredmeta;
 import model.BazaStudenta;
 import model.Student;
@@ -46,6 +47,7 @@ public class NepolozeniPredmetiPanel extends JPanel {
 		JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		btnPanel.setPreferredSize(new Dimension((3*screenWidth/7),75));
 		JButton btnDodaj = new JButton("Dodaj");
+		btnDodaj.addActionListener(new DodajPredmetStudentu());
 		JButton btnObrisi = new JButton("Obriši");
 		JButton btnPolaganje = new JButton("Polaganje");
 		btnPanel.add(Box.createHorizontalStrut(screenWidth/50));

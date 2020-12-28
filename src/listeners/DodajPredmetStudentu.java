@@ -13,6 +13,7 @@ import model.BazaStudenta;
 import model.Ocena;
 import model.Predmet;
 import model.Student;
+import view.NepolozeniPredmetiPanel;
 import view.StudentiIzmenaDialog;
 import view.StudentiJTable;
 
@@ -32,7 +33,7 @@ public class DodajPredmetStudentu implements ActionListener {
 		listaNepolozenihPredmeta=student.getSpisakNepolozenihIspita();
 		 listaPolozenihPredmeta=student.getSpisakPolozenihIspita();
 		//lista koju prikazujemo
-		 listaPredmeta=BazaPredmeta.getInstance().getPredmeti();
+		 listaPredmeta=BazaPredmeta.getInstance().getSviPredmeti();
 		DefaultListModel<String> dlm=new DefaultListModel<String>();
 		JList<String> list =new JList<String>(dlm);
 		for (Predmet predmet : listaPredmeta) {
@@ -52,8 +53,9 @@ public class DodajPredmetStudentu implements ActionListener {
 		
 		if (result == JOptionPane.YES_OPTION && list.getSelectedValue()!=null) {
 			String[] imePrezime=list.getSelectedValue().split("-");
-			Predmet predmet=BazaPredmeta.getInstance().getPredmet(imePrezime[0]);
+			Predmet predmet=BazaPredmeta.getInstance().getSviPredmet(imePrezime[0]);
 			listaNepolozenihPredmeta.add(predmet);
+			NepolozeniPredmetiPanel.getInstance().refreshPanel();
 			return;
 		}
 	}
@@ -63,6 +65,7 @@ public class DodajPredmetStudentu implements ActionListener {
 		for (Ocena ocena : listaPolozenihPredmeta) {
 			if(predmet.getSifraPredmeta().equals(ocena.getPredmet().getSifraPredmeta())) {
 				exists=true;
+				System.out.println("polozeni");
 				break;
 			}
 		}
@@ -74,6 +77,7 @@ public class DodajPredmetStudentu implements ActionListener {
 		for (Predmet predmet1 : listaNepolozenihPredmeta) {
 			if(predmet1.getSifraPredmeta().equals(predmet.getSifraPredmeta())) {
 				exists=true;
+				System.out.println("nepolozeni");
 				break;
 			}
 		}

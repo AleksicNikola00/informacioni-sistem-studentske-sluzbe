@@ -88,6 +88,14 @@ public class BazaPredmeta {
 		}
 	}
 
+	public Predmet getSviPredmet(String sifraPredmeta) {
+		for (Predmet predmet : sviPredmeti) {
+			if(predmet.getSifraPredmeta().equals(sifraPredmeta))
+				return predmet;
+		}
+		return null;
+	}
+	
 	public Predmet getPredmet(String sifraPredmeta) {
 		for (Predmet predmet : predmeti) {
 			if(predmet.getSifraPredmeta().equals(sifraPredmeta))

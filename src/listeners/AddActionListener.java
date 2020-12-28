@@ -15,8 +15,12 @@ public class AddActionListener implements ActionListener {
 		// TODO Auto-generated method stub
 		if(MainFrame.getInstance().getSelectedIndex() == 1)
 		{
-			ProfesoriDodajDialog.getInstance().setVisible(true);
+		/*	ProfesoriDodajDialog.getInstance();
+			ProfesoriDodajDialog.setMode(true);
+			ProfesoriDodajDialog.getInstance().refreshProfesorPanel();
+			*/ProfesoriDodajDialog.getInstance().setVisible(true);
 			ProfesoriDodajDialog.getInstance().setLocationRelativeTo(MainFrame.getInstance());
+
 		}else if(MainFrame.getInstance().getSelectedIndex() == 0) 
 		{
 			StudentiDodajDialog.getInstance().setVisible(true);

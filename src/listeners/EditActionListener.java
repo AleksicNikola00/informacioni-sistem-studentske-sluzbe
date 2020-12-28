@@ -9,6 +9,8 @@ import view.StudentiIzmenaDialog;
 import view.MainFrame;
 import view.PredmetiDodajDialog;
 import view.PredmetiJTable;
+import view.ProfesoriDodajDialog;
+import view.ProfesoriJTable;
 import view.StudentiJTable;
 
 public class EditActionListener implements ActionListener {
@@ -24,7 +26,19 @@ public class EditActionListener implements ActionListener {
 				StudentiIzmenaDialog.getInstance().setVisible(true);
 				StudentiIzmenaDialog.getInstance().setLocationRelativeTo(MainFrame.getInstance());
 			}
-		}else if(MainFrame.getInstance().getSelectedIndex() == 2) {
+		}
+		else if(MainFrame.getInstance().getSelectedIndex() == 1) {
+			if(ProfesoriJTable.getInstance().getSelectedRow() == -1)
+				JOptionPane.showMessageDialog(null, "Odaberite profesora!");
+			else {
+				/*ProfesoriDodajDialog.getInstance();
+				ProfesoriDodajDialog.setMode(false);
+				ProfesoriDodajDialog.getInstance().refreshPredmetPanel();
+				ProfesoriDodajDialog.getInstance().setVisible(true);
+				*/
+			}
+		}
+		else if(MainFrame.getInstance().getSelectedIndex() == 2) {
 			if(PredmetiJTable.getInstance().getSelectedRow()==-1)
 				JOptionPane.showMessageDialog(null, "Odaberite predmet!");
 			else {
