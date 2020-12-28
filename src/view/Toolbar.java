@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 import listeners.AddActionListener;
 import listeners.DeleteActionListener;
 import listeners.EditActionListener;
+import listeners.SearchActionListener;
 
 public class Toolbar extends JToolBar {
 
@@ -24,7 +25,28 @@ public class Toolbar extends JToolBar {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public Toolbar() {
+	
+	private static Toolbar instance = null;
+
+	public static Toolbar getInstance() {
+		if (instance == null) {
+			instance = new Toolbar();
+		}
+		return instance;
+	}
+	
+	
+	private JTextField searchBox;
+	
+	public JTextField getSearchBox() {
+		return searchBox;
+	}
+
+	public void setSearchBox(JTextField searchBox) {
+		this.searchBox = searchBox;
+	}
+
+	private Toolbar() {
 		super(SwingConstants.HORIZONTAL);
 		
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -60,11 +82,12 @@ public class Toolbar extends JToolBar {
 		JPanel toolbarRight = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		
 		Dimension dim = new Dimension(200, 30);
-		JTextField searchBox = new JTextField();
+		 searchBox = new JTextField();
         searchBox.setPreferredSize(dim);
         searchBox.setToolTipText("Unesi tekst");
 		
         JButton btnSearch = new JButton();
+        btnSearch.addActionListener(new SearchActionListener());
 		btnSearch.setToolTipText("Traži");
 		btnSearch.setIcon(new ImageIcon("images/pretrazi.jpg"));
 		

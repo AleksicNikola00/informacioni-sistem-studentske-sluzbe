@@ -50,6 +50,10 @@ public class MainFrame extends JFrame {
 		inicijalizacija();
 	}
 	
+	public JTable getTabelaStudenata() {
+		return tabelaStudenata;
+	}
+	
 	public void azurirajPrikaz() {
 		AbstractTableModelProfesori modelProfesor = (AbstractTableModelProfesori) tabelaProfesora.getModel();
 		modelProfesor.fireTableDataChanged();
@@ -67,12 +71,12 @@ public class MainFrame extends JFrame {
 		MyMenuBar myMenuBar=new MyMenuBar();
 		this.setJMenuBar(myMenuBar);
 		
-		Toolbar toolbar = new Toolbar();
+		Toolbar toolbar = Toolbar.getInstance();
 		add(toolbar, BorderLayout.NORTH);
 		
 		JPanel firstPan = new JPanel();
-		JLabel todoLbl3 = new JLabel("TODO: Prikaz predmeta");
-		firstPan.add(todoLbl3);
+		//JLabel todoLbl3 = new JLabel("TODO: Prikaz predmeta");
+		//firstPan.add(todoLbl3);
 		JPanel secondPan = new JPanel();
 		JPanel thirdPan = new JPanel();
 		secondPan.setLayout(new BorderLayout());
