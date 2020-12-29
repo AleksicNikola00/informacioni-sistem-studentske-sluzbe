@@ -82,7 +82,7 @@ public class Toolbar extends JToolBar {
 		JPanel toolbarRight = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		
 		Dimension dim = new Dimension(200, 30);
-		 searchBox = new JTextField();
+		searchBox = new JTextField();
         searchBox.setPreferredSize(dim);
         searchBox.setToolTipText("Unesi tekst");
 		

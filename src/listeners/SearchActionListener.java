@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 
-
+import view.AbstractTableModelProfesori;
 import view.AbstractTableModelStudenti;
 import view.MainFrame;
 import view.Toolbar;
@@ -45,6 +45,27 @@ public class SearchActionListener implements ActionListener {
 			RowFilter<Object,Object> serviceFilter = RowFilter.andFilter(filters);
 			 sorter.setRowFilter(serviceFilter);
 			MainFrame.getInstance().getTabelaStudenata().setRowSorter(sorter);
+			
+		}
+		else if(MainFrame.getInstance().getSelectedIndex() == 1) 
+		{
+			String[] niz = Toolbar.getInstance().getSearchBox().getText().split(" ");
+			String prezime = niz[0];
+	
+			AbstractTableModelProfesori model=(AbstractTableModelProfesori) MainFrame.getInstance().getTabelaProfesora().getModel();
+			TableRowSorter<AbstractTableModelProfesori> sorter = new TableRowSorter<AbstractTableModelProfesori>(model);
+			java.util.List<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(2);
+			//"(?i)"-case insensitive flag!
+			filters.add(RowFilter.regexFilter(".*"+"(?i)"+prezime+".*", 1));
+			if(niz.length == 2) 
+			{
+				String ime = niz[1];
+				filters.add(RowFilter.regexFilter(".*"+"(?i)"+ime+".*", 0));
+			}
+			
+			RowFilter<Object,Object> serviceFilter = RowFilter.andFilter(filters);
+			sorter.setRowFilter(serviceFilter);
+			MainFrame.getInstance().getTabelaProfesora().setRowSorter(sorter);
 			
 		}
 	}
