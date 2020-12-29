@@ -17,7 +17,6 @@ import javax.swing.JTextField;
 import controller.ProfesoriController;
 import listeners.MyFocusListener;
 import listeners.SwitchTxtFieldListener;
-import model.BazaProfesora;
 import model.Profesor;
 
 public class ProfesorPanel extends JPanel {
@@ -293,7 +292,7 @@ public class ProfesorPanel extends JPanel {
 	
 	public  void refreshProfesorFirstPanel() {
 		int indexProfesora = ProfesoriJTable.getInstance().getSelectedRow();
-		Profesor profesor = BazaProfesora.getInstance().getRow(indexProfesora);
+		Profesor profesor = ProfesoriController.getInstance().getProfesor(indexProfesora);
 		listaTxt.get(0).setText(profesor.getIme());
 		listaTxt.get(1).setText(profesor.getPrezime());
 		listaTxt.get(2).setText(profesor.getDatumRodjenja());

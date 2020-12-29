@@ -43,7 +43,7 @@ public class ProfesoriController {
 			return;
 		}
 		
-		Profesor profesor = BazaProfesora.getInstance().getRow(rowSelectedIndex);
+		Profesor profesor = this.getProfesor(rowSelectedIndex);
 		loadFromView(false);
 		
 		BazaProfesora.getInstance().izmeniProfesora(ime, prezime, zvanje, titula, datumRodj, 
