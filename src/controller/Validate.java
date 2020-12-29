@@ -1,6 +1,24 @@
 package controller;
 
+import java.util.List;
+
+import model.BazaStudenta;
+import model.Student;
+
 public class Validate {
+	
+	public static boolean validateUniqueIndex(String brIndexa) {
+		boolean valid=true;
+		List<Student> studenti= BazaStudenta.getInstance().getStudenti();
+		for (Student student : studenti) {
+			if(student.getBrojIndexa().equals(brIndexa)) {
+				valid=false;
+				break;
+			}
+		}
+		
+		return valid;
+	}
 	
 	public static boolean validateESPB(String s,int length) {
 		boolean valid=true;

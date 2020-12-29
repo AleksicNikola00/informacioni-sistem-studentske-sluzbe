@@ -10,10 +10,12 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.StudentiController;
+import controller.Validate;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -255,13 +257,21 @@ public class StudentPanel extends JPanel {
 					public void actionPerformed(ActionEvent e) {
 						if(proveraUnosa.validateTxtFields()) {
 							if(mode) {
+								if(!Validate.validateUniqueIndex(txtBrIndexa.getText())) {
+									JOptionPane.showMessageDialog(null, "Uneli ste već postojeći broj indexa!");
+									return;
+								}
 								StudentiController.getInstance().dodajStudenta();
 								StudentiDodajDialog.getInstance().dispose();
 							}
 							else {
+								if(isIndexSame() || Validate.validateUniqueIndex(txtBrIndexa.getText())) {
 								StudentiController.getInstance().izmeniStudenta(StudentiJTable.getInstance().getSelectedRow());
 								StudentiIzmenaDialog.getInstance().dispose();
-								//BazaPredmeta.getInstance().setPredmeti(true);
+								}else {
+								JOptionPane.showMessageDialog(null, "Uneli ste već postojeći broj indexa!");
+								return;
+								}
 							}
 							return;
 						}
@@ -321,5 +331,15 @@ public class StudentPanel extends JPanel {
 			nacinFinasiranjaComboBox.setSelectedIndex(1);
 		
 	}
-	
+	//pri editu ukoliko je index isti kao sto je i bio necemo proveravati da li vec postoji u listi
+	public boolean isIndexSame() {
+		boolean isSame=false;
+		
+		int selectedIndex=StudentiJTable.getInstance().getSelectedRow();
+		Student student=StudentiController.getInstance().getStudent(selectedIndex);
+		if(listaTxt.get(6).getText().equals(student.getBrojIndexa()))
+			isSame=true;
+		
+		return isSame;
+	}
 }
