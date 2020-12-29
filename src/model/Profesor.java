@@ -1,13 +1,12 @@
 package model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Profesor {
 
 	private String prezime;
 	private String ime;
-	private LocalDate datumRodjenja;
+	private String datumRodjenja;
 	private String adresaStanovanja;
 	private String telefon;
 	private String email;
@@ -17,7 +16,7 @@ public class Profesor {
 	private String brojLicneKarte;
 	private ArrayList<Predmet> predmeti;
 	
-	public Profesor(String ime, String prezime, String zvanje, String titula, LocalDate datumRodjenja, String adresaStanovanja, 
+	public Profesor(String ime, String prezime, String zvanje, String titula, String datumRodjenja, String adresaStanovanja, 
 			String telefon, String email, String adresaKancelarije, String brojLicneKarte, ArrayList<Predmet> predmeti) {
 		this.prezime = prezime;
 		this.ime = ime;
@@ -64,11 +63,11 @@ public class Profesor {
 		this.ime = ime;
 	}
 
-	public LocalDate getDatumRodjenja() {
+	public String getDatumRodjenja() {
 		return datumRodjenja;
 	}
 
-	public void setDatumRodjenja(LocalDate datumRodjenja) {
+	public void setDatumRodjenja(String datumRodjenja) {
 		this.datumRodjenja = datumRodjenja;
 	}
 

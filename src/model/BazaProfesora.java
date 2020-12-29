@@ -1,6 +1,6 @@
 package model;
 
-import java.time.LocalDate;
+
 import java.util.ArrayList;
 
 public class BazaProfesora {
@@ -72,9 +72,28 @@ public class BazaProfesora {
 		}
 	}
 
-	public void dodajProfesora(String ime, String prezime, String zvanje, String titula, LocalDate datumRodjenja, String adresaStanovanja, String telefon,
+	public void dodajProfesora(String ime, String prezime, String zvanje, String titula, String datumRodjenja, String adresaStanovanja, String telefon,
 			String email, String adresaKancelarije, String brojLicneKarte, ArrayList<Predmet> predmeti ) {
 		this.profesori.add(new Profesor(ime, prezime, zvanje, titula, datumRodjenja, adresaStanovanja, telefon, email, adresaKancelarije, brojLicneKarte, predmeti));
+	}
+	
+	public void izmeniProfesora(String ime, String prezime, String zvanje, String titula, String datumRodjenja, String adresaStanovanja, String telefon,
+			String email, String adresaKancelarije, String brojLicneKarte, ArrayList<Predmet> predmeti) {
+		for (Profesor profesor : profesori) {
+				if(profesor.getBrojLicneKarte().equals(brojLicneKarte)) {
+					profesor.setIme(ime);
+					profesor.setPrezime(prezime);
+					profesor.setDatumRodjenja(datumRodjenja);
+					profesor.setAdresaStanovanja(adresaStanovanja);
+					profesor.setTelefon(telefon);
+					profesor.setEmail(email);
+					profesor.setAdresaKancelarije(adresaKancelarije);
+					profesor.setBrojLicneKarte(brojLicneKarte);
+					profesor.setZvanje(zvanje);
+					profesor.setTitula(titula);
+					profesor.setPredmeti(predmeti);
+				}
+		}
 	}
 	
 	public void izbrisiProfesora(String brojLicneKarte) {

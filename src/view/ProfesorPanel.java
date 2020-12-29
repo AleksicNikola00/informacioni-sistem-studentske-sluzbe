@@ -10,7 +10,6 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -18,62 +17,88 @@ import javax.swing.JTextField;
 import controller.ProfesoriController;
 import listeners.MyFocusListener;
 import listeners.SwitchTxtFieldListener;
+import model.BazaProfesora;
+import model.Profesor;
 
-public class ProfesoriDodajDialog extends JDialog {
+public class ProfesorPanel extends JPanel {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 4195495952053849388L;
 	
-	private static ProfesoriDodajDialog instance = null;
-	private static ArrayList<JTextField> listaTxt;
-	private static JButton btnPotvrdi;
-	JButton btnOdustani;
-	private static JComboBox<String> zvanjaComboBox;
-	private static JComboBox<String> tituleComboBox;
+	private ArrayList<JTextField> listaTxt;
+	private JButton btnPotvrdi;
+	private JButton btnOdustani;
+	private JComboBox<String> zvanjaComboBox;
+	private JComboBox<String> tituleComboBox;
+	private boolean mode;
 	
-	public static ArrayList<JTextField> getListaTxt() {
+	
+	
+	public ArrayList<JTextField> getListaTxt() {
 		return listaTxt;
 	}
 
-	public static JButton getBtnPotvrdi() {
+	public void setListaTxt(ArrayList<JTextField> listaTxt) {
+		this.listaTxt = listaTxt;
+	}
+
+	public JButton getBtnPotvrdi() {
 		return btnPotvrdi;
 	}
 
-	public static JComboBox<String> getZvanjaComboBox() {
+	public void setBtnPotvrdi(JButton btnPotvrdi) {
+		this.btnPotvrdi = btnPotvrdi;
+	}
+
+	public JButton getBtnOdustani() {
+		return btnOdustani;
+	}
+
+	public void setBtnOdustani(JButton btnOdustani) {
+		this.btnOdustani = btnOdustani;
+	}
+
+	public JComboBox<String> getZvanjaComboBox() {
 		return zvanjaComboBox;
 	}
 
-	public static JComboBox<String> getTituleComboBox() {
+	public void setZvanjaComboBox(JComboBox<String> zvanjaComboBox) {
+		this.zvanjaComboBox = zvanjaComboBox;
+	}
+
+	public JComboBox<String> getTituleComboBox() {
 		return tituleComboBox;
 	}
-	
-	public static ProfesoriDodajDialog getInstance() {
-		if(instance==null)
-			instance=new ProfesoriDodajDialog();
-		
-		return instance;
+
+	public void setTituleComboBox(JComboBox<String> tituleComboBox) {
+		this.tituleComboBox = tituleComboBox;
 	}
-	
-	private ProfesoriDodajDialog() {
-		super(MainFrame.getInstance(),"Dodaj profesora", true);
+
+	public boolean isMode() {
+		return mode;
+	}
+
+	public void setMode(boolean mode) {
+		this.mode = mode;
+	}
+
+	public ProfesorPanel(boolean mode) {
+		this.mode = mode;
 		listaTxt=new ArrayList<JTextField>();
 		btnPotvrdi=new JButton("Potvrdi");
 		btnOdustani = new JButton("Odustani");
+		
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = kit.getScreenSize();
 		int screenHeight = screenSize.height;
 		int screenWidth = screenSize.width;
-		setSize((3*screenWidth/7) , 3 * screenHeight / 4 - screenHeight / 30);
-		setLocationRelativeTo(MainFrame.getInstance());
 		
 		inicijalizacija(screenWidth, screenHeight);
 	}
 	
 	private void inicijalizacija(int screenWidth, int screenHeight) {
-		JPanel panel = new JPanel();
-		add(panel);
 		Dimension dim = new Dimension((int)(screenWidth / 7), (int)(screenHeight / 25));
 		MyFocusListener proveraUnosa= new MyFocusListener(listaTxt, btnPotvrdi,btnOdustani);
 		
@@ -212,7 +237,10 @@ public class ProfesoriDodajDialog extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();
+				if(mode)
+					ProfesoriDodajDialog.getInstance().dispose();
+				else 
+					ProfesoriIzmenaDialog.getInstance().dispose();
 			}
 		});
 		
@@ -221,9 +249,14 @@ public class ProfesoriDodajDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(proveraUnosa.validateTxtFields()) {
-					ProfesoriController.getInstance().dodajProfesora();
-					dispose();
-					return;
+					if(mode) {
+						ProfesoriController.getInstance().dodajProfesora();
+						ProfesoriDodajDialog.getInstance().dispose();
+					}
+					else {
+						ProfesoriController.getInstance().izmeniProfesora(ProfesoriJTable.getInstance().getSelectedRow());
+						ProfesoriIzmenaDialog.getInstance().dispose();
+					}
 				}
 			}
 		});
@@ -236,6 +269,10 @@ public class ProfesoriDodajDialog extends JDialog {
 		listaTxt.add(txtEmail);
 		listaTxt.add(txtAdresaKanc);
 		listaTxt.add(txtBrojLK);
+		
+		if(!mode) {
+			refreshProfesorFirstPanel();
+		}
 		
 		Box box = Box.createVerticalBox();
 		box.add(panIme);
@@ -251,7 +288,29 @@ public class ProfesoriDodajDialog extends JDialog {
 		box.add(Box.createVerticalStrut(20));
 		box.add(panBtn);
 		box.add(Box.createGlue());
-		panel.add(box);
+		this.add(box);
+	}
+	
+	public  void refreshProfesorFirstPanel() {
+		int indexProfesora = ProfesoriJTable.getInstance().getSelectedRow();
+		Profesor profesor = BazaProfesora.getInstance().getRow(indexProfesora);
+		listaTxt.get(0).setText(profesor.getIme());
+		listaTxt.get(1).setText(profesor.getPrezime());
+		listaTxt.get(2).setText(profesor.getDatumRodjenja());
+		listaTxt.get(3).setText(profesor.getAdresaStanovanja());
+		listaTxt.get(4).setText(profesor.getTelefon());
+		listaTxt.get(5).setText(profesor.getEmail());
+		listaTxt.get(6).setText(profesor.getAdresaKancelarije());
+		listaTxt.get(7).setText(profesor.getBrojLicneKarte());
+			
+		if(profesor.getZvanje().equals("Docent"))
+			zvanjaComboBox.setSelectedIndex(0);
+		else if(profesor.getZvanje().equals("Vanredni profesor"))
+			zvanjaComboBox.setSelectedIndex(1);
+		else
+			zvanjaComboBox.setSelectedIndex(2);
+			
+		tituleComboBox.setSelectedIndex(0);
 	}
 
 }

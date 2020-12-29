@@ -5,12 +5,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import model.BazaPredmeta;
 import view.StudentiIzmenaDialog;
 import view.MainFrame;
 import view.PredmetiDodajDialog;
 import view.PredmetiJTable;
-
+import view.ProfesoriIzmenaDialog;
 import view.ProfesoriJTable;
 import view.StudentiJTable;
 
@@ -32,11 +31,9 @@ public class EditActionListener implements ActionListener {
 			if(ProfesoriJTable.getInstance().getSelectedRow() == -1)
 				JOptionPane.showMessageDialog(null, "Odaberite profesora!");
 			else {
-				/*ProfesoriDodajDialog.getInstance();
-				ProfesoriDodajDialog.setMode(false);
-				ProfesoriDodajDialog.getInstance().refreshPredmetPanel();
-				ProfesoriDodajDialog.getInstance().setVisible(true);
-				*/
+				ProfesoriIzmenaDialog.getInstance().refreshProfesorPanel();
+				ProfesoriIzmenaDialog.getInstance().setVisible(true);
+				ProfesoriIzmenaDialog.getInstance().setLocationRelativeTo(MainFrame.getInstance());
 			}
 		}
 		else if(MainFrame.getInstance().getSelectedIndex() == 2) {

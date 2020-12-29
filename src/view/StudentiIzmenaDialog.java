@@ -7,7 +7,6 @@ import java.awt.Toolkit;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.JTable;
 
 
 
