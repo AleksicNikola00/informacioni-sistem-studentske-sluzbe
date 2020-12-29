@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import model.Student.Status;
@@ -91,7 +92,7 @@ public class BazaStudenta {
 		}
 	}
 	
-	public void dodajStudenta(String ime, String prezime, String datumRodjenja, String adresa, String email, String brojTelefona,
+	public void dodajStudenta(String ime, String prezime, Date datumRodjenja, String adresa, String email, String brojTelefona,
 			String brojIndexa, int godinaUpisa, int trenutnaGodinaStudija, Status status, double prosecnaOcena,
 			ArrayList<Ocena> spisakPolozenihIspita, ArrayList<Predmet> spisakNepolozenihIspita) {
 		
@@ -109,7 +110,7 @@ public class BazaStudenta {
 		}
 	}
 	
-	public void izmeniStudenta(String stariIndex,String ime, String prezime, String datumRodjenja, String adresa, String email, String brojTelefona,
+	public void izmeniStudenta(String stariIndex,String ime, String prezime, Date datumRodjenja, String adresa, String email, String brojTelefona,
 			String brojIndexa, int godinaUpisa, int trenutnaGodinaStudija, Status status, double prosecnaOcena,
 			ArrayList<Ocena> spisakPolozenihIspita, ArrayList<Predmet> spisakNepolozenihIspita) {
 		

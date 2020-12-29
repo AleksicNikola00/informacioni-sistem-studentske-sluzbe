@@ -1,6 +1,9 @@
 package model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class BazaOcena {
 	
@@ -61,14 +64,15 @@ public class BazaOcena {
 			return Integer.toString(ocena.getOcena());
 		case 4:
 		{
-			return ocena.getDatumPolaganjaIspita();
+			DateFormat dateFormat=new SimpleDateFormat("dd.mm.yyyy.");
+			return dateFormat.format(ocena.getDatumPolaganjaIspita());
 		}
 		default:
 			return null;
 		}
 	}
 	
-	public void dodajOcenu(Student student, Predmet predmet, int ocena,String datumPolaganjaIspita) {
+	public void dodajOcenu(Student student, Predmet predmet, int ocena,Date datumPolaganjaIspita) {
 		this.ocene.add(new Ocena(student,predmet,ocena,datumPolaganjaIspita));
 	}
 	

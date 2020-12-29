@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import model.BazaOcena;
 import model.BazaPredmeta;
@@ -17,7 +18,7 @@ public class OceneController {
 	private Student student;
 	private Predmet predmet;
 	private int ocena;
-	private String datumPolaganjaIspita;
+	private Date datumPolaganjaIspita;
 	
 	public static OceneController getInstance() {
 		if (instance == null) {
@@ -58,11 +59,11 @@ public class OceneController {
 		this.ocena = ocena;
 	}
 
-	public String getDatumPolaganjaIspita() {
+	public Date getDatumPolaganjaIspita() {
 		return datumPolaganjaIspita;
 	}
 
-	public void setDatumPolaganjaIspita(String datumPolaganjaIspita) {
+	public void setDatumPolaganjaIspita(Date datumPolaganjaIspita) {
 		this.datumPolaganjaIspita = datumPolaganjaIspita;
 	}
 

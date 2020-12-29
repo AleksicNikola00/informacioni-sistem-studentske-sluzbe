@@ -19,6 +19,8 @@ import controller.Validate;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import listeners.MyFocusListener;
 import listeners.SwitchTxtFieldListener;
@@ -314,10 +316,11 @@ public class StudentPanel extends JPanel {
 	public void refreshJTxtFields() {
 		int selectedIndex=StudentiJTable.getInstance().getSelectedRow();
 		Student student=StudentiController.getInstance().getStudent(selectedIndex);
+		DateFormat dateFormat=new SimpleDateFormat("dd.mm.yyyy.");
 		//setuj 
 		listaTxt.get(0).setText(student.getIme());
 		listaTxt.get(1).setText(student.getPrezime());
-		listaTxt.get(2).setText(student.getDatumRodjenja());
+		listaTxt.get(2).setText(dateFormat.format(student.getDatumRodjenja()));
 		listaTxt.get(3).setText(student.getAdresa());
 		listaTxt.get(4).setText(student.getBrojTelefona());
 		listaTxt.get(5).setText(student.getEmail());
