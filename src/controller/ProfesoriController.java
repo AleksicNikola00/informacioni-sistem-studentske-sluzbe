@@ -12,7 +12,7 @@ import view.MainFrame;
 import view.ProfesoriDodajDialog;
 import view.ProfesoriIzmenaDialog;
 import view.ProfesoriJTable;
-import view.StudentiJTable;
+
 
 public class ProfesoriController {
 	

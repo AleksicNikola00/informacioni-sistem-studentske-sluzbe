@@ -1,7 +1,9 @@
 package controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
+import java.util.Date;
 
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -22,8 +24,9 @@ public class StudentiController {
 	
 	//
 	private ArrayList<JTextField> txtFieldArray;
-	private String ime,prezime,adresa,brIndexa,brTelefona,email,datum;
-	Status status;
+	private String ime,prezime,adresa,brIndexa,brTelefona,email;
+	private Date datum;
+	private Status status;
 	private JComboBox<String> trenutnaGodinaComboBox;
 	private JComboBox<String> nacinFinasiranjaComboBox;
 	private int godinaUpisa,trenutnaGodinaStudija;
@@ -90,7 +93,12 @@ public class StudentiController {
 		}
 		
 		ime=txtFieldArray.get(0).getText();
-		datum=txtFieldArray.get(2).getText();
+		//String datum[]=txtFieldArray.get(2).getText().split(".");
+		try {
+			datum=new SimpleDateFormat("dd.mm.yyyy.").parse(txtFieldArray.get(2).getText());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		prezime=txtFieldArray.get(1).getText();
 		adresa=txtFieldArray.get(3).getText();
 		brTelefona=txtFieldArray.get(4).getText();
