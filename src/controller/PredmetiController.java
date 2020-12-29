@@ -12,6 +12,7 @@ import model.Predmet;
 import model.Profesor;
 import model.Student;
 import view.MainFrame;
+import view.NepolozeniPredmetiPanel;
 import view.PredmetiDodajDialog;
 import view.StudentiJTable;
 
@@ -26,7 +27,7 @@ private static PredmetiController instance = null;
 	private int godinaStudija,brojESPB;
 	private String[] imePrezime;
 	private Profesor profesor;
-	//private boolean mode;
+	private boolean mode;
 	
 	
 	
@@ -38,7 +39,7 @@ private static PredmetiController instance = null;
 	}
 	
 	public void changeList(boolean mode) {
-		//this.mode=mode;
+		this.mode=mode;
 		if(!mode) {
 			int selectedIndex=StudentiJTable.getInstance().getSelectedRow();
 			Student student=StudentiController.getInstance().getStudent(selectedIndex);
@@ -55,15 +56,29 @@ private static PredmetiController instance = null;
 		
 	}
 	
+	public Predmet getPredmet(int rowSelectedIndex) {
+		String sifra;
+		if(mode)
+			 sifra=(String)MainFrame.getInstance().getTabelaPredmeta().getValueAt(rowSelectedIndex, 0);
+		else
+			sifra=(String) NepolozeniPredmetiPanel.getInstance().getTabelaNepolozenihPredmeta().getValueAt(rowSelectedIndex, 0);
+		
+		return BazaPredmeta.getInstance().getPredmet(sifra);
+	}
+	
+	
 	public void izbrisiPredmet(int rowSelectedIndex) {
 		if (rowSelectedIndex < 0) {
 			return;
 		}
 		
-		Predmet predmet= BazaPredmeta.getInstance().getRow(rowSelectedIndex);
+		Predmet predmet=getPredmet(rowSelectedIndex);
 		BazaPredmeta.getInstance().izbrisiPredmet(predmet.getSifraPredmeta());
 		
-		MainFrame.getInstance().azurirajPrikaz();
+		if(mode) {
+			
+			MainFrame.getInstance().azurirajPrikaz();
+		}
 	}
 	
 	
