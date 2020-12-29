@@ -13,8 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import model.BazaOcena;
-import model.BazaStudenta;
+import controller.OceneController;
+import controller.StudentiController;
 import model.Student;
 
 
@@ -50,21 +50,30 @@ public class PolozeniPredmetiPanel extends JPanel {
 		inicijalizacija(screenWidth, screenHeight);
 	}
 	
+	public Student getStudent() {
+		return student;
+	}
+	
 	public void refreshPanel() {
-		student=BazaStudenta.getInstance().getRow(StudentiJTable.getInstance().getSelectedRow());
-		//refreshuj tabelu
+		int selectedIndex=StudentiJTable.getInstance().getSelectedRow();
+		student=StudentiController.getInstance().getStudent(selectedIndex);
+		//
+		//BazaOcena.getInstance().setOcene(student.getSpisakPolozenihIspita());
+		//postavlja ocene trenutnog studenta
+		OceneController.getInstance().refreshOcene(student.getSpisakPolozenihIspita());
+		lblProsecnaOcena.setText("Prosečna ocena: "+student.getProsecnaOcena());
+		lblESPB.setText("Ukupno EPSB: "+student.getBrojESPB());
+		//
 		AbstractTableModelOcene model= (AbstractTableModelOcene)tabelaPolozenihPredmeta.getModel();
 		model.fireTableDataChanged();
 		validate();
 		//
-		BazaOcena.getInstance().setOcene(student.getSpisakPolozenihIspita());
-		lblProsecnaOcena.setText("Prosečna ocena: "+student.getProsecnaOcena());
-		lblESPB.setText("Ukupno EPSB: "+student.getBrojESPB());
 	}
 	private void inicijalizacija(int screenWidth, int screenHeight) {
 		//
 		
-		student=BazaStudenta.getInstance().getRow(StudentiJTable.getInstance().getSelectedRow());
+		int selectedIndex=StudentiJTable.getInstance().getSelectedRow();
+		student=StudentiController.getInstance().getStudent(selectedIndex);
 		//panel na vrhu
 		JPanel btnPanel= new JPanel(new FlowLayout(FlowLayout.LEFT));
 		btnPanel.setPreferredSize(new Dimension((3*screenWidth/7),75));
@@ -75,8 +84,9 @@ public class PolozeniPredmetiPanel extends JPanel {
 		//validate();
 		
 		//centralniPanel
-		BazaOcena.getInstance().setOcene(student.getSpisakPolozenihIspita());
-		tabelaPolozenihPredmeta=new OceneJTable();
+		//BazaOcena.getInstance().setOcene(student.getSpisakPolozenihIspita());
+		OceneController.getInstance().refreshOcene(student.getSpisakPolozenihIspita());
+		tabelaPolozenihPredmeta=OceneJTable.getInstance();
 		JScrollPane scrollPane1=new JScrollPane(tabelaPolozenihPredmeta);
 		scrollPane1.setPreferredSize(new Dimension((3*screenWidth/7)-screenWidth/25,(3*screenHeight/8)-10));
 		//

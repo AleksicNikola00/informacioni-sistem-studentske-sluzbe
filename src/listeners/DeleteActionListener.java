@@ -19,8 +19,9 @@ public class DeleteActionListener implements ActionListener {
 		if(MainFrame.getInstance().getSelectedIndex() == 0) {
 			int code = JOptionPane.showConfirmDialog(MainFrame.getInstance(), "Da li ste sigurni da želite da obrišete studenta?",
 					"Brisanje studenta", JOptionPane.YES_NO_OPTION);
-			if(code==JOptionPane.YES_OPTION)
+			if(code==JOptionPane.YES_OPTION) {
 				StudentiController.getInstance().izbrisiStudenta(StudentiJTable.getInstance().getSelectedRow());
+			}
 		}else if(MainFrame.getInstance().getSelectedIndex() == 1) {
 			int code = JOptionPane.showConfirmDialog(MainFrame.getInstance(), "Da li ste sigurni da želite da obrišete profesora?",
 					"Brisanje profesora", JOptionPane.YES_NO_OPTION);

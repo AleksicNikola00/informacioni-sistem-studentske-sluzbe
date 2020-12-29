@@ -12,6 +12,7 @@ import model.Predmet;
 import model.Student;
 import model.Student.Status;
 import view.StudentiIzmenaDialog;
+import view.StudentiJTable;
 import view.MainFrame;
 import view.StudentiDodajDialog;
 
@@ -49,22 +50,27 @@ public class StudentiController {
 		if (rowSelectedIndex < 0) {
 			return;
 		}
-		Student student =BazaStudenta.getInstance().getRow(rowSelectedIndex);
-		//System.out.println(student.getBrojIndexa());
-		BazaStudenta.getInstance().izbrisiStudenta(student.getBrojIndexa());
+		
+		String brIndex=(String)StudentiJTable.getInstance().getValueAt(rowSelectedIndex, 0);
+		BazaStudenta.getInstance().izbrisiStudenta(brIndex);
 		//arzuriraj prikaz
 		MainFrame.getInstance().azurirajPrikaz();
+	}
+	
+	public Student getStudent(int rowSelectedIndex) {
+		String brIndex=(String)StudentiJTable.getInstance().getValueAt(rowSelectedIndex, 0);
+		return BazaStudenta.getInstance().getStudentIndex(brIndex);
 	}
 	
 	public void izmeniStudenta(int rowSelectedIndex) {
 		if (rowSelectedIndex < 0) {
 			return;
 		}
-		Student student=BazaStudenta.getInstance().getRow(rowSelectedIndex);
+		String brIndex=(String)StudentiJTable.getInstance().getValueAt(rowSelectedIndex, 0);
 		//
 		loadFromView(false);
 		//
-		BazaStudenta.getInstance().izmeniStudenta(student.getBrojIndexa(), ime, prezime,datum,
+		BazaStudenta.getInstance().izmeniStudenta(brIndex, ime, prezime,datum,
 				adresa,brTelefona, email, brIndexa, godinaUpisa,trenutnaGodinaStudija,status, 0, new ArrayList<Ocena>(), 
 				new ArrayList<Predmet>());
 		

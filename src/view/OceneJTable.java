@@ -3,6 +3,9 @@ package view;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
+
+
+
 import java.awt.Color;
 import java.awt.Component;
 
@@ -12,7 +15,17 @@ public class OceneJTable extends JTable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public OceneJTable() {
+	
+	private static OceneJTable instance;
+	
+	public static OceneJTable getInstance() {
+		if (instance == null) {
+			instance = new OceneJTable();
+		}
+		return instance;
+	}
+	
+	private OceneJTable() {
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

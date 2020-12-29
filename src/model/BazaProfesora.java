@@ -48,6 +48,7 @@ public class BazaProfesora {
 		return this.profesori.get(rowIndex);
 	}
 	
+	
 	public Profesor getProfesor(String ime,String prezime) {
 		for (Profesor profesor : profesori) {
 			if(profesor.getIme().equals(ime) && profesor.getPrezime().equals(prezime)) 

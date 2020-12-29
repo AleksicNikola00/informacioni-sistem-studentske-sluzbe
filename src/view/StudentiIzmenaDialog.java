@@ -7,7 +7,6 @@ import java.awt.Toolkit;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.JTable;
 
 
 
@@ -66,9 +65,6 @@ public class StudentiIzmenaDialog extends JDialog {
 		secondPan =PolozeniPredmetiPanel.getInstance();
 		thirdPan = NepolozeniPredmetiPanel.getInstance();
 
-		//secondPan.setLayout(new BorderLayout());
-		//firstPan.setLayout(new BorderLayout());
-		//thirdPan.setLayout(new BorderLayout());
 		
 		JTabbedPane panEntities = new JTabbedPane();
 		panEntities.add("Informacije",firstPan);
