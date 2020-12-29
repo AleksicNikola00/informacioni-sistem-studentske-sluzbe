@@ -46,8 +46,9 @@ private static PredmetiController instance = null;
 			return;
 		}
 		
-		//Predmet predmet= BazaPredmeta.getInstance().getRow(rowSelectedIndex);
-		//BazaPredmeta.getInstance().
+		Predmet predmet= BazaPredmeta.getInstance().getRow(rowSelectedIndex);
+		BazaPredmeta.getInstance().izbrisiPredmet(predmet.getSifraPredmeta());
+		
 		MainFrame.getInstance().azurirajPrikaz();
 	}
 	

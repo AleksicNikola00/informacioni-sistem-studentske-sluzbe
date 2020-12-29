@@ -133,4 +133,16 @@ public class BazaPredmeta {
 		if(mode)
 			sviPredmeti = predmeti;
 	}
+	
+	public void izbrisiPredmet(String sifraPredmeta) {
+		for (Predmet predmet : predmeti) {
+			if(predmet.getSifraPredmeta().equals(sifraPredmeta)) {
+				predmeti.remove(predmet);
+				break;
+			}
+		}
+		
+		if(mode)
+			sviPredmeti = predmeti;
+	}
 }
