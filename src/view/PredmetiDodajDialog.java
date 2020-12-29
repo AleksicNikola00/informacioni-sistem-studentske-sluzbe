@@ -49,7 +49,7 @@ public class PredmetiDodajDialog extends JDialog{
 	
 		return instance;
 	}
-	
+
 	public static JButton getBtnMinus() {
 		return btnMinus;
 	}
@@ -226,7 +226,7 @@ public class PredmetiDodajDialog extends JDialog{
 							if(getMode())
 								PredmetiController.getInstance().dodajPredmet();
 							else
-								PredmetiController.getInstance().izmeniPredmet(PredmetiJTable.getInstance().getSelectedRow());
+								PredmetiController.getInstance().izmeniPredmet(MainFrame.getInstance().getTabelaPredmeta().getSelectedRow());
 							dispose();
 							return;
 						}else {
@@ -270,7 +270,7 @@ public class PredmetiDodajDialog extends JDialog{
 	public  void refreshPredmetPanel() {
 		if(!mode)
 		{
-			int indexPredmeta=PredmetiJTable.getInstance().getSelectedRow();
+			int indexPredmeta=MainFrame.getInstance().getTabelaPredmeta().getSelectedRow();
 			Predmet predmet=BazaPredmeta.getInstance().getRow(indexPredmeta);
 			setTitle("Izmeni predmet");
 			listaTxt.get(0).setText(predmet.getSifraPredmeta());

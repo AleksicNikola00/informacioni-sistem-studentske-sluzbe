@@ -54,6 +54,10 @@ public class MainFrame extends JFrame {
 		return tabelaStudenata;
 	}
 	
+	public JTable getTabelaPredmeta() {
+		return tabelaPredmeta;
+	}
+
 	public void azurirajPrikaz() {
 		AbstractTableModelProfesori modelProfesor = (AbstractTableModelProfesori) tabelaProfesora.getModel();
 		modelProfesor.fireTableDataChanged();
@@ -110,7 +114,7 @@ public class MainFrame extends JFrame {
 		
 		tabelaProfesora = ProfesoriJTable.getInstance();
 		tabelaStudenata= StudentiJTable.getInstance();//new StudentiJTable();
-		tabelaPredmeta = PredmetiJTable.getInstance();
+		tabelaPredmeta = new PredmetiJTable();
 		
 		tabelaStudenata.setAutoCreateRowSorter(true);
 		JScrollPane scrollPane1 = new JScrollPane(tabelaProfesora);

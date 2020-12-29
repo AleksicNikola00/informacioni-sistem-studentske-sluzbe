@@ -9,7 +9,6 @@ import controller.PredmetiController;
 import controller.ProfesoriController;
 import controller.StudentiController;
 import view.MainFrame;
-import view.PredmetiJTable;
 import view.ProfesoriJTable;
 import view.StudentiJTable;
 
@@ -37,13 +36,13 @@ public class DeleteActionListener implements ActionListener {
 					ProfesoriController.getInstance().izbrisiProfesora(ProfesoriJTable.getInstance().getSelectedRow());
 			}
 		}else if(MainFrame.getInstance().getSelectedIndex() == 2) {
-			if(PredmetiJTable.getInstance().getSelectedRow()==-1)
+			if(MainFrame.getInstance().getTabelaPredmeta().getSelectedRow()==-1)
 				JOptionPane.showMessageDialog(null, "Odaberite predmet!");
 			else {
 				int code = JOptionPane.showConfirmDialog(MainFrame.getInstance(), "Da li ste sigurni da želite da obrišete predmet?",
 						"Brisanje predmeta", JOptionPane.YES_NO_OPTION);
 				if(code==JOptionPane.YES_OPTION)
-					PredmetiController.getInstance().izbrisiPredmet(PredmetiJTable.getInstance().getSelectedRow());
+					PredmetiController.getInstance().izbrisiPredmet(MainFrame.getInstance().getTabelaPredmeta().getSelectedRow());
 			}
 		}
 	}

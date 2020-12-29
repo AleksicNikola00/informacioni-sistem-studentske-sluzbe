@@ -14,6 +14,7 @@ import javax.swing.JTable;
 import controller.PredmetiController;
 
 import listeners.DodajPredmetStudentu;
+import listeners.UpisOceneListener;
 
 
 public class NepolozeniPredmetiPanel extends JPanel {
@@ -26,6 +27,10 @@ public class NepolozeniPredmetiPanel extends JPanel {
 	private static NepolozeniPredmetiPanel instance=null;
 	private JTable tabelaNepolozenihPredmeta;
 	
+	public JTable getTabelaNepolozenihPredmeta() {
+		return tabelaNepolozenihPredmeta;
+	}
+
 	public static NepolozeniPredmetiPanel getInstance() {
 		if(instance==null)
 			instance=new NepolozeniPredmetiPanel();
@@ -48,6 +53,7 @@ public class NepolozeniPredmetiPanel extends JPanel {
 		btnDodaj.addActionListener(new DodajPredmetStudentu());
 		JButton btnObrisi = new JButton("Obriši");
 		JButton btnPolaganje = new JButton("Polaganje");
+		btnPolaganje.addActionListener(new UpisOceneListener());
 		btnPanel.add(Box.createHorizontalStrut(screenWidth/50));
 		btnPanel.add(btnDodaj);
 		btnPanel.add(btnObrisi);

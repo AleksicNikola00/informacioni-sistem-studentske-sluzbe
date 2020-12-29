@@ -8,7 +8,6 @@ import javax.swing.JOptionPane;
 import view.StudentiIzmenaDialog;
 import view.MainFrame;
 import view.PredmetiDodajDialog;
-import view.PredmetiJTable;
 import view.ProfesoriIzmenaDialog;
 import view.ProfesoriJTable;
 import view.StudentiJTable;
@@ -37,7 +36,7 @@ public class EditActionListener implements ActionListener {
 			}
 		}
 		else if(MainFrame.getInstance().getSelectedIndex() == 2) {
-			if(PredmetiJTable.getInstance().getSelectedRow()==-1)
+			if(MainFrame.getInstance().getTabelaPredmeta().getSelectedRow()==-1)
 				JOptionPane.showMessageDialog(null, "Odaberite predmet!");
 			else {
 				PredmetiDodajDialog.getInstance();
