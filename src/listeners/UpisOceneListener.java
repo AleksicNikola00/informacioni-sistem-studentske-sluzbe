@@ -17,6 +17,7 @@ public class UpisOceneListener implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Odaberite predmet!");
 		else {
 			UpisOceneDialog.getInstance();
+			UpisOceneDialog.getInstance().refreshUpisOceneDialog();
 			UpisOceneDialog.getInstance().setVisible(true);
 			UpisOceneDialog.getInstance().setLocationRelativeTo(StudentiIzmenaDialog.getInstance());
 		}

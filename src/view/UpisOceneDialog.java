@@ -16,11 +16,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controller.OceneController;
 import controller.PredmetiController;
 import listeners.MyFocusListener;
 import listeners.SwitchTxtFieldListener;
 import model.BazaStudenta;
-import model.Predmet;
 import model.Student;
 
 public class UpisOceneDialog extends JDialog {
@@ -35,8 +35,12 @@ public class UpisOceneDialog extends JDialog {
 	private static ArrayList<JTextField> listaTxt;
 	private static JButton btnPotvrdi;
 	private static JButton btnOdustani;
-	private static ArrayList<Predmet> listaNepolozenihPredmeta;
-	private static Student student;
+	private JTextField txtSifra;
+	private JTextField txtIme;
+	private JTextField txtDatum;
+	private int ocena;
+	private Student student;
+	private boolean mode;
 	
 	public static UpisOceneDialog getInstance() {
 		if(instance==null)
@@ -45,14 +49,36 @@ public class UpisOceneDialog extends JDialog {
 		return instance;
 	}
 	
+	
+	public JTextField getTxtDatum() {
+		return txtDatum;
+	}
+
+
+	public void setTxtDatum(JTextField txtDatum) {
+		this.txtDatum = txtDatum;
+	}
+
+
+	public int getOcena() {
+		return ocena;
+	}
+
+
+	public void setOcena(int ocena) {
+		this.ocena = ocena;
+	}
+
+
 	private UpisOceneDialog() {
 		super(StudentiIzmenaDialog.getInstance(), "Unos ocene", true);
 		listaTxt = new ArrayList<JTextField>();
 		btnPotvrdi = new JButton("Potvrdi");
 		btnOdustani = new JButton("Odustani");
-		int rowStudenta = StudentiJTable.getInstance().getSelectedRow();
-		student = BazaStudenta.getInstance().getRow(rowStudenta);
-		listaNepolozenihPredmeta = student.getSpisakNepolozenihIspita();
+		txtSifra = new JTextField();
+		txtIme = new JTextField();
+		txtDatum = new JTextField();
+		mode = PredmetiController.getInstance().isMode();
 		
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = kit.getScreenSize();
@@ -73,11 +99,7 @@ public class UpisOceneDialog extends JDialog {
 		JPanel panSifra = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblSifra = new JLabel("Šifra*");
 		lblSifra.setPreferredSize(dim);
-		JTextField txtSifra = new JTextField();
 		txtSifra.setPreferredSize(dim);
-		int row = NepolozeniPredmetiPanel.getInstance().getTabelaNepolozenihPredmeta().getSelectedRow();
-		String value = (String)NepolozeniPredmetiPanel.getInstance().getTabelaNepolozenihPredmeta().getValueAt(row, 0);
-		txtSifra.setText(value);
 		txtSifra.setEnabled(false);
 		panSifra.add(lblSifra);
 		panSifra.add(txtSifra);
@@ -85,10 +107,7 @@ public class UpisOceneDialog extends JDialog {
 		JPanel panIme = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblIme = new JLabel("Naziv*");
 		lblIme.setPreferredSize(dim);
-		JTextField txtIme = new JTextField();
 		txtIme.setPreferredSize(dim);
-		value = (String)NepolozeniPredmetiPanel.getInstance().getTabelaNepolozenihPredmeta().getValueAt(row, 1);
-		txtIme.setText(value);
 		txtIme.setEnabled(false);
 		panIme.add(lblIme);
 		panIme.add(txtIme);
@@ -105,7 +124,6 @@ public class UpisOceneDialog extends JDialog {
 		JPanel panDatum = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblDatum = new JLabel("Datum*");
 		lblDatum.setPreferredSize(dim);
-		JTextField txtDatum = new JTextField();
 		txtDatum.setPreferredSize(dim);
 		txtDatum.setName("datRodj");
 		txtDatum.addActionListener(new SwitchTxtFieldListener());
@@ -122,8 +140,6 @@ public class UpisOceneDialog extends JDialog {
 		btnOdustani.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				PredmetiController.getInstance().izbrisiPredmet(row);
-				NepolozeniPredmetiPanel.getInstance().refreshPanel();
 				dispose();
 				return;
 			}
@@ -134,6 +150,32 @@ public class UpisOceneDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if(proveraUnosa.validateTxtFields()) {
+					int row = NepolozeniPredmetiPanel.getInstance().getTabelaNepolozenihPredmeta().getSelectedRow();
+					PredmetiController.getInstance().setMode(false);
+					PredmetiController.getInstance().izbrisiPredmet(row);
+					PredmetiController.getInstance().setMode(mode);
+					
+					int rowIndex=StudentiJTable.getInstance().getSelectedRow();
+					student = BazaStudenta.getInstance().getRow(rowIndex);
+					OceneController.getInstance().setStudent(student);
+					
+					if(ocenaComboBox.getSelectedItem().equals(6))
+						setOcena(6);
+					else if(ocenaComboBox.getSelectedItem().equals(7))
+						setOcena(7);
+					else if(ocenaComboBox.getSelectedItem().equals(8))
+						setOcena(8);
+					else if(ocenaComboBox.getSelectedItem().equals(9))
+						setOcena(9);
+					else
+						setOcena(10);
+					OceneController.getInstance().setOcena(getOcena());
+					
+					OceneController.getInstance().setDatumPolaganjaIspita(txtDatum.getText());
+					
+					OceneController.getInstance().dodajOcenu();
+					
+					StudentiIzmenaDialog.getInstance().refreshStudentPanel();
 					
 					dispose();
 					return;
@@ -152,5 +194,14 @@ public class UpisOceneDialog extends JDialog {
 		box.add(panBtn);
 		box.add(Box.createGlue());
 		panel.add(box);
+	}
+	
+	public void refreshUpisOceneDialog(){
+		int row = NepolozeniPredmetiPanel.getInstance().getTabelaNepolozenihPredmeta().getSelectedRow();
+		String value = (String)NepolozeniPredmetiPanel.getInstance().getTabelaNepolozenihPredmeta().getValueAt(row, 0);
+		txtSifra.setText(value);
+		
+		value = (String)NepolozeniPredmetiPanel.getInstance().getTabelaNepolozenihPredmeta().getValueAt(row, 1);
+		txtIme.setText(value);
 	}
 }

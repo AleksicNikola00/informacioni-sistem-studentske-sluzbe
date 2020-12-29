@@ -29,8 +29,14 @@ private static PredmetiController instance = null;
 	private Profesor profesor;
 	private boolean mode;
 	
-	
-	
+	public boolean isMode() {
+		return mode;
+	}
+
+	public void setMode(boolean mode) {
+		this.mode = mode;
+	}
+
 	public static PredmetiController getInstance() {
 		if (instance == null) {
 			instance = new PredmetiController();
@@ -79,6 +85,10 @@ private static PredmetiController instance = null;
 			
 			MainFrame.getInstance().azurirajPrikaz();
 		}
+		else {
+			OceneController.getInstance().setPredmet(predmet);
+		}
+			
 	}
 	
 	
