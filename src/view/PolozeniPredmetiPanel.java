@@ -15,6 +15,7 @@ import javax.swing.JTable;
 
 import controller.OceneController;
 import controller.StudentiController;
+import listeners.PonistiOcenu;
 import model.Student;
 
 
@@ -54,6 +55,10 @@ public class PolozeniPredmetiPanel extends JPanel {
 		return student;
 	}
 	
+	public JTable getTabelaPolozenihPredmeta() {
+		return tabelaPolozenihPredmeta;
+	}
+	
 	public void refreshPanel() {
 		int selectedIndex=StudentiJTable.getInstance().getSelectedRow();
 		student=StudentiController.getInstance().getStudent(selectedIndex);
@@ -78,6 +83,7 @@ public class PolozeniPredmetiPanel extends JPanel {
 		JPanel btnPanel= new JPanel(new FlowLayout(FlowLayout.LEFT));
 		btnPanel.setPreferredSize(new Dimension((3*screenWidth/7),75));
 		JButton btnPonistiOcenu = new JButton("Poništi ocenu");
+		btnPonistiOcenu.addActionListener(new PonistiOcenu());
 		btnPanel.add(Box.createHorizontalStrut(screenWidth/50));
 		btnPanel.add(btnPonistiOcenu);
 		add(btnPanel,BorderLayout.NORTH);
