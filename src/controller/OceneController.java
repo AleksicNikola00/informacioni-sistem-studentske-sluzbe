@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 
 import model.BazaOcena;
+import model.BazaPredmeta;
 import model.Ocena;
 import model.Predmet;
 import model.Student;
@@ -70,7 +71,8 @@ public class OceneController {
 		int selectedIndex=StudentiJTable.getInstance().getSelectedRow();
 		Student student=StudentiController.getInstance().getStudent(selectedIndex);
 		String sifraPredmeta=(String)OceneJTable.getInstance().getValueAt(selectedRow, 0);
-		BazaOcena.getInstance().ponistiOcenu(student.getBrojIndexa(), sifraPredmeta);
+		Ocena ocena=BazaOcena.getInstance().ponistiOcenu(student.getBrojIndexa(), sifraPredmeta);
+		BazaPredmeta.getInstance().izbrisiPredmet(ocena.getPredmet().getSifraPredmeta());
 	}
 	
 }

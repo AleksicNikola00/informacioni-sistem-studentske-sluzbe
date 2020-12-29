@@ -72,11 +72,13 @@ public class BazaOcena {
 		this.ocene.add(new Ocena(student,predmet,ocena,datumPolaganjaIspita));
 	}
 	
-	public void ponistiOcenu(String brIndexa,String sifraPredmeta) {
+	public Ocena ponistiOcenu(String brIndexa,String sifraPredmeta) {
 		for (Ocena ocena : ocene) {
 			if(ocena.getStudent().getBrojIndexa().equals(brIndexa) && ocena.getPredmet().getSifraPredmeta().equals(sifraPredmeta))
 				this.ocene.remove(ocena);
+			return ocena;
 		}
+		return null;
 	}
 	
 }
