@@ -1,12 +1,13 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Profesor {
 
 	private String prezime;
 	private String ime;
-	private String datumRodjenja;
+	private Date datumRodjenja;
 	private String adresaStanovanja;
 	private String telefon;
 	private String email;
@@ -16,7 +17,7 @@ public class Profesor {
 	private String brojLicneKarte;
 	private ArrayList<Predmet> predmeti;
 	
-	public Profesor(String ime, String prezime, String zvanje, String titula, String datumRodjenja, String adresaStanovanja, 
+	public Profesor(String ime, String prezime, String zvanje, String titula, Date datumRodjenja, String adresaStanovanja, 
 			String telefon, String email, String adresaKancelarije, String brojLicneKarte, ArrayList<Predmet> predmeti) {
 		this.prezime = prezime;
 		this.ime = ime;
@@ -63,11 +64,11 @@ public class Profesor {
 		this.ime = ime;
 	}
 
-	public String getDatumRodjenja() {
+	public Date getDatumRodjenja() {
 		return datumRodjenja;
 	}
 
-	public void setDatumRodjenja(String datumRodjenja) {
+	public void setDatumRodjenja(Date datumRodjenja) {
 		this.datumRodjenja = datumRodjenja;
 	}
 

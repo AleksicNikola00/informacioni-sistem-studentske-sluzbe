@@ -2,6 +2,7 @@ package model;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class BazaProfesora {
 	
@@ -73,12 +74,12 @@ public class BazaProfesora {
 		}
 	}
 
-	public void dodajProfesora(String ime, String prezime, String zvanje, String titula, String datumRodjenja, String adresaStanovanja, String telefon,
+	public void dodajProfesora(String ime, String prezime, String zvanje, String titula, Date datumRodjenja, String adresaStanovanja, String telefon,
 			String email, String adresaKancelarije, String brojLicneKarte, ArrayList<Predmet> predmeti ) {
 		this.profesori.add(new Profesor(ime, prezime, zvanje, titula, datumRodjenja, adresaStanovanja, telefon, email, adresaKancelarije, brojLicneKarte, predmeti));
 	}
 	
-	public void izmeniProfesora(String ime, String prezime, String zvanje, String titula, String datumRodjenja, String adresaStanovanja, String telefon,
+	public void izmeniProfesora(String ime, String prezime, String zvanje, String titula, Date datumRodjenja, String adresaStanovanja, String telefon,
 			String email, String adresaKancelarije, String brojLicneKarte, ArrayList<Predmet> predmeti) {
 		for (Profesor profesor : profesori) {
 				if(profesor.getBrojLicneKarte().equals(brojLicneKarte)) {

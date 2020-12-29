@@ -5,6 +5,8 @@ import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.Box;
@@ -171,7 +173,11 @@ public class UpisOceneDialog extends JDialog {
 						setOcena(10);
 					OceneController.getInstance().setOcena(getOcena());
 					
-					OceneController.getInstance().setDatumPolaganjaIspita(txtDatum.getText());
+					try {
+						OceneController.getInstance().setDatumPolaganjaIspita(new SimpleDateFormat("dd.mm.yyyy.").parse(txtDatum.getText()));
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
 					
 					OceneController.getInstance().dodajOcenu();
 					

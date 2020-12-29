@@ -4,6 +4,8 @@ import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.Box;
@@ -293,9 +295,10 @@ public class ProfesorPanel extends JPanel {
 	public  void refreshProfesorFirstPanel() {
 		int indexProfesora = ProfesoriJTable.getInstance().getSelectedRow();
 		Profesor profesor = ProfesoriController.getInstance().getProfesor(indexProfesora);
+		DateFormat dateFormat=new SimpleDateFormat("dd.mm.yyyy.");
 		listaTxt.get(0).setText(profesor.getIme());
 		listaTxt.get(1).setText(profesor.getPrezime());
-		listaTxt.get(2).setText(profesor.getDatumRodjenja());
+		listaTxt.get(2).setText(dateFormat.format(profesor.getDatumRodjenja()));
 		listaTxt.get(3).setText(profesor.getAdresaStanovanja());
 		listaTxt.get(4).setText(profesor.getTelefon());
 		listaTxt.get(5).setText(profesor.getEmail());
