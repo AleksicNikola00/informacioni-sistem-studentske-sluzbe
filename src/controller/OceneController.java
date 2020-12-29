@@ -72,7 +72,8 @@ public class OceneController {
 		Student student=StudentiController.getInstance().getStudent(selectedIndex);
 		String sifraPredmeta=(String)OceneJTable.getInstance().getValueAt(selectedRow, 0);
 		Ocena ocena=BazaOcena.getInstance().ponistiOcenu(student.getBrojIndexa(), sifraPredmeta);
-		BazaPredmeta.getInstance().izbrisiPredmet(ocena.getPredmet().getSifraPredmeta());
+		BazaPredmeta.getInstance().dodajNepolozenimPredmetima(ocena.getPredmet());
+		
 	}
 	
 }
