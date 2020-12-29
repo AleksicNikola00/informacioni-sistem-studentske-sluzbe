@@ -1,6 +1,8 @@
 package model;
 
-import java.sql.Date;
+import java.util.Date;
+
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,6 +40,7 @@ public class BazaOcena {
 		this.ocene = ocene;
 	}
 	
+	
 	public int getColumnCount() {
 		return 5;
 	}
@@ -71,8 +74,15 @@ public class BazaOcena {
 		}
 	}
 	
-	public void dodajOcenu(Student student, Predmet predmet, int ocena, Date datumPolaganjaIspita) {
+	public void dodajOcenu(Student student, Predmet predmet, int ocena,Date datumPolaganjaIspita) {
 		this.ocene.add(new Ocena(student,predmet,ocena,datumPolaganjaIspita));
+	}
+	
+	public void ponistiOcenu(String brIndexa,String sifraPredmeta) {
+		for (Ocena ocena : ocene) {
+			if(ocena.getStudent().getBrojIndexa().equals(brIndexa) && ocena.getPredmet().getSifraPredmeta().equals(sifraPredmeta))
+				this.ocene.remove(ocena);
+		}
 	}
 	
 }

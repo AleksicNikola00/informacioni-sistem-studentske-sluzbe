@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
+
 import model.BazaPredmeta;
 import model.BazaProfesora;
 import model.Predmet;
@@ -12,6 +13,7 @@ import model.Profesor;
 import model.Student;
 import view.MainFrame;
 import view.PredmetiDodajDialog;
+import view.StudentiJTable;
 
 public class PredmetiController {
 private static PredmetiController instance = null;
@@ -24,6 +26,9 @@ private static PredmetiController instance = null;
 	private int godinaStudija,brojESPB;
 	private String[] imePrezime;
 	private Profesor profesor;
+	//private boolean mode;
+	
+	
 	
 	public static PredmetiController getInstance() {
 		if (instance == null) {
@@ -32,13 +37,22 @@ private static PredmetiController instance = null;
 		return instance;
 	}
 	
+	public void changeList(boolean mode) {
+		//this.mode=mode;
+		if(!mode) {
+			int selectedIndex=StudentiJTable.getInstance().getSelectedRow();
+			Student student=StudentiController.getInstance().getStudent(selectedIndex);
+			BazaPredmeta.getInstance().setNepolozeniPredmeti(student.getSpisakNepolozenihIspita());
+		}
+		BazaPredmeta.getInstance().setCurrentList(mode);
+	}
+	
 	public void dodajPredmet(){
 		loadFromView();
-		
 		BazaPredmeta.getInstance().dodajPredmet(sifraPredmeta, nazivPredmeta, semestar, godinaStudija, profesor, brojESPB,
 				new ArrayList<Student>(), new ArrayList<Student>());
-		
 		MainFrame.getInstance().azurirajPrikaz();
+		
 	}
 	
 	public void izbrisiPredmet(int rowSelectedIndex) {

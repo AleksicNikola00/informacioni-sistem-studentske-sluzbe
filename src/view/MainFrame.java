@@ -13,8 +13,8 @@ import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import controller.PredmetiController;
 import listeners.MyWindowListener;
-import model.BazaPredmeta;
  
 public class MainFrame extends JFrame {
 
@@ -96,7 +96,10 @@ public class MainFrame extends JFrame {
 				JTabbedPane tabbedPane = (JTabbedPane) e.getSource();
 		        selectedIndex = tabbedPane.getSelectedIndex();
 		        if(selectedIndex == 2)
-		        	BazaPredmeta.getInstance().setPredmeti(true);
+		        {
+		        	//BazaPredmeta.getInstance().setPredmeti(true);
+		        	PredmetiController.getInstance().changeList(true);
+		        }
 			
 			}
 		});
@@ -109,6 +112,7 @@ public class MainFrame extends JFrame {
 		tabelaStudenata= StudentiJTable.getInstance();//new StudentiJTable();
 		tabelaPredmeta = PredmetiJTable.getInstance();
 		
+		tabelaStudenata.setAutoCreateRowSorter(true);
 		JScrollPane scrollPane1 = new JScrollPane(tabelaProfesora);
 		secondPan.add(scrollPane1, BorderLayout.CENTER);
 		
@@ -117,7 +121,8 @@ public class MainFrame extends JFrame {
 		
 		JScrollPane scrollPane3 = new JScrollPane(tabelaPredmeta);
 		thirdPan.add(scrollPane3, BorderLayout.CENTER);
-			
+		
+		
 		this.azurirajPrikaz();
 	}
 

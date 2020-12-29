@@ -11,10 +11,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import controller.PredmetiController;
+
 import listeners.DodajPredmetStudentu;
-import model.BazaPredmeta;
-import model.BazaStudenta;
-import model.Student;
+
 
 public class NepolozeniPredmetiPanel extends JPanel {
 
@@ -24,7 +24,6 @@ public class NepolozeniPredmetiPanel extends JPanel {
 	private static final long serialVersionUID = -2480661972392136347L;
 	
 	private static NepolozeniPredmetiPanel instance=null;
-	private Student student;
 	private JTable tabelaNepolozenihPredmeta;
 	
 	public static NepolozeniPredmetiPanel getInstance() {
@@ -43,7 +42,6 @@ public class NepolozeniPredmetiPanel extends JPanel {
 	}
 	
 	private void inicijalizacija(int screenWidth, int screenHeight) {
-		student = BazaStudenta.getInstance().getRow(StudentiJTable.getInstance().getSelectedRow());
 		JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		btnPanel.setPreferredSize(new Dimension((3*screenWidth/7),75));
 		JButton btnDodaj = new JButton("Dodaj");
@@ -67,11 +65,7 @@ public class NepolozeniPredmetiPanel extends JPanel {
 	}
 	
 	public void refreshPanel() {
-		student = BazaStudenta.getInstance().getRow(StudentiJTable.getInstance().getSelectedRow()); 
-		
-		BazaPredmeta.getInstance().setNepolozeniPredmeti(student.getSpisakNepolozenihIspita());
-		BazaPredmeta.getInstance().setPredmeti(false);
-		
+		PredmetiController.getInstance().changeList(false); 
 		AbstractTableModelPredmeti model= (AbstractTableModelPredmeti)tabelaNepolozenihPredmeta.getModel();
 		model.fireTableDataChanged();
 		validate();

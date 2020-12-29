@@ -52,11 +52,17 @@ public class ProfesoriController {
 		MainFrame.getInstance().azurirajPrikaz();
 	}
 	
+	public Profesor getProfesor(int rowSelectedIndex) {
+		String ime=BazaProfesora.getInstance().getValueAt(rowSelectedIndex, 0);
+		String prezime=BazaProfesora.getInstance().getValueAt(rowSelectedIndex, 1);
+		return BazaProfesora.getInstance().getProfesor(ime, prezime);
+	}
+	
 	public void izbrisiProfesora(int rowSelectedIndex) {
 		if (rowSelectedIndex < 0) {
 			return;
 		}
-		Profesor profesor=BazaProfesora.getInstance().getRow(rowSelectedIndex);
+		Profesor profesor=getProfesor(rowSelectedIndex);
 		BazaProfesora.getInstance().izbrisiProfesora(profesor.getBrojLicneKarte());
 		
 		MainFrame.getInstance().azurirajPrikaz();

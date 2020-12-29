@@ -35,6 +35,13 @@ public class BazaStudenta {
 		this.studenti=new ArrayList<Student>();
 	}
 
+	public Student getStudentIndex(String index) {
+		for (Student student : studenti) {
+			if(student.getBrojIndexa().equals(index))
+				return student;
+		}
+		return null;
+	}
 	public List<Student> getStudenti() {
 		return studenti;
 	}
