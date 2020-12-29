@@ -11,6 +11,8 @@ import model.Profesor;
 import view.MainFrame;
 import view.ProfesoriDodajDialog;
 import view.ProfesoriIzmenaDialog;
+import view.ProfesoriJTable;
+import view.StudentiJTable;
 
 public class ProfesoriController {
 	
@@ -53,8 +55,8 @@ public class ProfesoriController {
 	}
 	
 	public Profesor getProfesor(int rowSelectedIndex) {
-		String ime=BazaProfesora.getInstance().getValueAt(rowSelectedIndex, 0);
-		String prezime=BazaProfesora.getInstance().getValueAt(rowSelectedIndex, 1);
+		String ime=(String)ProfesoriJTable.getInstance().getValueAt(rowSelectedIndex, 0);
+		String prezime=(String)ProfesoriJTable.getInstance().getValueAt(rowSelectedIndex, 1);
 		return BazaProfesora.getInstance().getProfesor(ime, prezime);
 	}
 	

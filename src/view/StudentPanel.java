@@ -333,13 +333,10 @@ public class StudentPanel extends JPanel {
 	}
 	//pri editu ukoliko je index isti kao sto je i bio necemo proveravati da li vec postoji u listi
 	public boolean isIndexSame() {
-		boolean isSame=false;
 		
 		int selectedIndex=StudentiJTable.getInstance().getSelectedRow();
 		Student student=StudentiController.getInstance().getStudent(selectedIndex);
-		if(listaTxt.get(6).getText().equals(student.getBrojIndexa()))
-			isSame=true;
 		
-		return isSame;
+		return (listaTxt.get(6).getText().equals(student.getBrojIndexa()))?true:false;
 	}
 }

@@ -16,10 +16,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.PredmetiController;
+import controller.Validate;
 import listeners.DodajPredmetProfesoruListener;
 import listeners.MyFocusListener;
 import listeners.SwitchTxtFieldListener;
-import model.BazaPredmeta;
 import model.Predmet;
 
 import java.awt.Toolkit;
@@ -223,10 +223,20 @@ public class PredmetiDodajDialog extends JDialog{
 					public void actionPerformed(ActionEvent arg0) {
 						// TODO Auto-generated method stub
 						if(proveraUnosa.validateTxtFields()) {
-							if(getMode())
-								PredmetiController.getInstance().dodajPredmet();
-							else
+							if(getMode()) {
+								if(!Validate.validateUniqueSifra(txtSifra.getText())) {
+									JOptionPane.showMessageDialog(null, "Uneli ste već postojeću šifru predmeta!");
+									return;
+								}
+									PredmetiController.getInstance().dodajPredmet();
+							}
+							else {
+								if(!isSifraSame() && !Validate.validateUniqueSifra(txtSifra.getText())) {
+									JOptionPane.showMessageDialog(null, "Uneli ste već postojeću šifru predmeta!");
+									return;
+								}
 								PredmetiController.getInstance().izmeniPredmet(MainFrame.getInstance().getTabelaPredmeta().getSelectedRow());
+							}
 							dispose();
 							return;
 						}else {
@@ -267,11 +277,12 @@ public class PredmetiDodajDialog extends JDialog{
 		PredmetiDodajDialog.mode = mode;
 	}
 	
+	//edit
 	public  void refreshPredmetPanel() {
 		if(!mode)
 		{
 			int indexPredmeta=MainFrame.getInstance().getTabelaPredmeta().getSelectedRow();
-			Predmet predmet=BazaPredmeta.getInstance().getRow(indexPredmeta);
+			Predmet predmet=PredmetiController.getInstance().getPredmet(indexPredmeta);
 			setTitle("Izmeni predmet");
 			listaTxt.get(0).setText(predmet.getSifraPredmeta());
 			listaTxt.get(1).setText(predmet.getNazivPredmeta());
@@ -286,6 +297,14 @@ public class PredmetiDodajDialog extends JDialog{
 		else
 			setTitle("Dodaj predmet");
 
-
 	}
+	
+	public boolean isSifraSame() {
+		//boolean isSame=false;
+		int indexPredmeta=MainFrame.getInstance().getTabelaPredmeta().getSelectedRow();
+		Predmet predmet=PredmetiController.getInstance().getPredmet(indexPredmeta);
+		
+		return (listaTxt.get(0).getText().equals(predmet.getSifraPredmeta()))?true:false;
+	}
+	
 }

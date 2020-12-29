@@ -2,7 +2,9 @@ package controller;
 
 import java.util.List;
 
+import model.BazaPredmeta;
 import model.BazaStudenta;
+import model.Predmet;
 import model.Student;
 
 public class Validate {
@@ -19,6 +21,19 @@ public class Validate {
 		
 		return valid;
 	}
+	
+	public static boolean validateUniqueSifra(String sifraPredmeta) {
+		boolean valid = true;
+		List<Predmet> predmeti= BazaPredmeta.getInstance().getSviPredmeti();
+		for (Predmet predmet : predmeti) {
+			if(predmet.getSifraPredmeta().equals(sifraPredmeta)) {
+				valid=false;
+				break;
+			}
+		}
+		return valid;
+	}
+	
 	
 	public static boolean validateESPB(String s,int length) {
 		boolean valid=true;
