@@ -122,6 +122,7 @@ public class MainFrame extends JFrame {
 		
 		tabelaStudenata.setAutoCreateRowSorter(true);
 		tabelaProfesora.setAutoCreateRowSorter(true);
+		tabelaPredmeta.setAutoCreateRowSorter(true);
 		JScrollPane scrollPane1 = new JScrollPane(tabelaProfesora);
 		secondPan.add(scrollPane1, BorderLayout.CENTER);
 		
