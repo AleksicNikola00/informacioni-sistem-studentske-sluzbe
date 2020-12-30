@@ -182,7 +182,7 @@ public class PredmetiDodajDialog extends JDialog{
 		panProfesor.add(txtProfesor);
 		panProfesor.add(Box.createHorizontalStrut(10));
 		//JButton btnPlus = new JButton("+");
-		//btnPlus.addActionListener(new DodajPredmetuProfesoraListener(proveraUnosa));
+		btnPlus.addActionListener(new DodajPredmetuProfesoraListener(proveraUnosa));
 		
 		panProfesor.add(btnPlus);
 		panProfesor.add(Box.createHorizontalStrut(10));
