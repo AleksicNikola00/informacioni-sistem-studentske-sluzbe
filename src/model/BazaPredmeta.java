@@ -16,13 +16,16 @@ public class BazaPredmeta {
 	private ArrayList<Predmet> predmeti;
 	private ArrayList<Predmet> sviPredmeti;
 	private ArrayList<Predmet> nepolozeniPredmeti;
+	private ArrayList<Predmet> predmetiKojeProfesorPredaje;
 	private ArrayList<String> kolone;
 	
-	public void setCurrentList(boolean mode) {
-		if(mode)
+	public void setCurrentList(int mode) {
+		if(mode == 1)
 			predmeti = sviPredmeti;
-		else
+		else if(mode == 2)
 			predmeti = nepolozeniPredmeti;
+		else if(mode == 3)
+			predmeti = predmetiKojeProfesorPredaje;
 	}
 
 	public void setNepolozeniPredmeti(ArrayList<Predmet> nepolozeniPredmeti) {
@@ -37,6 +40,14 @@ public class BazaPredmeta {
 		return nepolozeniPredmeti;
 	}
 	
+	public ArrayList<Predmet> getPredmetiKojeProfesorPredaje() {
+		return predmetiKojeProfesorPredaje;
+	}
+
+	public void setPredmetiKojeProfesorPredaje(ArrayList<Predmet> predmetiKojeProfesorPredaje) {
+		this.predmetiKojeProfesorPredaje = predmetiKojeProfesorPredaje;
+	}
+
 	private BazaPredmeta() {
 		this.predmeti = new ArrayList<Predmet>();
 		this.nepolozeniPredmeti = new ArrayList<Predmet>();

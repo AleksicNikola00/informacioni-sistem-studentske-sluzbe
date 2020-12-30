@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import javax.swing.JDialog;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 public class ProfesoriIzmenaDialog extends JDialog {
@@ -17,8 +16,7 @@ public class ProfesoriIzmenaDialog extends JDialog {
 
 	private static ProfesoriIzmenaDialog instance=null;
 	private static ProfesorPanel firstPan;
-	//private static PolozeniPredmetiPanel secondPan;
-	private static JPanel secondPan;
+	private static PredmetePredajeProfesorPanel secondPan;
 	
 	public static ProfesoriIzmenaDialog getInstance() {
 		if(instance==null)
@@ -45,16 +43,12 @@ public class ProfesoriIzmenaDialog extends JDialog {
 	
 	public void refreshProfesorPanel() {
 		firstPan.refreshProfesorFirstPanel();
-		//secondPan.refreshPanel();
+		secondPan.refreshPanel();
 	}
 	
 	public void inicijalizacija(int screenWidth, int screenHeight) {
-		JPanel panel=new JPanel();
-		add(panel);
-		
 		firstPan = new ProfesorPanel(false);
-		//secondPan =PolozeniPredmetiPanel.getInstance();
-		secondPan = new JPanel();
+		secondPan = PredmetePredajeProfesorPanel.getInstance();
 		
 		JTabbedPane panEntities = new JTabbedPane();
 		panEntities.add("Info", firstPan);

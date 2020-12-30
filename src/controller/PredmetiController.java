@@ -13,7 +13,9 @@ import model.Profesor;
 import model.Student;
 import view.MainFrame;
 import view.NepolozeniPredmetiPanel;
+import view.PredmetePredajeProfesorPanel;
 import view.PredmetiDodajDialog;
+import view.ProfesoriJTable;
 import view.StudentiJTable;
 
 public class PredmetiController {
@@ -27,13 +29,13 @@ private static PredmetiController instance = null;
 	private int godinaStudija,brojESPB;
 	private String[] imePrezime;
 	private Profesor profesor;
-	private boolean mode;
+	private int mode; // 1-svi, 2-nepolozeniStudent, 3-predajeProfesor
 	
-	public boolean isMode() {
+	public int getMode() {
 		return mode;
 	}
 
-	public void setMode(boolean mode) {
+	public void setMode(int mode) {
 		this.mode = mode;
 	}
 
@@ -44,14 +46,22 @@ private static PredmetiController instance = null;
 		return instance;
 	}
 	
-	public void changeList(boolean mode) {
+	public void changeList(int mode) {
 		this.mode=mode;
-		if(!mode) {
+		if(mode == 2) {
 			int selectedIndex=StudentiJTable.getInstance().getSelectedRow();
 			Student student=StudentiController.getInstance().getStudent(selectedIndex);
 			BazaPredmeta.getInstance().setNepolozeniPredmeti(student.getSpisakNepolozenihIspita());
+			BazaPredmeta.getInstance().setCurrentList(mode);
 		}
-		BazaPredmeta.getInstance().setCurrentList(mode);
+		else if(mode == 1)
+			BazaPredmeta.getInstance().setCurrentList(mode);
+		else if(mode == 3) {
+			int selectedIndex = ProfesoriJTable.getInstance().getSelectedRow();
+			Profesor profesor = ProfesoriController.getInstance().getProfesor(selectedIndex);
+			BazaPredmeta.getInstance().setPredmetiKojeProfesorPredaje(profesor.getPredmeti());
+			BazaPredmeta.getInstance().setCurrentList(mode);
+		}
 	}
 	
 	public void dodajPredmet(){
@@ -63,12 +73,13 @@ private static PredmetiController instance = null;
 	}
 	
 	public Predmet getPredmet(int rowSelectedIndex) {
-		String sifra;
-		if(mode)
-			 sifra=(String)MainFrame.getInstance().getTabelaPredmeta().getValueAt(rowSelectedIndex, 0);
-		else
+		String sifra = new String();
+		if(mode == 1)
+			sifra=(String)MainFrame.getInstance().getTabelaPredmeta().getValueAt(rowSelectedIndex, 0);
+		else if(mode == 2)
 			sifra=(String) NepolozeniPredmetiPanel.getInstance().getTabelaNepolozenihPredmeta().getValueAt(rowSelectedIndex, 0);
-		
+		else if(mode == 3)
+			sifra=(String) PredmetePredajeProfesorPanel.getInstance().getPredmetiKojeProfesorPredaje().getValueAt(rowSelectedIndex, 0);
 		return BazaPredmeta.getInstance().getPredmet(sifra);
 	}
 	
@@ -81,13 +92,10 @@ private static PredmetiController instance = null;
 		Predmet predmet=getPredmet(rowSelectedIndex);
 		BazaPredmeta.getInstance().izbrisiPredmet(predmet.getSifraPredmeta());
 		
-		if(mode) {
-			
+		if(mode == 1) 
 			MainFrame.getInstance().azurirajPrikaz();
-		}
-		else {
+		else if(mode == 2)
 			OceneController.getInstance().setPredmet(predmet);
-		}
 			
 	}
 	

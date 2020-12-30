@@ -12,34 +12,30 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import controller.PredmetiController;
+import listeners.UkloniPredmetProfesoru;
 
-import listeners.DodajPredmetStudentu;
-import listeners.UkloniPredmetStudentu;
-import listeners.UpisOceneListener;
-
-
-public class NepolozeniPredmetiPanel extends JPanel {
+public class PredmetePredajeProfesorPanel extends JPanel {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -2480661972392136347L;
+	private static final long serialVersionUID = 9047471325747789550L;
+
+	private static PredmetePredajeProfesorPanel instance=null;
+	private JTable predmetiKojeProfesorPredaje;
 	
-	private static NepolozeniPredmetiPanel instance=null;
-	private JTable tabelaNepolozenihPredmeta;
-	
-	public JTable getTabelaNepolozenihPredmeta() {
-		return tabelaNepolozenihPredmeta;
+	public JTable getPredmetiKojeProfesorPredaje() {
+		return predmetiKojeProfesorPredaje;
 	}
 
-	public static NepolozeniPredmetiPanel getInstance() {
+	public static PredmetePredajeProfesorPanel getInstance() {
 		if(instance==null)
-			instance=new NepolozeniPredmetiPanel();
+			instance=new PredmetePredajeProfesorPanel();
 		
 		return instance;
 	}
 	
-	private NepolozeniPredmetiPanel() {
+	private PredmetePredajeProfesorPanel() {
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = kit.getScreenSize();
 		int screenHeight = screenSize.height;
@@ -51,19 +47,15 @@ public class NepolozeniPredmetiPanel extends JPanel {
 		JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		btnPanel.setPreferredSize(new Dimension((3*screenWidth/7),75));
 		JButton btnDodaj = new JButton("Dodaj");
-		btnDodaj.addActionListener(new DodajPredmetStudentu());
 		JButton btnObrisi = new JButton("Ukloni");
-		btnObrisi.addActionListener(new UkloniPredmetStudentu());
-		JButton btnPolaganje = new JButton("Polaganje");
-		btnPolaganje.addActionListener(new UpisOceneListener());
+		btnObrisi.addActionListener(new UkloniPredmetProfesoru());
 		btnPanel.add(Box.createHorizontalStrut(screenWidth/50));
 		btnPanel.add(btnDodaj);
 		btnPanel.add(btnObrisi);
-		btnPanel.add(btnPolaganje);
 		add(btnPanel,BorderLayout.NORTH);
 		
-		tabelaNepolozenihPredmeta = new PredmetiJTable();
-		JScrollPane scrollPane = new JScrollPane(tabelaNepolozenihPredmeta);
+		predmetiKojeProfesorPredaje = new PredmetiJTable();
+		JScrollPane scrollPane = new JScrollPane(predmetiKojeProfesorPredaje);
 		scrollPane.setPreferredSize(new Dimension((3*screenWidth/7)-screenWidth/25, (3*screenHeight/8)-10));
 		JPanel centralPanel = new JPanel();
 		centralPanel.setPreferredSize(new Dimension((3*screenWidth/7)-screenWidth/25, (3*screenHeight/8)));
@@ -72,8 +64,8 @@ public class NepolozeniPredmetiPanel extends JPanel {
 	}
 	
 	public void refreshPanel() {
-		PredmetiController.getInstance().changeList(2); 
-		AbstractTableModelPredmeti model = (AbstractTableModelPredmeti)tabelaNepolozenihPredmeta.getModel();
+		PredmetiController.getInstance().changeList(3); 
+		AbstractTableModelPredmeti model = (AbstractTableModelPredmeti)predmetiKojeProfesorPredaje.getModel();
 		model.fireTableDataChanged();
 		validate();
 	}

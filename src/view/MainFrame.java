@@ -83,8 +83,6 @@ public class MainFrame extends JFrame {
 		add(toolbar, BorderLayout.NORTH);
 		
 		JPanel firstPan = new JPanel();
-		//JLabel todoLbl3 = new JLabel("TODO: Prikaz predmeta");
-		//firstPan.add(todoLbl3);
 		JPanel secondPan = new JPanel();
 		JPanel thirdPan = new JPanel();
 		secondPan.setLayout(new BorderLayout());
@@ -106,7 +104,7 @@ public class MainFrame extends JFrame {
 		        if(selectedIndex == 2)
 		        {
 		        	//BazaPredmeta.getInstance().setPredmeti(true);
-		        	PredmetiController.getInstance().changeList(true);
+		        	PredmetiController.getInstance().changeList(1);
 		        }
 			
 			}
