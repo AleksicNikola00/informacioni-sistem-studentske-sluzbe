@@ -12,6 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import controller.PredmetiController;
+import listeners.DodajProfesoruPredmet;
 import listeners.UkloniPredmetProfesoru;
 
 public class PredmetePredajeProfesorPanel extends JPanel {
@@ -46,8 +47,9 @@ public class PredmetePredajeProfesorPanel extends JPanel {
 	private void inicijalizacija(int screenWidth, int screenHeight) {
 		JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		btnPanel.setPreferredSize(new Dimension((3*screenWidth/7),75));
-		JButton btnDodaj = new JButton("Dodaj");
-		JButton btnObrisi = new JButton("Ukloni");
+		JButton btnDodaj = new JButton("Dodaj predmet");
+		btnDodaj.addActionListener(new DodajProfesoruPredmet());
+		JButton btnObrisi = new JButton("Ukloni predmet");
 		btnObrisi.addActionListener(new UkloniPredmetProfesoru());
 		btnPanel.add(Box.createHorizontalStrut(screenWidth/50));
 		btnPanel.add(btnDodaj);

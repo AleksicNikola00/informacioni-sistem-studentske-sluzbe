@@ -20,9 +20,9 @@ import javax.swing.JTextField;
 
 import controller.OceneController;
 import controller.PredmetiController;
+import controller.StudentiController;
 import listeners.MyFocusListener;
 import listeners.SwitchTxtFieldListener;
-import model.BazaStudenta;
 import model.Student;
 
 public class UpisOceneDialog extends JDialog {
@@ -158,7 +158,7 @@ public class UpisOceneDialog extends JDialog {
 					PredmetiController.getInstance().setMode(mode);
 					
 					int rowIndex=StudentiJTable.getInstance().getSelectedRow();
-					student = BazaStudenta.getInstance().getRow(rowIndex);
+					student = StudentiController.getInstance().getStudent(rowIndex);
 					OceneController.getInstance().setStudent(student);
 					
 					if(ocenaComboBox.getSelectedItem().equals(6))

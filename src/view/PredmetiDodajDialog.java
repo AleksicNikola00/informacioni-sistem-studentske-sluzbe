@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 
 import controller.PredmetiController;
 import controller.Validate;
-import listeners.DodajPredmetProfesoruListener;
+import listeners.DodajPredmetuProfesoraListener;
 import listeners.MyFocusListener;
 import listeners.SwitchTxtFieldListener;
 import model.Predmet;
@@ -182,7 +182,7 @@ public class PredmetiDodajDialog extends JDialog{
 		panProfesor.add(txtProfesor);
 		panProfesor.add(Box.createHorizontalStrut(10));
 		//JButton btnPlus = new JButton("+");
-		btnPlus.addActionListener(new DodajPredmetProfesoruListener(proveraUnosa));
+		btnPlus.addActionListener(new DodajPredmetuProfesoraListener(proveraUnosa));
 		
 		panProfesor.add(btnPlus);
 		panProfesor.add(Box.createHorizontalStrut(10));

@@ -13,11 +13,11 @@ import model.BazaProfesora;
 import model.Profesor;
 import view.PredmetiDodajDialog;
 
-public class DodajPredmetProfesoruListener implements ActionListener {
+public class DodajPredmetuProfesoraListener implements ActionListener {
 
 	private MyFocusListener myFocusListener;
 	
-	public DodajPredmetProfesoruListener(MyFocusListener myFocusListener) {
+	public DodajPredmetuProfesoraListener(MyFocusListener myFocusListener) {
 		this.myFocusListener=myFocusListener;
 	}
 	//https://stackoverflow.com/questions/13334198/java-custom-buttons-in-showinputdialog  
