@@ -182,11 +182,33 @@ public class PredmetiDodajDialog extends JDialog{
 		panProfesor.add(txtProfesor);
 		panProfesor.add(Box.createHorizontalStrut(10));
 		//JButton btnPlus = new JButton("+");
-		btnPlus.addActionListener(new DodajPredmetuProfesoraListener(proveraUnosa));
+		//btnPlus.addActionListener(new DodajPredmetuProfesoraListener(proveraUnosa));
 		
 		panProfesor.add(btnPlus);
 		panProfesor.add(Box.createHorizontalStrut(10));
 		//JButton btnMinus=new JButton("-");
+		btnMinus.setEnabled(false);
+		btnMinus.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+            	Object[] buttons= {"Potvrdi","Odustani"};
+            	JPanel panText = new JPanel();
+            	JLabel label = new JLabel("Da li ste sigurni?");
+            	panText.add(Box.createHorizontalGlue());
+            	panText.add(label);
+            	panText.add(Box.createHorizontalGlue());
+            	int dijalog = JOptionPane.showOptionDialog(MainFrame.getInstance(), panText,
+        				"Ukloni Profesora", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
+                        null, buttons, null);
+            	
+            	if(dijalog == JOptionPane.YES_OPTION) {
+	            	txtProfesor.setText("");
+	                btnPlus.setEnabled(true);
+	                btnMinus.setEnabled(false);
+            	}
+            }
+        });
 		panProfesor.add(btnMinus);
 		
 		
