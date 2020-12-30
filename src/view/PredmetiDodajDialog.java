@@ -187,17 +187,6 @@ public class PredmetiDodajDialog extends JDialog{
 		panProfesor.add(btnPlus);
 		panProfesor.add(Box.createHorizontalStrut(10));
 		//JButton btnMinus=new JButton("-");
-		btnMinus.setEnabled(false);
-		btnMinus.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-					txtProfesor.setText("");
-					btnPlus.setEnabled(true);
-					btnMinus.setEnabled(false);
-				
-			}
-		});
 		panProfesor.add(btnMinus);
 		
 		

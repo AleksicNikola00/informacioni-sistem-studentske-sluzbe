@@ -7,14 +7,14 @@ import javax.swing.JOptionPane;
 
 import controller.PredmetiController;
 import view.MainFrame;
-import view.NepolozeniPredmetiPanel;
+import view.PredmetePredajeProfesorPanel;
 
 public class UkloniPredmetProfesoru implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		
-		if(true) {//index==-1
+		int index = PredmetePredajeProfesorPanel.getInstance().getPredmetiKojeProfesorPredaje().getSelectedRow();
+		if(index==-1) {
 			JOptionPane.showMessageDialog(null, "Odaberite predmet!");
 			return;
 		}
@@ -23,8 +23,8 @@ public class UkloniPredmetProfesoru implements ActionListener {
 				"Ukloni predmet", JOptionPane.YES_NO_OPTION);
 		
 		if(code==JOptionPane.YES_OPTION) {
-			//PredmetiController.getInstance().izbrisiPredmet(index);
-			//NepolozeniPredmetiPanel.getInstance().refreshPanel();
+			PredmetiController.getInstance().izbrisiPredmet(index);
+			PredmetePredajeProfesorPanel.getInstance().refreshPanel();
 		}
 	}
 
