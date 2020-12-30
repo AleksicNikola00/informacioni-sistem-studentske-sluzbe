@@ -52,8 +52,8 @@ public class ProfesoriController {
 		Profesor profesor = this.getProfesor(rowSelectedIndex);
 		loadFromView(false);
 		
-		BazaProfesora.getInstance().izmeniProfesora(ime, prezime, zvanje, titula, datumRodj, 
-				adresaStan, telefon, email, adresaKanc, profesor.getBrojLicneKarte(), new ArrayList<Predmet>());
+		BazaProfesora.getInstance().izmeniProfesora(profesor.getIme(), profesor.getPrezime(), ime, prezime, zvanje, titula, datumRodj, 
+				adresaStan, telefon, email, adresaKanc, brojLK, new ArrayList<Predmet>());
 		
 		MainFrame.getInstance().azurirajPrikaz();
 	}
@@ -69,7 +69,7 @@ public class ProfesoriController {
 			return;
 		}
 		Profesor profesor=getProfesor(rowSelectedIndex);
-		BazaProfesora.getInstance().izbrisiProfesora(profesor.getBrojLicneKarte());
+		BazaProfesora.getInstance().izbrisiProfesora(profesor.getIme(), profesor.getPrezime());
 		
 		MainFrame.getInstance().azurirajPrikaz();
 	}

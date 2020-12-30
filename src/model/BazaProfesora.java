@@ -79,10 +79,10 @@ public class BazaProfesora {
 		this.profesori.add(new Profesor(ime, prezime, zvanje, titula, datumRodjenja, adresaStanovanja, telefon, email, adresaKancelarije, brojLicneKarte, predmeti));
 	}
 	
-	public void izmeniProfesora(String ime, String prezime, String zvanje, String titula, Date datumRodjenja, String adresaStanovanja, String telefon,
+	public void izmeniProfesora(String staroIme, String staroPrezime, String ime, String prezime, String zvanje, String titula, Date datumRodjenja, String adresaStanovanja, String telefon,
 			String email, String adresaKancelarije, String brojLicneKarte, ArrayList<Predmet> predmeti) {
 		for (Profesor profesor : profesori) {
-				if(profesor.getBrojLicneKarte().equals(brojLicneKarte)) {
+				if(profesor.getIme().equals(staroIme) && profesor.getPrezime().equals(staroPrezime)) {
 					profesor.setIme(ime);
 					profesor.setPrezime(prezime);
 					profesor.setDatumRodjenja(datumRodjenja);
@@ -98,9 +98,9 @@ public class BazaProfesora {
 		}
 	}
 	
-	public void izbrisiProfesora(String brojLicneKarte) {
+	public void izbrisiProfesora(String ime, String prezime) {
 		for (Profesor profesor : profesori) {
-			if(profesor.getBrojLicneKarte().equals(brojLicneKarte)) {
+			if(profesor.getIme().equals(ime) && profesor.getPrezime().equals(prezime)) {
 				profesori.remove(profesor);
 				break;
 			}

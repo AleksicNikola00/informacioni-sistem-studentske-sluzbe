@@ -3,8 +3,10 @@ package controller;
 import java.util.List;
 
 import model.BazaPredmeta;
+import model.BazaProfesora;
 import model.BazaStudenta;
 import model.Predmet;
+import model.Profesor;
 import model.Student;
 
 public class Validate {
@@ -15,6 +17,19 @@ public class Validate {
 		for (Student student : studenti) {
 			if(student.getBrojIndexa().equals(brIndexa)) {
 				valid=false;
+				break;
+			}
+		}
+		
+		return valid;
+	}
+	
+	public static boolean validateUniqueName(String ime, String prezime){
+		boolean valid = true;
+		List<Profesor> profesori = BazaProfesora.getInstance().getProfesori();
+		for (Profesor profesor : profesori) {
+			if(profesor.getIme().equals(ime) && profesor.getPrezime().equals(prezime)) {
+				valid = false;
 				break;
 			}
 		}

@@ -13,10 +13,12 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.ProfesoriController;
+import controller.Validate;
 import listeners.MyFocusListener;
 import listeners.SwitchTxtFieldListener;
 import model.Profesor;
@@ -251,12 +253,20 @@ public class ProfesorPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if(proveraUnosa.validateTxtFields()) {
 					if(mode) {
+						if(!Validate.validateUniqueName(txtIme.getText(), txtPrezime.getText())) {
+							JOptionPane.showMessageDialog(null, "Uneli ste već postojećeg profesora!");
+							return;
+						}
 						ProfesoriController.getInstance().dodajProfesora();
 						ProfesoriDodajDialog.getInstance().dispose();
 					}
 					else {
-						ProfesoriController.getInstance().izmeniProfesora(ProfesoriJTable.getInstance().getSelectedRow());
-						ProfesoriIzmenaDialog.getInstance().dispose();
+						if(isNameSame() || Validate.validateUniqueName(txtIme.getText(), txtPrezime.getText())) {
+							ProfesoriController.getInstance().izmeniProfesora(ProfesoriJTable.getInstance().getSelectedRow());
+							ProfesoriIzmenaDialog.getInstance().dispose();
+						}
+						else
+							JOptionPane.showMessageDialog(null, "Uneli ste već postojećeg profesora!");
 					}
 				}
 			}
@@ -313,6 +323,16 @@ public class ProfesorPanel extends JPanel {
 			zvanjaComboBox.setSelectedIndex(2);
 			
 		tituleComboBox.setSelectedIndex(0);
+	}
+	
+	public boolean isNameSame() {
+		int selectedIndex = ProfesoriJTable.getInstance().getSelectedRow();
+		Profesor profesor = ProfesoriController.getInstance().getProfesor(selectedIndex);
+		
+		if(listaTxt.get(0).getText().equals(profesor.getIme()) && listaTxt.get(1).getText().equals(profesor.getPrezime()))
+			return true;
+		else
+			return false;
 	}
 
 }
