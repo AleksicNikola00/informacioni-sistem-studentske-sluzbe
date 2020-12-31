@@ -31,6 +31,10 @@ public class BazaPredmeta {
 	public void setNepolozeniPredmeti(ArrayList<Predmet> nepolozeniPredmeti) {
 		this.nepolozeniPredmeti = nepolozeniPredmeti;
 	}
+	
+	public void setSviPredmeti(ArrayList<Predmet> sviPredmeti) {
+		this.sviPredmeti=sviPredmeti;
+	}
 
 	public ArrayList<Predmet> getSviPredmeti() {
 		return sviPredmeti;

@@ -9,46 +9,54 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.BazaPredmeta;
+import model.BazaProfesora;
+import model.BazaStudenta;
 import model.Predmet;
 import model.Profesor;
 import model.Student;
+import view.MainFrame;
 
 public class Deserialization {
 	
 	private static ObjectInputStream ois;
 
 	@SuppressWarnings("unchecked")
-	public static void ucitajStudente(List<Student> studenti,String imeFajla) throws ClassNotFoundException, FileNotFoundException, IOException {
+	public static void ucitajStudente(String imeFajla) throws ClassNotFoundException, FileNotFoundException, IOException {
 			File f=new File(imeFajla);
 		try {
 			ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(f)));
-			studenti=(List<Student>)ois.readObject();
+			BazaStudenta.getInstance().setStudenti((List<Student>)ois.readObject());
+			
+			
 		} finally{
 			ois.close();
+			MainFrame.getInstance().azurirajPrikaz();
 		}
-			
-		
+	
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static void ucitajProfesore(ArrayList<Profesor> profesori,String imeFajla) throws FileNotFoundException, IOException, ClassNotFoundException {
+	public static void ucitajProfesore(String imeFajla) throws FileNotFoundException, IOException, ClassNotFoundException {
 		File f=new File(imeFajla);
 		try {
 			ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(f)));
-			profesori=(ArrayList<Profesor>) ois.readObject();
+			BazaProfesora.getInstance().setProfesori((ArrayList<Profesor>) ois.readObject());
 		}finally{
 			ois.close();
+			MainFrame.getInstance().azurirajPrikaz();
 		}
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static void ucitasPredmete(ArrayList<Predmet> predmeti,String imeFajla) throws FileNotFoundException, IOException, ClassNotFoundException {
+	public static void ucitasPredmete(String imeFajla) throws FileNotFoundException, IOException, ClassNotFoundException {
 		File f=new File(imeFajla);
 		try {
 			ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(f)));
-			predmeti=(ArrayList<Predmet>) ois.readObject();
+			BazaPredmeta.getInstance().setSviPredmeti((ArrayList<Predmet>) ois.readObject());
 		}finally{
 			ois.close();
+			MainFrame.getInstance().azurirajPrikaz();
 		}
 	}
 }

@@ -15,7 +15,8 @@ import view.Toolbar;
 
 public class SearchActionListener implements ActionListener {
 
-	
+	//private RowFilter<AbstractTableModelStudenti, Integer> godinaFilter;
+	//Student student;
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		//https://docs.oracle.com/javase/7/docs/api/javax/swing/RowFilter.html
@@ -24,7 +25,7 @@ public class SearchActionListener implements ActionListener {
 		{
 			String[] niz=Toolbar.getInstance().getSearchBox().getText().split(" ");
 			String prezime=niz[0];
-	
+			
 			AbstractTableModelStudenti model=(AbstractTableModelStudenti) MainFrame.getInstance().getTabelaStudenata().getModel();
 			TableRowSorter<AbstractTableModelStudenti> sorter=new TableRowSorter<AbstractTableModelStudenti>(model);
 			java.util.List<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(3);
@@ -38,13 +39,14 @@ public class SearchActionListener implements ActionListener {
 				{
 					String index=niz[2];
 					index.toUpperCase();
-					System.out.println(index);
 					filters.add(RowFilter.regexFilter(".*"+"(?i)"+index+".*",0));
 				}
 									
 			}
+			//filters.add(RowFilter.numberFilter(ComparisonType.NOT_EQUAL, 1,3));
+			
 			RowFilter<Object,Object> serviceFilter = RowFilter.andFilter(filters);
-			 sorter.setRowFilter(serviceFilter);
+			sorter.setRowFilter(serviceFilter);
 			MainFrame.getInstance().getTabelaStudenata().setRowSorter(sorter);
 			
 		}
