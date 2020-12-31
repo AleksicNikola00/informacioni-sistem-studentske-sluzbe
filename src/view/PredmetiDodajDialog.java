@@ -300,6 +300,8 @@ public class PredmetiDodajDialog extends JDialog{
 			listaTxt.get(2).setText(Integer.toString(predmet.getBrojESPB()));
 			listaTxt.get(3).setText(predmet.getProfesor().getIme()+" "+predmet.getProfesor().getPrezime());
 			godinaStudijaComboBox.setSelectedIndex(predmet.getGodinaStudija()-1);
+			btnPlus.setEnabled(false);
+			btnMinus.setEnabled(true);
 			if(predmet.getSemestar().equals("letnji"))
 				semestarComboBox.setSelectedIndex(0);//letnji
 			else

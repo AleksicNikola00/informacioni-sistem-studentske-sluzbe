@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.BazaPredmeta;
@@ -22,6 +23,19 @@ public class Validate {
 		}
 		
 		return valid;
+	}
+	
+	public static boolean validateProfesorAddedToSubject(Profesor profesor) {
+		boolean exists=false;
+		ArrayList<Predmet> predmeti = BazaPredmeta.getInstance().getSviPredmeti();
+		for (Predmet predmet : predmeti) {
+			if(profesor.getIme().equals(predmet.getProfesor().getIme()) && profesor.getPrezime().equals(predmet.getProfesor().getPrezime())) {
+				exists=true;
+				break;
+			}
+		}
+		
+		return exists;
 	}
 	
 	public static boolean validateUniqueName(String ime, String prezime){

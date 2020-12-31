@@ -8,6 +8,8 @@ import javax.swing.JOptionPane;
 import controller.PredmetiController;
 import controller.ProfesoriController;
 import controller.StudentiController;
+import controller.Validate;
+import model.Profesor;
 import view.MainFrame;
 import view.ProfesoriJTable;
 import view.StudentiJTable;
@@ -32,8 +34,14 @@ public class DeleteActionListener implements ActionListener {
 			else {
 				int code = JOptionPane.showConfirmDialog(MainFrame.getInstance(), "Da li ste sigurni da želite da obrišete profesora?",
 						"Brisanje profesora", JOptionPane.YES_NO_OPTION);
-				if(code==JOptionPane.YES_OPTION)
-					ProfesoriController.getInstance().izbrisiProfesora(ProfesoriJTable.getInstance().getSelectedRow());
+				if(code==JOptionPane.YES_OPTION) {
+					int index=ProfesoriJTable.getInstance().getSelectedRow();
+					Profesor profesor=ProfesoriController.getInstance().getProfesor(index);
+					if(Validate.validateProfesorAddedToSubject(profesor)) 
+						JOptionPane.showMessageDialog(null, "Profesor dodat predmetu, prvo uklonite profesora sa predmeta zatim ponovite brisanje!");
+					else
+						ProfesoriController.getInstance().izbrisiProfesora(index);
+				}
 			}
 		}else if(MainFrame.getInstance().getSelectedIndex() == 2) {
 			if(MainFrame.getInstance().getTabelaPredmeta().getSelectedRow()==-1)
