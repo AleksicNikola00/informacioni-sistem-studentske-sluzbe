@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import controller.OceneController;
-
 import view.MainFrame;
 import view.PolozeniPredmetiPanel;
 import view.StudentiIzmenaDialog;
@@ -24,8 +23,10 @@ public class PonistiOcenu implements ActionListener {
 				"Poništavnje ocene", JOptionPane.YES_NO_OPTION);
 		
 		if(code==JOptionPane.YES_OPTION) {
+			//Ocena ocena=OceneJTable.getInstance();
 			OceneController.getInstance().ponistiOcenu(selectedRow);
 			StudentiIzmenaDialog.getInstance().refreshStudentPanel();
+			MainFrame.getInstance().azurirajPrikaz();
 		}
 	}
 

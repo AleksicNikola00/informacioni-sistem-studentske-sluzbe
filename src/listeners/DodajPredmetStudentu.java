@@ -8,8 +8,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 
+import controller.StudentiController;
 import model.BazaPredmeta;
-import model.BazaStudenta;
 import model.Ocena;
 import model.Predmet;
 import model.Student;
@@ -29,12 +29,12 @@ public class DodajPredmetStudentu implements ActionListener {
 		// TODO Auto-generated method stub
 		Object[] buttons= {"Dodaj","Odustani"};
 		int rowIndex=StudentiJTable.getInstance().getSelectedRow();
-		student=BazaStudenta.getInstance().getRow(rowIndex);
+		//student=BazaStudenta.getInstance().getRow(rowIndex);
+		student=StudentiController.getInstance().getStudent(rowIndex);
 		listaNepolozenihPredmeta=student.getSpisakNepolozenihIspita();
 		 listaPolozenihPredmeta=student.getSpisakPolozenihIspita();
 		//lista koju prikazujemo
 		 listaPredmeta=BazaPredmeta.getInstance().getSviPredmeti();
-		 //System.out.println(listaPredmeta.size());
 		DefaultListModel<String> dlm=new DefaultListModel<String>();
 		JList<String> list =new JList<String>(dlm);
 		for (Predmet predmet : listaPredmeta) {
@@ -56,6 +56,7 @@ public class DodajPredmetStudentu implements ActionListener {
 			String[] imePrezime=list.getSelectedValue().split("-");
 			Predmet predmet=BazaPredmeta.getInstance().getSviPredmet(imePrezime[0]);
 			listaNepolozenihPredmeta.add(predmet);
+			predmet.getStudentiKojiNisuPoloziliPredmet().add(student);
 			NepolozeniPredmetiPanel.getInstance().refreshPanel();
 			return;
 		}

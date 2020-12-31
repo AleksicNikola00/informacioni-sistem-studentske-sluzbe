@@ -27,6 +27,7 @@ public class OceneController {
 		return instance;
 	}
 	
+	
 	public void refreshOcene(ArrayList<Ocena> ocene) {
 		BazaOcena.getInstance().setOcene(ocene);
 	}
@@ -67,6 +68,7 @@ public class OceneController {
 		this.datumPolaganjaIspita = datumPolaganjaIspita;
 	}
 
+
 	//public void ponistiOcenu(String brIndexa,String sifraPredmeta)
 	public void ponistiOcenu(int selectedRow) {
 		int selectedIndex=StudentiJTable.getInstance().getSelectedRow();
@@ -74,7 +76,7 @@ public class OceneController {
 		String sifraPredmeta=(String)OceneJTable.getInstance().getValueAt(selectedRow, 0);
 		Ocena ocena=BazaOcena.getInstance().ponistiOcenu(student.getBrojIndexa(), sifraPredmeta);
 		BazaPredmeta.getInstance().dodajNepolozenimPredmetima(ocena.getPredmet());
-		
+		ocena.getPredmet().getStudentiKojiSuPoloziliPredmet().remove(student);
 	}
 	
 }
