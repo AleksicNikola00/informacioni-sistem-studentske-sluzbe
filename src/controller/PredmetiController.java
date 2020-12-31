@@ -92,6 +92,9 @@ private static PredmetiController instance = null;
 		Predmet predmet=getPredmet(rowSelectedIndex);
 		BazaPredmeta.getInstance().izbrisiPredmet(predmet.getSifraPredmeta());
 		
+		Profesor profesor = BazaProfesora.getInstance().getProfesor(predmet.getProfesor().getIme(), predmet.getProfesor().getPrezime());
+		profesor.getPredmeti().remove(predmet);
+		
 		if(mode == 1) 
 			MainFrame.getInstance().azurirajPrikaz();
 		else if(mode == 2)
@@ -104,7 +107,8 @@ private static PredmetiController instance = null;
 		if (rowSelectedIndex < 0) {
 			return;
 		}
-		Predmet predmet=BazaPredmeta.getInstance().getRow(rowSelectedIndex);
+		Predmet predmet = getPredmet(rowSelectedIndex);
+		predmet.getProfesor().getPredmeti().remove(predmet);
 		loadFromView();
 		BazaPredmeta.getInstance().izmeniPredmet(predmet.getSifraPredmeta(), sifraPredmeta, nazivPredmeta,
 				semestar, godinaStudija, profesor, brojESPB, 

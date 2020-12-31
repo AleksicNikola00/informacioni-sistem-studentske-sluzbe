@@ -118,8 +118,11 @@ public class BazaPredmeta {
 	public void dodajPredmet(String sifraPredmeta, String nazivPredmeta, String semestar, int godinaStudija,
 			Profesor profesor, int brojESPB, ArrayList<Student> studentiKojiSuPoloziliPredmet,
 			ArrayList<Student> studentiKojiNisuPoloziliPredmet) {
-		this.sviPredmeti.add(new Predmet(sifraPredmeta, nazivPredmeta, semestar, godinaStudija, profesor, brojESPB, 
-				studentiKojiSuPoloziliPredmet, studentiKojiNisuPoloziliPredmet));
+		Predmet predmet = new Predmet(sifraPredmeta, nazivPredmeta, semestar, godinaStudija, profesor, brojESPB, 
+				studentiKojiSuPoloziliPredmet, studentiKojiNisuPoloziliPredmet);
+		this.sviPredmeti.add(predmet);
+		Profesor profesor1 = BazaProfesora.getInstance().getProfesor(profesor.getIme(), profesor.getPrezime());
+		profesor1.getPredmeti().add(predmet);
 		
 	}
 	
@@ -140,6 +143,8 @@ public class BazaPredmeta {
 				predmet.setBrojESPB(brojESPB);
 				predmet.setStudentiKojiSuPoloziliPredmet(studentiKojiSuPoloziliPredmet);
 				predmet.setStudentiKojiNisuPoloziliPredmet(studentiKojiNisuPoloziliPredmet);
+				
+				profesor.getPredmeti().add(predmet);
 				
 				break;
 			}
