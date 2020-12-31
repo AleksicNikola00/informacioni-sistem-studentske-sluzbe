@@ -9,6 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
+import model.BazaPredmeta;
+import model.BazaProfesora;
 import model.BazaStudenta;
 import serialization.Serialization;
 import view.MainFrame;
@@ -50,7 +52,25 @@ private static MyWindowListener instance=null;
 			frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		} else {
 			try {
-				Serialization.sacuvajStudente(BazaStudenta.getInstance().getStudenti(), "datoteka.txt");
+				Serialization.sacuvajStudente(BazaStudenta.getInstance().getStudenti(), "student.txt");
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				Serialization.sacuvajProfesore(BazaProfesora.getInstance().getProfesori(), "profesor.txt");
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				Serialization.sacuvajPredmete(BazaPredmeta.getInstance().getSviPredmeti(), "predmet.txt");
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

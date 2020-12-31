@@ -49,11 +49,12 @@ public class Deserialization {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static void ucitasPredmete(String imeFajla) throws FileNotFoundException, IOException, ClassNotFoundException {
+	public static void ucitajPredmete(String imeFajla) throws FileNotFoundException, IOException, ClassNotFoundException {
 		File f=new File(imeFajla);
 		try {
 			ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(f)));
 			BazaPredmeta.getInstance().setSviPredmeti((ArrayList<Predmet>) ois.readObject());
+			BazaPredmeta.getInstance().setCurrentList(1);
 		}finally{
 			ois.close();
 			MainFrame.getInstance().azurirajPrikaz();
