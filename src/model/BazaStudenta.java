@@ -1,12 +1,17 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import model.Student.Status;
 
-public class BazaStudenta {
+public class BazaStudenta implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6403222893256316030L;
 	private static BazaStudenta instance = null;
 
 	public static BazaStudenta getInstance() {

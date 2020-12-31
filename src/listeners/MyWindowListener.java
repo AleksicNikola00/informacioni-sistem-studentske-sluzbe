@@ -2,11 +2,15 @@ package listeners;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
+import model.BazaStudenta;
+import serialization.Serialization;
 import view.MainFrame;
 
 public class MyWindowListener implements WindowListener {
@@ -45,6 +49,15 @@ private static MyWindowListener instance=null;
 		if (code != JOptionPane.YES_OPTION) {
 			frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		} else {
+			try {
+				Serialization.sacuvajStudente(BazaStudenta.getInstance().getStudenti(), "datoteka.txt");
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 			System.exit(0);
 		}
