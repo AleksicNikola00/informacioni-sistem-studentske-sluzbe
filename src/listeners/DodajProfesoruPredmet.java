@@ -10,7 +10,6 @@ import javax.swing.JOptionPane;
 
 import controller.ProfesoriController;
 import model.BazaPredmeta;
-import model.BazaProfesora;
 import model.Predmet;
 import model.Profesor;
 import view.PredmetePredajeProfesorPanel;
@@ -27,7 +26,7 @@ public class DodajProfesoruPredmet implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object[] buttons = {"Potvrdi","Odustani"};
 		int rowIndex = ProfesoriJTable.getInstance().getSelectedRow();
-		profesor = BazaProfesora.getInstance().getRow(rowIndex);
+		profesor = ProfesoriController.getInstance().getProfesor(rowIndex);
 		predmetiKojeProfesorPredaje = profesor.getPredmeti();
 		listaPredmeta = BazaPredmeta.getInstance().getSviPredmeti();
 		

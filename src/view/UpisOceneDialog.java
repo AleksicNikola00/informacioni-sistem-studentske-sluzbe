@@ -23,6 +23,7 @@ import controller.PredmetiController;
 import controller.StudentiController;
 import listeners.MyFocusListener;
 import listeners.SwitchTxtFieldListener;
+import model.Predmet;
 import model.Student;
 
 public class UpisOceneDialog extends JDialog {
@@ -156,10 +157,13 @@ public class UpisOceneDialog extends JDialog {
 					PredmetiController.getInstance().setMode(2);
 					PredmetiController.getInstance().izbrisiPredmet(row);
 					PredmetiController.getInstance().setMode(mode);
+					Predmet predmet = OceneController.getInstance().getPredmet();
 					
 					int rowIndex=StudentiJTable.getInstance().getSelectedRow();
 					student = StudentiController.getInstance().getStudent(rowIndex);
 					OceneController.getInstance().setStudent(student);
+					predmet.getStudentiKojiSuPoloziliPredmet().add(student);
+					predmet.getStudentiKojiNisuPoloziliPredmet().remove(student);
 					
 					if(ocenaComboBox.getSelectedItem().equals(6))
 						setOcena(6);
@@ -182,7 +186,7 @@ public class UpisOceneDialog extends JDialog {
 					OceneController.getInstance().dodajOcenu();
 					
 					StudentiIzmenaDialog.getInstance().refreshStudentPanel();
-					
+					MainFrame.getInstance().azurirajPrikaz();
 					dispose();
 					return;
 				}

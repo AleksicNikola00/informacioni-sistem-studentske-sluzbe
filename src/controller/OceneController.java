@@ -77,6 +77,7 @@ public class OceneController {
 		Ocena ocena=BazaOcena.getInstance().ponistiOcenu(student.getBrojIndexa(), sifraPredmeta);
 		BazaPredmeta.getInstance().dodajNepolozenimPredmetima(ocena.getPredmet());
 		ocena.getPredmet().getStudentiKojiSuPoloziliPredmet().remove(student);
+		ocena.getPredmet().getStudentiKojiNisuPoloziliPredmet().add(student);
 	}
 	
 }
