@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-
+import javax.swing.JScrollPane;
 
 import model.BazaProfesora;
 import model.Profesor;
@@ -43,8 +43,8 @@ public class DodajPredmetuProfesoraListener implements ActionListener {
 			return;
 		}
 			
-		
-		int result=JOptionPane.showOptionDialog(PredmetiDodajDialog.getInstance(), list, "Odaberi profesora",
+		JScrollPane scrollPane= new JScrollPane(list);
+		int result=JOptionPane.showOptionDialog(PredmetiDodajDialog.getInstance(), scrollPane, "Odaberi profesora",
                 JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
                 null, buttons, null);
 		if (result == JOptionPane.YES_OPTION && list.getSelectedValue()!=null){

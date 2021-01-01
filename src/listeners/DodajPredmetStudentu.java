@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 
 import controller.StudentiController;
 import model.BazaPredmeta;
@@ -48,7 +49,8 @@ public class DodajPredmetStudentu implements ActionListener {
 			return;
 		}
 		
-		int result=JOptionPane.showOptionDialog(StudentiIzmenaDialog.getInstance(), list, "Dodaj predmet",
+		JScrollPane scrollPane= new JScrollPane(list);
+		int result=JOptionPane.showOptionDialog(StudentiIzmenaDialog.getInstance(), scrollPane, "Dodaj predmet",
                 JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
                 null, buttons, null);
 		
