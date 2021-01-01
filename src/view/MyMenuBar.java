@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -9,6 +10,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 
 import listeners.AddActionListener;
@@ -81,8 +84,60 @@ public class MyMenuBar extends JMenuBar {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			//UIManager.put("OptionPane.minimumSize", new Dimension(300,200));
-			JOptionPane.showMessageDialog(MainFrame.getInstance(), message,"Help Dijalog",JOptionPane.INFORMATION_MESSAGE);
-			
+			JTextArea textArea = new JTextArea("Kreiranje novog entiteta:\n"
+					+ "Selektujte tab čiji entitet želite da dodate.\n"
+					+ "Da bi se otvorio dijalog potrebno je da uradite jednu od četiri stvari:\n        1. Kliknite na dugme Kreiraj (znak +) na traci sa alatkama\n"
+					+ "        2. Iz menija izaberite File -> New\n        3. Pomoću prečice CTRL + N\n        4. Pomoću prečice ALT + F + N\n"
+					+ "Prije dodavanja predmeta potrebno je dodati profesora, jer predmet bez profesora nije moguć.\n"
+					+ "Unesite validne podatke u polja po uzoru na predefinisane vrednosti, te pritisnite dugme Potvrdi.\n\n"
+					+ "Izmena entiteta:\n"
+					+ "Selektujte tab, a zatim i određeni entitet koji želite da izmenite.\n"
+					+ "Da bi se otvorio dijalog potrebno je da uradite jednu od četiri stvari:\n        1. Kliknite na dugme Izmeni (znak olovke) na traci sa alatkama\n"
+					+ "        2. Iz menija izaberite Edit -> Edit\n        3. Pomoću prečice CTRL + E\n        4. Pomoću prečice ALT + E + E\n"
+					+ "Izvršite neophodne izmene, te pritisnite dugme Potvrdi.\n\n" 
+					+ "Brisanje entiteta:\n"
+					+ "Selektujte tab, a zatim i određeni entitet koji želite da izbrišete.\n"
+					+ "Da bi se izbrisao entitet potrebno je da uradite jednu od četiri stvari:\n       1. Kliknite na dugme Obriši (znak kante) na traci sa alatkama\n"
+					+ "        2. Iz menija izaberite Edit -> Delete\n        3. Pomoću prečice CTRL + D\n        4. Pomoću prečice ALT + E + D\n"        
+					+ "Iskočiće dijalog za potvrdu brisanja na kom izaberete Da.\n\n"
+					+ "Dodavanje predmeta studentu:\n"
+					+ "Selektujte tab Studenti, zatim izaberite određenog studenta i otvorite dijalog za izmenu na neki od načina iz pomoći Izmena entiteta.\n"
+					+ "Kliknite na tab Nepoloženi, zatim na dugme Dodaj, izaberite predmet i kliknite Dodaj za potvrdu.\n\n"
+					+ "Uklanjanje predmeta studentu:\n"
+					+ "Selektujte tab Studenti, zatim izaberite određenog studenta i otvorite dijalog za izmenu na neki od načina iz pomoći Izmena entiteta.\n"
+					+ "Kliknite na tab Nepoloženi, odaberite predmet, zatim na dugme Ukloni, i kliknite Da za potvrdu.\n\n"
+					+ "Polaganje predmeta studenta:\n"
+					+ "Selektujte tab Studenti, zatim izaberite određenog studenta i otvorite dijalog za izmenu na neki od načina iz pomoći Izmena entiteta.\n"
+					+ "Kliknite na tab Nepoloženi, odaberite predmet, zatim na dugme Polaganje."
+					+ "Popunite dijalog validnim datumom i odgovarajućom ocenom, a zatim kliknite na dugme Potvrdi.\n\n"
+					+ "Poništavanje ocene studenta:\n"
+					+ "Selektujte tab Studenti, zatim izaberite određenog studenta i otvorite dijalog za izmenu na neki od načina iz pomoći Izmena entiteta.\n"
+					+ "Kliknite na tab Položeni, odaberite predmet, zatim na dugme Poništi ocenu, potvrdite klikom na Da.\n\n"
+					+ "Pretraga entiteta:\n"
+					+ "Pretraga se vrši unosom određenog teksta sadržanog u odgovarajućim atributima klase entiteta koja se pretražuje u tekstualno polje na desnoj strani trake sa alatkama."
+					+ "Svaki od parametara pretrage mora biti odvojen razmakom.\n"
+					+ "Pri pretrazi studenata može se pretraživati po prezimenu ili prezimenu i imenu ili prezimenu, imenu i broju indeksa.\n"
+					+ "Pri pretrazi profesora može se pretraživati po prezimenu ili prezimenu i imenu.\n"
+					+ "Pri pretrazi predmeta pretražuje se po nazivu predmeta.\n"
+					+ "Klikom na dugme Traži (znak lupe) pored tekstualnog polja, vrši se pretraživanje.\n\n"
+					+ "Sortiranje entiteta:\n"
+					+ "Selektujte tab sa glavnog prozora čije entitete želite da sortirate.\n"
+					+ "Klikom na atribute (prvi red svakog taba), možete da sortirate entitete po tim atributima u rastućem ili opadajućem redosledu.\n\n"
+					+ "Dodavanje i uklanjanje predmeta profesoru:\n"
+					+ "Selektujte tab Profesori, zatim izaberite određenog profesora i otvorite dijalog za izmenu na neki od načina iz pomoći Izmena entiteta.\n"
+					+ "Kliknite na tab Predmeti.\n"
+					+ "Pri dodavanju predmeta iz pomoći Dodavanje entiteta, ako je predmetu dodat profesor, taj predmet će se naći u tabeli predmeta tog profesora.\n"
+					+ "Kliknite na dugme Dodaj predmet.\n"
+					+ "Izborom odgovarajućeg predmeta za dodaju, i pritiskom na dugme Potvrdi, predmet se briše iz tabele prethodnog profesora, a dodaje u tabelu novog profesora."
+					
+					
+					
+					);
+			JScrollPane scrollPane = new JScrollPane(textArea);  
+			textArea.setLineWrap(true);  
+			textArea.setWrapStyleWord(true); 
+			scrollPane.setPreferredSize( new Dimension( 500, 500 ) );
+			JOptionPane.showMessageDialog(MainFrame.getInstance(), scrollPane,"Help Dijalog",JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 	
