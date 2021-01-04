@@ -129,7 +129,23 @@ public class MyMenuBar extends JMenuBar {
         
         jSearch= new JCheckBoxMenuItem("Pretraga");
         jSearch.setSelected(true);
+        jSearch.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				Toolbar.getInstance().changeSearch(false);
+			}
+		});
         jAdvancedSearch = new JCheckBoxMenuItem("Napredna pretraga");
+        jAdvancedSearch.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				Toolbar.getInstance().changeSearch(true);
+			}
+		});
         pretrazi.add(jSearch);
         pretrazi.add(jAdvancedSearch);
         ButtonGroup advancedSearch = new ButtonGroup();
