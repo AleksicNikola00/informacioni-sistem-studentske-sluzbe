@@ -9,7 +9,7 @@ import javax.swing.RowFilter;
 import javax.swing.RowFilter.ComparisonType;
 import javax.swing.table.TableRowSorter;
 
-
+import view.AbstractTableModelPredmeti;
 import view.AbstractTableModelStudenti;
 import view.MainFrame;
 import view.Toolbar;
@@ -17,15 +17,18 @@ import view.Toolbar;
 public class AdvancedSearchListener implements ActionListener {
 	
 	private boolean notFilter;
-	private boolean andOr;//true-and false-or
-	private int iterator;
-	private int filterNum;
-	
-	AbstractTableModelStudenti modelStudent;
-	TableRowSorter<AbstractTableModelStudenti> sorterStudenta;
-	ArrayList<RowFilter<Object, Object>>  Finalfilters;
-	RowFilter<Object,Object> serviceFilter;
-	String[] niz;
+    private boolean andOr;//true-and false-or
+    private int iterator;
+    private int filterNum;
+    private boolean mode;//true-student false-predmet
+
+    private AbstractTableModelStudenti modelStudent;
+    private TableRowSorter<AbstractTableModelStudenti> sorterStudenta;
+    private AbstractTableModelPredmeti modelPredmet;
+    private TableRowSorter<AbstractTableModelPredmeti> sorterPredmeta;
+    private ArrayList<RowFilter<Object, Object>>  Finalfilters;
+    private RowFilter<Object,Object> serviceFilter;
+    private String[] niz;
 	
 	//
 
@@ -36,6 +39,7 @@ public class AdvancedSearchListener implements ActionListener {
 		//https://stackoverflow.com/questions/5194948/java-swing-combine-rowfilter-andfilter-with-rowfilter-orfilter
 		if(MainFrame.getInstance().getSelectedIndex() == 0) 
 		{
+			mode = true;
 			filterNum=0;
 			modelStudent=(AbstractTableModelStudenti) MainFrame.getInstance().getTabelaStudenata().getModel();
 			sorterStudenta=new TableRowSorter<AbstractTableModelStudenti>(modelStudent);
@@ -66,6 +70,38 @@ public class AdvancedSearchListener implements ActionListener {
 			}
 			MainFrame.getInstance().getTabelaStudenata().setRowSorter(sorterStudenta);
 		}
+		else if(MainFrame.getInstance().getSelectedIndex() == 2) {
+            mode=false;
+            filterNum=0;
+            modelPredmet = (AbstractTableModelPredmeti) MainFrame.getInstance().getTabelaPredmeta().getModel();
+            sorterPredmeta=new TableRowSorter<AbstractTableModelPredmeti>(modelPredmet);
+            Finalfilters = new ArrayList<RowFilter<Object, Object>>();
+
+             niz=Toolbar.getInstance().getSearchBox().getText().split(" ");
+             System.out.println("Duzina niza "+niz.length);
+            iterator=findBracket(0)+1;
+            if(niz.length<3) {
+                sorterPredmeta.setRowFilter(null);
+            }else {
+
+                try {
+                    addToList();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Neispravan format upita! Obavezno unosenje razmaka izmedju elemenata!");
+                    sorterPredmeta.setRowFilter(null);
+                    return;
+                }
+
+            System.out.println("And or value " + andOr);
+            if(andOr)
+                 serviceFilter = RowFilter.andFilter(Finalfilters);
+            else
+                serviceFilter = RowFilter.orFilter(Finalfilters);
+            sorterPredmeta.setRowFilter(serviceFilter);
+
+            }
+            MainFrame.getInstance().getTabelaPredmeta().setRowSorter(sorterPredmeta);
+        }
 	}
 	
 	public void addToList() {
@@ -135,7 +171,7 @@ public class AdvancedSearchListener implements ActionListener {
 			
 			int column=getColumn(niz[i]);
 			ComparisonType cmpType=getComparisonType(niz[i+1]);
-			if(column<3) {//stringovi,regex-i
+			if((column<3 && mode) || ((column<2 || column==4)&&!mode)) {//stringovi,regex-i
 				String porediSa=urediString(niz[i+2]);
 				if(cmpType==ComparisonType.NOT_EQUAL) {
 					filters.add(RowFilter.notFilter(RowFilter.regexFilter(porediSa, column)));
@@ -145,7 +181,7 @@ public class AdvancedSearchListener implements ActionListener {
 				}
 				
 			}else {//int
-				if(column==3) {
+				if((column==3 && mode) || ((column>=2 && column<=3)&&!mode)) {
 					int broj=Integer.parseInt(niz[i+2]);
 					if(notFilter)
 						filters.add(RowFilter.notFilter(RowFilter.numberFilter(cmpType, broj, column)));
@@ -196,15 +232,17 @@ public class AdvancedSearchListener implements ActionListener {
 	public int getColumn(String string) {
 		
 		int column=-1;
-		if(string.equals("ime"))
+		if(string.equals("ime") || string.equals("naziv"))
 			column=1;
-		else if(string.equals("prezime"))
+		else if(string.equals("prezime") || string.equals("espb"))
 			column=2;
 		else if(string.equals("godina"))
 			column=3;
+		else if(string.equals("semestar"))
+            column=4;
 		else if(string.equals("prosek"))
 			column =5;
-		else if(string.equals("indeks"))
+		else if(string.equals("indeks") || string.equals("sifra"))
 			column=0;
 		
 		return column;
