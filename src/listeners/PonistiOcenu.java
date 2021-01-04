@@ -28,7 +28,7 @@ public class PonistiOcenu implements ActionListener {
 			//Ocena ocena=OceneJTable.getInstance();
 			OceneController.getInstance().ponistiOcenu(selectedRow);
 			StudentiIzmenaDialog.getInstance().refreshStudentPanel();
-			MainFrame.getInstance().azurirajPrikaz();
+			//MainFrame.getInstance().azurirajPrikaz();
 		}
 	}
 

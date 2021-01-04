@@ -190,7 +190,7 @@ public class UpisOceneDialog extends JDialog {
 					OceneController.getInstance().dodajOcenu();
 					
 					StudentiIzmenaDialog.getInstance().refreshStudentPanel();
-					MainFrame.getInstance().azurirajPrikaz();
+					//MainFrame.getInstance().azurirajPrikaz();
 					dispose();
 					return;
 				}

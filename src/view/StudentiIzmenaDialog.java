@@ -8,6 +8,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import listeners.WindowListenerSubject;
+
 
 
 public class StudentiIzmenaDialog extends JDialog {
@@ -43,6 +45,7 @@ public class StudentiIzmenaDialog extends JDialog {
 		setLocationRelativeTo(MainFrame.getInstance());
 			
 		inicijalizacija(screenWidth, screenHeight);
+		addWindowListener(new WindowListenerSubject());
 	}
 	
 	public void refreshStudentPanel() {

@@ -45,7 +45,10 @@ public class MyMenuBar extends JMenuBar {
     private JCheckBoxMenuItem jSrpski;
     private JCheckBoxMenuItem jEngleski;
 	//
-	
+    private JMenu pretrazi;
+	private JCheckBoxMenuItem jSearch;
+	private JCheckBoxMenuItem jAdvancedSearch;
+    
 	public MyMenuBar() {
 		file= new JMenu("Fajl");
 		file.setMnemonic(KeyEvent.VK_F);
@@ -114,11 +117,24 @@ public class MyMenuBar extends JMenuBar {
                 MainFrame.getInstance().changeLanguage();
             }
         });
+       
         jezici.add(jEngleski);
-
         ButtonGroup bg = new ButtonGroup();
         bg.add(jSrpski);
         bg.add(jEngleski);
+        //
+        pretrazi=new JMenu("Vrste pretrage");
+        add(pretrazi);
+        
+        
+        jSearch= new JCheckBoxMenuItem("Pretraga");
+        jSearch.setSelected(true);
+        jAdvancedSearch = new JCheckBoxMenuItem("Napredna pretraga");
+        pretrazi.add(jSearch);
+        pretrazi.add(jAdvancedSearch);
+        ButtonGroup advancedSearch = new ButtonGroup();
+        advancedSearch.add(jSearch);
+        advancedSearch.add(jAdvancedSearch);
 		
 	}
 	
@@ -135,6 +151,10 @@ public class MyMenuBar extends JMenuBar {
         jezici.setText(MainFrame.getInstance().getResourceBundle().getString("jezici"));
         jSrpski.setText(MainFrame.getInstance().getResourceBundle().getString("jSrpski"));
         jEngleski.setText(MainFrame.getInstance().getResourceBundle().getString("jEngleski"));
+        //
+        pretrazi.setText(MainFrame.getInstance().getResourceBundle().getString("pretrazi"));
+        jSearch.setText(MainFrame.getInstance().getResourceBundle().getString("jPretraga"));
+        jAdvancedSearch.setText(MainFrame.getInstance().getResourceBundle().getString("jNaprednaPretraga"));
     }
 	
 	
