@@ -34,8 +34,13 @@ public class PolozeniPredmetiPanel extends JPanel {
 	private JTable tabelaPolozenihPredmeta;
 	private JLabel lblProsecnaOcena;
 	private JLabel lblESPB;
+	private JButton btnPonistiOcenu;
 	private Student student;
 	
+	public JButton getBtnPonistiOcenu() {
+		return btnPonistiOcenu;
+	}
+
 	public static PolozeniPredmetiPanel getInstance() {
 		if(instance==null)
 			instance=new PolozeniPredmetiPanel();
@@ -66,8 +71,6 @@ public class PolozeniPredmetiPanel extends JPanel {
 		//BazaOcena.getInstance().setOcene(student.getSpisakPolozenihIspita());
 		//postavlja ocene trenutnog studenta
 		OceneController.getInstance().refreshOcene(student.getSpisakPolozenihIspita());
-		lblProsecnaOcena.setText("Prosečna ocena: "+student.getProsecnaOcena());
-		lblESPB.setText("Ukupno EPSB: "+student.getBrojESPB());
 		//
 		AbstractTableModelOcene model= (AbstractTableModelOcene)tabelaPolozenihPredmeta.getModel();
 		model.fireTableDataChanged();
@@ -82,7 +85,7 @@ public class PolozeniPredmetiPanel extends JPanel {
 		//panel na vrhu
 		JPanel btnPanel= new JPanel(new FlowLayout(FlowLayout.LEFT));
 		btnPanel.setPreferredSize(new Dimension((3*screenWidth/7),75));
-		JButton btnPonistiOcenu = new JButton("Poništi ocenu");
+		btnPonistiOcenu = new JButton("Poništi ocenu");
 		btnPonistiOcenu.addActionListener(new PonistiOcenu());
 		btnPanel.add(Box.createHorizontalStrut(screenWidth/50));
 		btnPanel.add(btnPonistiOcenu);
@@ -115,4 +118,5 @@ public class PolozeniPredmetiPanel extends JPanel {
 		add(labelPanel,BorderLayout.SOUTH);
 		
 	}
+
 }

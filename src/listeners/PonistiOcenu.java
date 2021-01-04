@@ -19,8 +19,9 @@ public class PonistiOcenu implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Odaberite ocenu!");
 			return;
 		}
-		int code = JOptionPane.showConfirmDialog(MainFrame.getInstance(), "Da li ste sigurni da želite da poništite ocenu?",
-				"Poništavnje ocene", JOptionPane.YES_NO_OPTION);
+		
+		int code = JOptionPane.showConfirmDialog(MainFrame.getInstance(), "Da li ste sigurni da želite poništiti ocenu?",
+					"Poništavanje ocene", JOptionPane.YES_NO_OPTION);
 		
 		if(code==JOptionPane.YES_OPTION) {
 			//Ocena ocena=OceneJTable.getInstance();

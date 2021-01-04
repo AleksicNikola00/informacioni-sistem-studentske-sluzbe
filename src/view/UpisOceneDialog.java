@@ -38,6 +38,10 @@ public class UpisOceneDialog extends JDialog {
 	private static ArrayList<JTextField> listaTxt;
 	private static JButton btnPotvrdi;
 	private static JButton btnOdustani;
+	private JLabel lblSifra;
+	private JLabel lblIme;
+	private JLabel lblOcena;
+	private JLabel lblDatum;
 	private JTextField txtSifra;
 	private JTextField txtIme;
 	private JTextField txtDatum;
@@ -100,7 +104,7 @@ public class UpisOceneDialog extends JDialog {
 		MyFocusListener proveraUnosa= new MyFocusListener(listaTxt, btnPotvrdi, btnOdustani);
 		
 		JPanel panSifra = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblSifra = new JLabel("Šifra*");
+		lblSifra = new JLabel("Šifra*");
 		lblSifra.setPreferredSize(dim);
 		txtSifra.setPreferredSize(dim);
 		txtSifra.setEnabled(false);
@@ -108,7 +112,7 @@ public class UpisOceneDialog extends JDialog {
 		panSifra.add(txtSifra);
 		
 		JPanel panIme = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblIme = new JLabel("Naziv*");
+		lblIme = new JLabel("Naziv*");
 		lblIme.setPreferredSize(dim);
 		txtIme.setPreferredSize(dim);
 		txtIme.setEnabled(false);
@@ -116,7 +120,7 @@ public class UpisOceneDialog extends JDialog {
 		panIme.add(txtIme);
 		
 		JPanel panOcena = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblOcena = new JLabel("Ocena*");
+		lblOcena = new JLabel("Ocena*");
 		lblOcena.setPreferredSize(dim);
 		panOcena.add(lblOcena);
 		Integer[] ocena = {6, 7, 8, 9, 10};
@@ -125,7 +129,7 @@ public class UpisOceneDialog extends JDialog {
 		panOcena.add(ocenaComboBox);
 		
 		JPanel panDatum = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblDatum = new JLabel("Datum*");
+		lblDatum = new JLabel("Datum*");
 		lblDatum.setPreferredSize(dim);
 		txtDatum.setPreferredSize(dim);
 		txtDatum.setName("datRodj");
@@ -207,11 +211,23 @@ public class UpisOceneDialog extends JDialog {
 	}
 	
 	public void refreshUpisOceneDialog(){
+		upisOceneChangeLanguage();
+		
 		int row = NepolozeniPredmetiPanel.getInstance().getTabelaNepolozenihPredmeta().getSelectedRow();
 		String value = (String)NepolozeniPredmetiPanel.getInstance().getTabelaNepolozenihPredmeta().getValueAt(row, 0);
 		txtSifra.setText(value);
 		
 		value = (String)NepolozeniPredmetiPanel.getInstance().getTabelaNepolozenihPredmeta().getValueAt(row, 1);
 		txtIme.setText(value);
+	}
+	
+	public void upisOceneChangeLanguage() {
+		setTitle(MainFrame.getInstance().getResourceBundle().getString("unosOceneTitle"));
+		btnPotvrdi.setText(MainFrame.getInstance().getResourceBundle().getString("potvrdi"));
+		btnOdustani.setText(MainFrame.getInstance().getResourceBundle().getString("odustani"));
+		lblSifra.setText(MainFrame.getInstance().getResourceBundle().getString("sifraZvezda"));
+		lblIme.setText(MainFrame.getInstance().getResourceBundle().getString("nazivZvezda"));
+		lblOcena.setText(MainFrame.getInstance().getResourceBundle().getString("ocenaZvezda"));
+		lblDatum.setText(MainFrame.getInstance().getResourceBundle().getString("datumZvezda"));
 	}
 }

@@ -18,8 +18,9 @@ public class EditActionListener implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		if(MainFrame.getInstance().getSelectedIndex() == 0) 
 		{
-			if(StudentiJTable.getInstance().getSelectedRow()==-1)
+			if(StudentiJTable.getInstance().getSelectedRow()==-1) {
 				JOptionPane.showMessageDialog(null, "Odaberite studenta!");
+			}
 			else {
 				StudentiIzmenaDialog.getInstance().refreshStudentPanel();
 				StudentiIzmenaDialog.getInstance().setVisible(true);
@@ -27,8 +28,10 @@ public class EditActionListener implements ActionListener {
 			}
 		}
 		else if(MainFrame.getInstance().getSelectedIndex() == 1) {
-			if(ProfesoriJTable.getInstance().getSelectedRow() == -1)
-				JOptionPane.showMessageDialog(null, "Odaberite profesora!");
+			if(ProfesoriJTable.getInstance().getSelectedRow() == -1){
+				String message = MainFrame.getInstance().getResourceBundle().getString("invalidProfesor");
+				JOptionPane.showMessageDialog(null, message);
+			}
 			else {
 				ProfesoriIzmenaDialog.getInstance().refreshProfesorPanel();
 				ProfesoriIzmenaDialog.getInstance().setVisible(true);
@@ -36,8 +39,9 @@ public class EditActionListener implements ActionListener {
 			}
 		}
 		else if(MainFrame.getInstance().getSelectedIndex() == 2) {
-			if(MainFrame.getInstance().getTabelaPredmeta().getSelectedRow()==-1)
+			if(MainFrame.getInstance().getTabelaPredmeta().getSelectedRow()==-1){
 				JOptionPane.showMessageDialog(null, "Odaberite predmet!");
+			}
 			else {
 				PredmetiDodajDialog.getInstance();
 				PredmetiDodajDialog.setMode(false);

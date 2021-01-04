@@ -24,7 +24,8 @@ public class UkloniPredmetStudentu implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Odaberite predmet!");
 			return;
 		}
-		int code = JOptionPane.showConfirmDialog(MainFrame.getInstance(), "Da li ste sigurni da želite da uklonite predmet?",
+		
+		int code = JOptionPane.showConfirmDialog(MainFrame.getInstance(), "Da li ste sigurni da želite ukloniti predmet?",
 				"Uklanjanje predmeta", JOptionPane.YES_NO_OPTION);
 		
 		if(code==JOptionPane.YES_OPTION) {

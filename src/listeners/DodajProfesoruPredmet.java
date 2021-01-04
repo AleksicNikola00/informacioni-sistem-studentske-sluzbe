@@ -7,11 +7,13 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 
 import controller.ProfesoriController;
 import model.BazaPredmeta;
 import model.Predmet;
 import model.Profesor;
+import view.MainFrame;
 import view.PredmetePredajeProfesorPanel;
 import view.ProfesoriIzmenaDialog;
 import view.ProfesoriJTable;
@@ -24,7 +26,7 @@ public class DodajProfesoruPredmet implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		Object[] buttons = {"Potvrdi","Odustani"};
+		Object[] buttons = {MainFrame.getInstance().getResourceBundle().getString("potvrdi"), MainFrame.getInstance().getResourceBundle().getString("odustani")};
 		int rowIndex = ProfesoriJTable.getInstance().getSelectedRow();
 		profesor = ProfesoriController.getInstance().getProfesor(rowIndex);
 		predmetiKojeProfesorPredaje = profesor.getPredmeti();
@@ -41,13 +43,14 @@ public class DodajProfesoruPredmet implements ActionListener {
 		}
 		
 		if(list.getModel().getSize()==0) {
-			JOptionPane.showMessageDialog(null, "Ni jedan predmet nije dostpuan!");
+			JOptionPane.showMessageDialog(null, MainFrame.getInstance().getResourceBundle().getString("emptyPredmeti"));
 			return;
 		}
 		
-		Object[] message = {"Predmeti:", list};
-		
-		int result = JOptionPane.showOptionDialog(ProfesoriIzmenaDialog.getInstance(), message, "Dodaj predmet",
+		JScrollPane scrollPane= new JScrollPane(list);
+		Object[] message = {MainFrame.getInstance().getResourceBundle().getString("predmetiDvotacka"), scrollPane};
+		String title = MainFrame.getInstance().getResourceBundle().getString("addPredmetTitle");
+		int result = JOptionPane.showOptionDialog(ProfesoriIzmenaDialog.getInstance(), message, title,
                 JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
                 null, buttons, null);
 		

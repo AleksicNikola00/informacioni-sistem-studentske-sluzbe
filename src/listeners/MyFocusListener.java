@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import controller.Validate;
+import view.MainFrame;
 
 public class MyFocusListener implements FocusListener {
 	
@@ -38,21 +39,24 @@ public class MyFocusListener implements FocusListener {
 		case "txtSifraPredmeta":
 			if(length==0  && arg0.getOppositeComponent()!=btnOdustani) {
 				txt.setText("");
-				JOptionPane.showMessageDialog(null, "Neispravna šifra predmeta!");
+				String message = MainFrame.getInstance().getResourceBundle().getString("neispravnaSifraPredmeta");
+				JOptionPane.showMessageDialog(null, message);
 				btnPotvrdi.setEnabled(false);
 			}
 			break;
 		case "txtNazivPredmeta":
 			if(length==0  && arg0.getOppositeComponent()!=btnOdustani) {
 				txt.setText("");
-				JOptionPane.showMessageDialog(null, "Neispravno ime predmeta!");
+				String message = MainFrame.getInstance().getResourceBundle().getString("neispravanNazivPredmeta");
+				JOptionPane.showMessageDialog(null, message);
 				btnPotvrdi.setEnabled(false);
 			}
 			break;
 		case "txtESPB":
 			if(!Validate.validateESPB(s, length)  && arg0.getOppositeComponent()!=btnOdustani) {
 				txt.setText("");
-				JOptionPane.showMessageDialog(null, "Neispravno uneti ESPB bodovi!");
+				String message = MainFrame.getInstance().getResourceBundle().getString("neispravniESPB");
+				JOptionPane.showMessageDialog(null, message);
 				btnPotvrdi.setEnabled(false);
 			}
 			break;
@@ -67,69 +71,79 @@ public class MyFocusListener implements FocusListener {
 		case "txtIme":
 			if(!Validate.validateString(s,length) && arg0.getOppositeComponent()!=btnOdustani) {
 				txt.setText("");
-				JOptionPane.showMessageDialog(null, "Neispravno ime!");
+				String message = MainFrame.getInstance().getResourceBundle().getString("neispravnoIme");
+				JOptionPane.showMessageDialog(null, message);
 				btnPotvrdi.setEnabled(false);
 			}
 			break;
 		case "txtPrz":
 			if(!Validate.validateString(s,length)  && arg0.getOppositeComponent()!=btnOdustani) {
 				txt.setText("");
-				JOptionPane.showMessageDialog(null, "Neispravno prezime!");
+				String message = MainFrame.getInstance().getResourceBundle().getString("neispravnoPrezime");
+				JOptionPane.showMessageDialog(null, message);
 			}
 			break;
 		case "datRodj":
 			if (!s.matches("([0-9]{2})\\.([0-9]{2})\\.([0-9]{4}).")  && arg0.getOppositeComponent()!=btnOdustani) {
 				txt.setText("");
-				JOptionPane.showMessageDialog(null, "Neispravan format datuma! \nVALIDAN FORMAT: (dd.mm.yyyy.)");
+				String message = MainFrame.getInstance().getResourceBundle().getString("neispravanDatum");
+				JOptionPane.showMessageDialog(null, message);
 				btnPotvrdi.setEnabled(false);
 			}
 			break;
 		case "txtAdresa":
 			if(length==0  && arg0.getOppositeComponent()!=btnOdustani) {
 				txt.setText("");
-				JOptionPane.showMessageDialog(null, "Neispravna adresa stanovanja!");
+				String message = MainFrame.getInstance().getResourceBundle().getString("neispravnaAdresaStanovanja");
+				JOptionPane.showMessageDialog(null, message);
 				btnPotvrdi.setEnabled(false);
 			}
 			break;
 		case "txtBroj":
 			if(!Validate.validatePhoneNumber(s, length)  && arg0.getOppositeComponent()!=btnOdustani) {
 				txt.setText("");
-				JOptionPane.showMessageDialog(null, "Neispravan broj telefona!");
+				String message = MainFrame.getInstance().getResourceBundle().getString("neispravanBrojTelefona");
+				JOptionPane.showMessageDialog(null, message);
 				btnPotvrdi.setEnabled(false);
 			}	
 			break;
 		case "txtEmail": //https://stackoverflow.com/questions/624581/what-is-the-best-java-email-address-validation-method  PREUZET REGGEX ODAVDE!
 			if (!s.matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$")) {
 				txt.setText("");
-				JOptionPane.showMessageDialog(null, "Neispravan format emaila!");
+				String message = MainFrame.getInstance().getResourceBundle().getString("neispravanEmail");
+				JOptionPane.showMessageDialog(null, message);
 				btnPotvrdi.setEnabled(false);
 			}
 			break;
 		case "txtIndex":
 			if(length==0  && arg0.getOppositeComponent()!=btnOdustani) {
 				txt.setText("");
-				JOptionPane.showMessageDialog(null, "Neispravan broj indexa!");
+				String message = MainFrame.getInstance().getResourceBundle().getString("neispravanBrojIndeksa");
+				JOptionPane.showMessageDialog(null, message);
 				btnPotvrdi.setEnabled(false);
 			}
 			break;
 		case "txtGodinaUpisa":
 			if(!Validate.validateYear(s, length)  && arg0.getOppositeComponent()!=btnOdustani) {
 				txt.setText("");
-				JOptionPane.showMessageDialog(null, "Neispravna godina upisa!");
+				String message = MainFrame.getInstance().getResourceBundle().getString("neispravnaGodinaUpisa");
+				JOptionPane.showMessageDialog(null, message);
 				btnPotvrdi.setEnabled(false);
 			}
 			break;
 		case "txtAdresaKancelarije":
 			if(length==0  && arg0.getOppositeComponent()!=btnOdustani) {
 				txt.setText("");
-				JOptionPane.showMessageDialog(null, "Neispravna adresa kancelarije!");
+				String message = MainFrame.getInstance().getResourceBundle().getString("neispravnaAdresaKancelarije");
+				JOptionPane.showMessageDialog(null, message);
 				btnPotvrdi.setEnabled(false);
 			}
 			break;
 		case "txtBrojLK":
 			if(!Validate.validateIDCardNumber(s, length)  && arg0.getOppositeComponent()!=btnOdustani) {
 				txt.setText("");
-				JOptionPane.showMessageDialog(null, "Neispravan broj lične karte!");
+				String message = MainFrame.getInstance().getResourceBundle().getString("neispravanBrojLK");
+				JOptionPane.showMessageDialog(null, message);
 				btnPotvrdi.setEnabled(false);
 			}
 			break;

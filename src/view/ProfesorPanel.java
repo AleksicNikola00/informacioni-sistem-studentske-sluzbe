@@ -33,6 +33,16 @@ public class ProfesorPanel extends JPanel {
 	private ArrayList<JTextField> listaTxt;
 	private JButton btnPotvrdi;
 	private JButton btnOdustani;
+	private JLabel lblIme;
+	private JLabel lblPrezime;
+	private JLabel lblDatumRodj;
+	private JLabel lblAdresaStan;
+	private JLabel lblBrojTel;
+	private JLabel lblEmail;
+	private JLabel lblAdresaKanc;
+	private JLabel lblBrojLK;
+	private JLabel lblZvanje;
+	private JLabel lblTitula;
 	private JComboBox<String> zvanjaComboBox;
 	private JComboBox<String> tituleComboBox;
 	private boolean mode;
@@ -107,7 +117,7 @@ public class ProfesorPanel extends JPanel {
 		
 		//ime
 		JPanel panIme = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblIme = new JLabel("Ime*");
+		lblIme = new JLabel("Ime*");
 		lblIme.setPreferredSize(dim);
 		JTextField txtIme = new JTextField();
 		txtIme.setPreferredSize(dim);
@@ -120,7 +130,7 @@ public class ProfesorPanel extends JPanel {
 		
 		//prezime
 		JPanel panPrezime = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblPrezime = new JLabel("Prezime*");
+		lblPrezime = new JLabel("Prezime*");
 		lblPrezime.setPreferredSize(dim);
 		JTextField txtPrezime = new JTextField();
 		txtPrezime.setPreferredSize(dim);
@@ -133,7 +143,7 @@ public class ProfesorPanel extends JPanel {
 		
 		//datum rodjenja
 		JPanel panDatumRodj = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblDatumRodj = new JLabel("Datum rođenja*");
+		lblDatumRodj = new JLabel("Datum rođenja*");
 		lblDatumRodj.setPreferredSize(dim);
 		JTextField txtDatumRodj = new JTextField();
 		txtDatumRodj.setPreferredSize(dim);
@@ -146,7 +156,7 @@ public class ProfesorPanel extends JPanel {
 		
 		//adresa stanovanja
 		JPanel panAdresaStan = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblAdresaStan = new JLabel("Adresa stanovanja*");
+		lblAdresaStan = new JLabel("Adresa stanovanja*");
 		lblAdresaStan.setPreferredSize(dim);
 		JTextField txtAdresaStan = new JTextField();
 		txtAdresaStan.setPreferredSize(dim);
@@ -159,7 +169,7 @@ public class ProfesorPanel extends JPanel {
 		
 		//broj telefona
 		JPanel panBrojTel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblBrojTel = new JLabel("Broj telefona*");
+		lblBrojTel = new JLabel("Broj telefona*");
 		lblBrojTel.setPreferredSize(dim);
 		JTextField txtBrojTel = new JTextField();
 		txtBrojTel.setPreferredSize(dim);
@@ -172,7 +182,7 @@ public class ProfesorPanel extends JPanel {
 		
 		// email
 		JPanel panEmail = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblEmail = new JLabel("E-mail adresa*");
+		lblEmail = new JLabel("E-mail adresa*");
 		lblEmail.setPreferredSize(dim);
 		JTextField txtEmail = new JTextField();
 		txtEmail.setPreferredSize(dim);
@@ -185,7 +195,7 @@ public class ProfesorPanel extends JPanel {
 		
 		// adresa kancelarije
 		JPanel panAdresaKanc = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblAdresaKanc = new JLabel("Adresa kancelarije*");
+		lblAdresaKanc = new JLabel("Adresa kancelarije*");
 		lblAdresaKanc.setPreferredSize(dim);
 		JTextField txtAdresaKanc = new JTextField();
 		txtAdresaKanc.setPreferredSize(dim);
@@ -198,7 +208,7 @@ public class ProfesorPanel extends JPanel {
 		
 		// broj lične karte
 		JPanel panBrojLK = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblBrojLK = new JLabel("Broj lične karte*");
+		lblBrojLK = new JLabel("Broj lične karte*");
 		lblBrojLK.setPreferredSize(dim);
 		JTextField txtBrojLK = new JTextField();
 		txtBrojLK.setPreferredSize(dim);
@@ -211,7 +221,7 @@ public class ProfesorPanel extends JPanel {
 		
 		//zvanje
 		JPanel panZvanje = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblZvanje = new JLabel("Zvanje*");
+		lblZvanje = new JLabel("Zvanje*");
 		lblZvanje.setPreferredSize(new Dimension(dim));
 		panZvanje.add(lblZvanje);
 		String[] zvanja = {"Docent", "Vanredni profesor", "Redovni profesor"};
@@ -221,7 +231,7 @@ public class ProfesorPanel extends JPanel {
 		
 		//titula
 		JPanel panTitula = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblTitula = new JLabel("Titula*");
+		lblTitula = new JLabel("Titula*");
 		lblTitula.setPreferredSize(new Dimension(dim));
 		panTitula.add(lblTitula);
 		String[] titule = {"Doktor nauka"};
@@ -254,7 +264,8 @@ public class ProfesorPanel extends JPanel {
 				if(proveraUnosa.validateTxtFields()) {
 					if(mode) {
 						if(!Validate.validateUniqueName(txtIme.getText(), txtPrezime.getText())) {
-							JOptionPane.showMessageDialog(null, "Uneli ste već postojećeg profesora!");
+							String message = MainFrame.getInstance().getResourceBundle().getString("postojeciProfesorError");
+							JOptionPane.showMessageDialog(null, message);
 							return;
 						}
 						ProfesoriController.getInstance().dodajProfesora();
@@ -265,8 +276,10 @@ public class ProfesorPanel extends JPanel {
 							ProfesoriController.getInstance().izmeniProfesora(ProfesoriJTable.getInstance().getSelectedRow());
 							ProfesoriIzmenaDialog.getInstance().dispose();
 						}
-						else
-							JOptionPane.showMessageDialog(null, "Uneli ste već postojećeg profesora!");
+						else {
+							String message = MainFrame.getInstance().getResourceBundle().getString("postojeciProfesorError");
+							JOptionPane.showMessageDialog(null, message);
+						}
 					}
 				}
 			}
@@ -303,6 +316,8 @@ public class ProfesorPanel extends JPanel {
 	}
 	
 	public  void refreshProfesorFirstPanel() {
+		profesorPanelChangeLanguage();
+		
 		int indexProfesora = ProfesoriJTable.getInstance().getSelectedRow();
 		Profesor profesor = ProfesoriController.getInstance().getProfesor(indexProfesora);
 		DateFormat dateFormat=new SimpleDateFormat("dd.mm.yyyy.");
@@ -315,9 +330,9 @@ public class ProfesorPanel extends JPanel {
 		listaTxt.get(6).setText(profesor.getAdresaKancelarije());
 		listaTxt.get(7).setText(profesor.getBrojLicneKarte());
 			
-		if(profesor.getZvanje().equals("Docent"))
+		if(profesor.getZvanje().equals(MainFrame.getInstance().getResourceBundle().getString("docent")))
 			zvanjaComboBox.setSelectedIndex(0);
-		else if(profesor.getZvanje().equals("Vanredni profesor"))
+		else if(profesor.getZvanje().equals(MainFrame.getInstance().getResourceBundle().getString("vanredni")))
 			zvanjaComboBox.setSelectedIndex(1);
 		else
 			zvanjaComboBox.setSelectedIndex(2);
@@ -335,4 +350,24 @@ public class ProfesorPanel extends JPanel {
 			return false;
 	}
 
+	public void profesorPanelChangeLanguage() {
+		btnPotvrdi.setText(MainFrame.getInstance().getResourceBundle().getString("potvrdi"));
+		btnOdustani.setText(MainFrame.getInstance().getResourceBundle().getString("odustani"));
+		lblIme.setText(MainFrame.getInstance().getResourceBundle().getString("imeZvezda"));
+		lblPrezime.setText(MainFrame.getInstance().getResourceBundle().getString("prezimeZvezda"));
+		lblDatumRodj.setText(MainFrame.getInstance().getResourceBundle().getString("datumRodjZvezda"));
+		lblAdresaStan.setText(MainFrame.getInstance().getResourceBundle().getString("adresaStanZvezda"));
+		lblBrojTel.setText(MainFrame.getInstance().getResourceBundle().getString("brojTelZvezda"));
+		lblEmail.setText(MainFrame.getInstance().getResourceBundle().getString("emailZvezda"));
+		lblAdresaKanc.setText(MainFrame.getInstance().getResourceBundle().getString("adresaKancZvezda"));
+		lblBrojLK.setText(MainFrame.getInstance().getResourceBundle().getString("brojLKZvezda"));
+		lblZvanje.setText(MainFrame.getInstance().getResourceBundle().getString("zvanjeZvezda"));
+		lblTitula.setText(MainFrame.getInstance().getResourceBundle().getString("titulaZvezda"));
+		zvanjaComboBox.removeAllItems();
+		zvanjaComboBox.addItem(MainFrame.getInstance().getResourceBundle().getString("docent"));
+		zvanjaComboBox.addItem(MainFrame.getInstance().getResourceBundle().getString("vanredni"));
+		zvanjaComboBox.addItem(MainFrame.getInstance().getResourceBundle().getString("redovni"));
+		tituleComboBox.removeAllItems();
+		tituleComboBox.addItem(MainFrame.getInstance().getResourceBundle().getString("doktorNauka"));
+	}
 }

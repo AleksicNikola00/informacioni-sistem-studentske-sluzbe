@@ -37,6 +37,10 @@ public class Toolbar extends JToolBar {
 	
 	
 	private JTextField searchBox;
+	private JButton btnOpen;
+	private JButton btnEdit;
+	private JButton btnDelete;
+	private JButton btnSearch;
 	
 	public JTextField getSearchBox() {
 		return searchBox;
@@ -54,7 +58,7 @@ public class Toolbar extends JToolBar {
 		
 		JPanel toolbarLeft = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		
-		JButton btnOpen = new JButton();
+		btnOpen = new JButton();
 		btnOpen.setToolTipText("Kreiraj");
 		btnOpen.setIcon(new ImageIcon("images/kreiraj.jpg"));
 		btnOpen.addActionListener(new AddActionListener());
@@ -62,7 +66,7 @@ public class Toolbar extends JToolBar {
 		
 		addSeparator();
 
-		JButton btnEdit = new JButton();
+		btnEdit = new JButton();
 		btnEdit.setToolTipText("Izmeni");
 		btnEdit.setIcon(new ImageIcon("images/izmeni.jpg"));
 		btnEdit.addActionListener(new EditActionListener());
@@ -71,7 +75,7 @@ public class Toolbar extends JToolBar {
 		
 		addSeparator();
 
-		JButton btnDelete = new JButton();
+		btnDelete = new JButton();
 		btnDelete.setToolTipText("Obriši");
 		btnDelete.setIcon(new ImageIcon("images/obrisi.jpg"));
 		btnDelete.addActionListener(new DeleteActionListener());
@@ -86,7 +90,7 @@ public class Toolbar extends JToolBar {
         searchBox.setPreferredSize(dim);
         searchBox.setToolTipText("Unesi tekst");
 		
-        JButton btnSearch = new JButton();
+        btnSearch = new JButton();
         btnSearch.addActionListener(new SearchActionListener());
 		btnSearch.setToolTipText("Traži");
 		btnSearch.setIcon(new ImageIcon("images/pretrazi.jpg"));
@@ -98,4 +102,11 @@ public class Toolbar extends JToolBar {
 		
 	}
 
+	public void toolbarChangeLanguage() {
+		btnOpen.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("fNew"));
+		btnEdit.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("edit"));
+		btnDelete.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("eDelete"));
+		searchBox.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("searchBox"));
+		btnSearch.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("btnSearch"));
+	}
 }

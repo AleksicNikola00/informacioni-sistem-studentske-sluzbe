@@ -3,7 +3,9 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
- 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -14,6 +16,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import controller.PredmetiController;
+import controller.ProfesoriController;
 import listeners.MyWindowListener;
  
 public class MainFrame extends JFrame {
@@ -22,19 +25,27 @@ public class MainFrame extends JFrame {
 	
 	private static MainFrame instance = null;
 
+	private ResourceBundle resourceBundle;
+	
 	public static MainFrame getInstance() {
 		if (instance == null) {
 			instance = new MainFrame();
 		}
 		return instance;
 	}
-	
+
+	private MyMenuBar myMenuBar;
+	private Toolbar toolbar;
+	private MyStatusBar myStatusBar;
+	private JTabbedPane panEntities;
 	private JTable tabelaProfesora;
 	private JTable tabelaStudenata;
 	private JTable tabelaPredmeta;
 	private int selectedIndex;
 	
 	private MainFrame() {
+		Locale.setDefault(new Locale("sr", "RS"));
+		resourceBundle = ResourceBundle.getBundle("gui.MessageResources.MessageResources", Locale.getDefault());
 		UIManager.put("OptionPane.yesButtonText", "Da");
 		UIManager.put("OptionPane.noButtonText", "Ne");
 		Toolkit kit = Toolkit.getDefaultToolkit();
@@ -50,6 +61,10 @@ public class MainFrame extends JFrame {
 		inicijalizacija();
 	}
 	
+	public ResourceBundle getResourceBundle() {
+		return resourceBundle;
+	}
+
 	public JTable getTabelaStudenata() {
 		return tabelaStudenata;
 	}
@@ -76,10 +91,10 @@ public class MainFrame extends JFrame {
 	}
 	
 	private void inicijalizacija() {
-		MyMenuBar myMenuBar=new MyMenuBar();
+		myMenuBar=new MyMenuBar();
 		this.setJMenuBar(myMenuBar);
 		
-		Toolbar toolbar = Toolbar.getInstance();
+		toolbar = Toolbar.getInstance();
 		add(toolbar, BorderLayout.NORTH);
 		
 		JPanel firstPan = new JPanel();
@@ -88,7 +103,7 @@ public class MainFrame extends JFrame {
 		secondPan.setLayout(new BorderLayout());
 		firstPan.setLayout(new BorderLayout());
 		thirdPan.setLayout(new BorderLayout());
-		JTabbedPane panEntities = new JTabbedPane();
+		panEntities = new JTabbedPane();
 		panEntities.add("Studenti", firstPan);
 		panEntities.add("Profesori", secondPan);
 		panEntities.add("Predmeti", thirdPan);
@@ -111,7 +126,7 @@ public class MainFrame extends JFrame {
 		});
 		
 		addWindowListener(MyWindowListener.getInstance());
-		MyStatusBar myStatusBar= new MyStatusBar();
+		myStatusBar= new MyStatusBar();
 		this.add(myStatusBar,BorderLayout.SOUTH);
 		
 		tabelaProfesora = ProfesoriJTable.getInstance();
@@ -137,5 +152,21 @@ public class MainFrame extends JFrame {
 	public int getSelectedIndex() {
 		return selectedIndex;
 	}
-
+	
+	public void changeLanguage() {
+		resourceBundle = ResourceBundle.getBundle("gui.MessageResources.MessageResources", Locale.getDefault());
+		setTitle(MainFrame.getInstance().getResourceBundle().getString("naslov"));
+		UIManager.put("OptionPane.yesButtonText", resourceBundle.getObject("yesOption"));
+		UIManager.put("OptionPane.noButtonText", resourceBundle.getObject("noOption"));
+		panEntities.setTitleAt(0, MainFrame.getInstance().getResourceBundle().getString("studenti"));
+		panEntities.setTitleAt(1, MainFrame.getInstance().getResourceBundle().getString("profesori"));
+		panEntities.setTitleAt(2, MainFrame.getInstance().getResourceBundle().getString("predmeti"));
+		
+		toolbar.toolbarChangeLanguage();
+		NepolozeniPredmetiPanel.getInstance().nepolozeniPredmetiChangeLanguage();
+		PredmetePredajeProfesorPanel.getInstance().predmetePredajeProfesorChangeLanguage();
+		ProfesoriDodajDialog.getInstance().profesoriDodajDialogChangeLanguage();
+		ProfesoriController.getInstance().bazaProfesoraChangeLanguage();
+		PredmetiController.getInstance().bazaPredmetaChangeLanguage();
+	}
 }

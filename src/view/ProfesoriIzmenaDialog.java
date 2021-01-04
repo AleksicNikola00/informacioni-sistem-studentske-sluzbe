@@ -17,6 +17,7 @@ public class ProfesoriIzmenaDialog extends JDialog {
 	private static ProfesoriIzmenaDialog instance=null;
 	private static ProfesorPanel firstPan;
 	private static PredmetePredajeProfesorPanel secondPan;
+	private JTabbedPane panEntities;
 	
 	public static ProfesoriIzmenaDialog getInstance() {
 		if(instance==null)
@@ -42,6 +43,9 @@ public class ProfesoriIzmenaDialog extends JDialog {
 	}
 	
 	public void refreshProfesorPanel() {
+		panEntities.setTitleAt(0, MainFrame.getInstance().getResourceBundle().getString("info"));
+		panEntities.setTitleAt(1, MainFrame.getInstance().getResourceBundle().getString("predmeti"));
+		setTitle(MainFrame.getInstance().getResourceBundle().getString("izmeniProfesora"));
 		firstPan.refreshProfesorFirstPanel();
 		secondPan.refreshPanel();
 	}
@@ -50,10 +54,11 @@ public class ProfesoriIzmenaDialog extends JDialog {
 		firstPan = new ProfesorPanel(false);
 		secondPan = PredmetePredajeProfesorPanel.getInstance();
 		
-		JTabbedPane panEntities = new JTabbedPane();
+		panEntities = new JTabbedPane();
 		panEntities.add("Info", firstPan);
 		panEntities.add("Predmeti", secondPan);
 		
 		add(panEntities, BorderLayout.CENTER);
 	}
+	
 }

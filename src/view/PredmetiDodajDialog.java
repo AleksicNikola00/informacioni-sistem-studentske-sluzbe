@@ -42,6 +42,12 @@ public class PredmetiDodajDialog extends JDialog{
 	private static JComboBox<String> semestarComboBox;
 	private static JTextField txtProfesor;
 	private static boolean mode;//true-dodaj false-izmeni
+	private JLabel lblSifra;
+	private JLabel lblIme;
+	private JLabel lblGodinaStudija;
+	private JLabel lblSemestar;
+	private JLabel lblESPB;
+	private JLabel lblProfesor;
 	
 	public static PredmetiDodajDialog getInstance() {
 		if(instance==null)
@@ -107,7 +113,7 @@ public class PredmetiDodajDialog extends JDialog{
 		
 		//sifra predmeta
 		JPanel panSifra = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblSifra = new JLabel("Šifra*");
+		lblSifra = new JLabel("Šifra*");
 		lblSifra.setPreferredSize(dim);
 		JTextField txtSifra = new JTextField();
 		txtSifra.setPreferredSize(dim);
@@ -121,7 +127,7 @@ public class PredmetiDodajDialog extends JDialog{
 		
 		//nazivPredmeta
 		JPanel panIme = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblIme = new JLabel("Naziv*");
+		lblIme = new JLabel("Naziv*");
 		lblIme.setPreferredSize(dim);
 		JTextField txtIme = new JTextField();
 		txtIme.setPreferredSize(dim);
@@ -135,7 +141,7 @@ public class PredmetiDodajDialog extends JDialog{
 		
 		//godinaStudija
 		JPanel panGodinaStudija=new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblGodinaStudija = new JLabel("Godina*");
+		lblGodinaStudija = new JLabel("Godina*");
 		lblGodinaStudija.setPreferredSize(dim);
 		panGodinaStudija.add(lblGodinaStudija);
 		Integer[] godinaStudija= {1,2,3,4,5,6};
@@ -145,7 +151,7 @@ public class PredmetiDodajDialog extends JDialog{
 		
 		//semestar
 		JPanel panSemestar= new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblSemestar = new JLabel("Semestar*");
+		lblSemestar = new JLabel("Semestar*");
 		lblSemestar.setPreferredSize(dim);
 		panSemestar.add(lblSemestar);
 		String[] semestar= {"letnji","zimski"};
@@ -155,7 +161,7 @@ public class PredmetiDodajDialog extends JDialog{
 		
 		//ESPB
 		JPanel panESPB= new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblESPB = new JLabel("ESPB*");
+		lblESPB = new JLabel("ESPB*");
 		lblESPB.setPreferredSize(dim);
 		JTextField txtESPB=new JTextField();
 		txtESPB.setPreferredSize(dim);
@@ -169,7 +175,7 @@ public class PredmetiDodajDialog extends JDialog{
 		
 		//PROFSEOR
 		JPanel panProfesor= new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblProfesor = new JLabel("Profesor*");
+		lblProfesor = new JLabel("Profesor*");
 		lblProfesor.setPreferredSize(dim);
 		txtProfesor=new JTextField();
 		txtProfesor.setPreferredSize(dimProfesor);
@@ -192,14 +198,15 @@ public class PredmetiDodajDialog extends JDialog{
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
-            	Object[] buttons= {"Potvrdi","Odustani"};
+            	Object[] buttons= {MainFrame.getInstance().getResourceBundle().getString("potvrdi"), MainFrame.getInstance().getResourceBundle().getString("odustani")};
             	JPanel panText = new JPanel();
-            	JLabel label = new JLabel("Da li ste sigurni?");
+            	JLabel label = new JLabel(MainFrame.getInstance().getResourceBundle().getString("jesiSiguran"));
             	panText.add(Box.createHorizontalGlue());
             	panText.add(label);
             	panText.add(Box.createHorizontalGlue());
+            	String title = MainFrame.getInstance().getResourceBundle().getString("ukloniProfesoraTitle");
             	int dijalog = JOptionPane.showOptionDialog(MainFrame.getInstance(), panText,
-        				"Ukloni Profesora", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
+        				title, JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
                         null, buttons, null);
             	
             	if(dijalog == JOptionPane.YES_OPTION) {
@@ -236,14 +243,14 @@ public class PredmetiDodajDialog extends JDialog{
 						if(proveraUnosa.validateTxtFields()) {
 							if(getMode()) {
 								if(!Validate.validateUniqueSifra(txtSifra.getText())) {
-									JOptionPane.showMessageDialog(null, "Uneli ste već postojeću šifru predmeta!");
+									JOptionPane.showMessageDialog(null, "Uneli ste postojeću šifru!");
 									return;
 								}
 									PredmetiController.getInstance().dodajPredmet();
 							}
 							else {
 								if(!isSifraSame() && !Validate.validateUniqueSifra(txtSifra.getText())) {
-									JOptionPane.showMessageDialog(null, "Uneli ste već postojeću šifru predmeta!");
+									JOptionPane.showMessageDialog(null, "Uneli ste postojeću šifru!");
 									return;
 								}
 								PredmetiController.getInstance().izmeniPredmet(MainFrame.getInstance().getTabelaPredmeta().getSelectedRow());
@@ -252,7 +259,7 @@ public class PredmetiDodajDialog extends JDialog{
 							return;
 						}else {
 							if(txtProfesor.getText().equals("")) {
-								JOptionPane.showMessageDialog(null, "Odaberite predmetnog profesora!");
+								JOptionPane.showMessageDialog(null, "Odaberite profesora!");
 								btnPotvrdi.setEnabled(false);
 							}
 						}
@@ -294,7 +301,7 @@ public class PredmetiDodajDialog extends JDialog{
 		{
 			int indexPredmeta=MainFrame.getInstance().getTabelaPredmeta().getSelectedRow();
 			Predmet predmet=PredmetiController.getInstance().getPredmet(indexPredmeta);
-			setTitle("Izmeni predmet");
+			setTitle("Izmen predmet");
 			listaTxt.get(0).setText(predmet.getSifraPredmeta());
 			listaTxt.get(1).setText(predmet.getNazivPredmeta());
 			listaTxt.get(2).setText(Integer.toString(predmet.getBrojESPB()));
@@ -302,7 +309,7 @@ public class PredmetiDodajDialog extends JDialog{
 			godinaStudijaComboBox.setSelectedIndex(predmet.getGodinaStudija()-1);
 			btnPlus.setEnabled(false);
 			btnMinus.setEnabled(true);
-			if(predmet.getSemestar().equals("letnji"))
+			if(predmet.getSemestar().equals(MainFrame.getInstance().getResourceBundle().getString("letnji")))
 				semestarComboBox.setSelectedIndex(0);//letnji
 			else
 				semestarComboBox.setSelectedIndex(1);

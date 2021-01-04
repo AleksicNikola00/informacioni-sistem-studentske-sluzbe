@@ -18,6 +18,7 @@ public class MyStatusBar extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private JLabel labela1;
 	private JLabel labela2=new JLabel();
 	
 	MyStatusBar(){
@@ -26,7 +27,7 @@ public class MyStatusBar extends JPanel{
 		clock();
 		
 		
-		JLabel labela1=new JLabel("Studentska služba");
+		labela1=new JLabel("Studentska služba");
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		setLayout(new BorderLayout());
 		add(labela1,BorderLayout.WEST);
@@ -52,4 +53,5 @@ public class MyStatusBar extends JPanel{
 		};
 		clock.start();
 	}
+	
 }

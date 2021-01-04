@@ -28,7 +28,7 @@ public class DodajPredmetStudentu implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		Object[] buttons= {"Dodaj","Odustani"};
+		Object[] buttons= {"Dodaj", "Odustani"};
 		int rowIndex=StudentiJTable.getInstance().getSelectedRow();
 		//student=BazaStudenta.getInstance().getRow(rowIndex);
 		student=StudentiController.getInstance().getStudent(rowIndex);
@@ -45,12 +45,12 @@ public class DodajPredmetStudentu implements ActionListener {
 			}
 		}
 		if(list.getModel().getSize()==0) {
-			JOptionPane.showMessageDialog(null, "Ni jedan predmet nije dostpuan!");
+			JOptionPane.showMessageDialog(null, "Nema dostupnih predmeta!");
 			return;
 		}
 		
 		JScrollPane scrollPane= new JScrollPane(list);
-		int result=JOptionPane.showOptionDialog(StudentiIzmenaDialog.getInstance(), scrollPane, "Dodaj predmet",
+		int result=JOptionPane.showOptionDialog(StudentiIzmenaDialog.getInstance(), scrollPane, "Dodavanje predmeta",
                 JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
                 null, buttons, null);
 		

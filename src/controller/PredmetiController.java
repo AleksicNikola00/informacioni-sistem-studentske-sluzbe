@@ -130,4 +130,22 @@ private static PredmetiController instance = null;
 			 imePrezime=txtFieldArray.get(3).getText().split(" ");
 			 profesor=BazaProfesora.getInstance().getProfesor(imePrezime[0], imePrezime[1]);
 	}
+	
+	public void bazaPredmetaChangeLanguage() {
+		MainFrame.getInstance().getTabelaPredmeta().getColumnModel().getColumn(0).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("sifraPredmeta"));
+		MainFrame.getInstance().getTabelaPredmeta().getColumnModel().getColumn(1).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("nazivPredmeta"));
+		MainFrame.getInstance().getTabelaPredmeta().getColumnModel().getColumn(2).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("espb"));
+		MainFrame.getInstance().getTabelaPredmeta().getColumnModel().getColumn(3).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("godina"));
+		MainFrame.getInstance().getTabelaPredmeta().getColumnModel().getColumn(4).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("semestar"));
+		NepolozeniPredmetiPanel.getInstance().getTabelaNepolozenihPredmeta().getColumnModel().getColumn(0).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("sifraPredmeta"));
+		NepolozeniPredmetiPanel.getInstance().getTabelaNepolozenihPredmeta().getColumnModel().getColumn(1).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("nazivPredmeta"));
+		NepolozeniPredmetiPanel.getInstance().getTabelaNepolozenihPredmeta().getColumnModel().getColumn(2).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("espb"));
+		NepolozeniPredmetiPanel.getInstance().getTabelaNepolozenihPredmeta().getColumnModel().getColumn(3).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("godina"));
+		NepolozeniPredmetiPanel.getInstance().getTabelaNepolozenihPredmeta().getColumnModel().getColumn(4).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("semestar"));
+		PredmetePredajeProfesorPanel.getInstance().getPredmetiKojeProfesorPredaje().getColumnModel().getColumn(0).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("sifraPredmeta"));
+		PredmetePredajeProfesorPanel.getInstance().getPredmetiKojeProfesorPredaje().getColumnModel().getColumn(1).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("nazivPredmeta"));
+		PredmetePredajeProfesorPanel.getInstance().getPredmetiKojeProfesorPredaje().getColumnModel().getColumn(2).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("espb"));
+		PredmetePredajeProfesorPanel.getInstance().getPredmetiKojeProfesorPredaje().getColumnModel().getColumn(3).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("godina"));
+		PredmetePredajeProfesorPanel.getInstance().getPredmetiKojeProfesorPredaje().getColumnModel().getColumn(4).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("semestar"));	
+	}
 }

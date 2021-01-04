@@ -84,5 +84,4 @@ public class BazaOcena {
 		}
 		return null;
 	}
-	
 }

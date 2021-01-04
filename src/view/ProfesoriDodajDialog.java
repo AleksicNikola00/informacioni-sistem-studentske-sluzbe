@@ -45,4 +45,8 @@ public class ProfesoriDodajDialog extends JDialog{
 		add(panelDodaj);
 	}
 	
+	public void profesoriDodajDialogChangeLanguage() {
+		setTitle(MainFrame.getInstance().getResourceBundle().getString("dodajProfesora"));
+		panelDodaj.profesorPanelChangeLanguage();
+	}
 }

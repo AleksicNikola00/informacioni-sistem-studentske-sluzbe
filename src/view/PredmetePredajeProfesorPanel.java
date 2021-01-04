@@ -24,6 +24,8 @@ public class PredmetePredajeProfesorPanel extends JPanel {
 
 	private static PredmetePredajeProfesorPanel instance=null;
 	private JTable predmetiKojeProfesorPredaje;
+	private JButton btnDodaj;
+	private JButton btnObrisi;
 	
 	public JTable getPredmetiKojeProfesorPredaje() {
 		return predmetiKojeProfesorPredaje;
@@ -47,9 +49,9 @@ public class PredmetePredajeProfesorPanel extends JPanel {
 	private void inicijalizacija(int screenWidth, int screenHeight) {
 		JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		btnPanel.setPreferredSize(new Dimension((3*screenWidth/7),75));
-		JButton btnDodaj = new JButton("Dodaj predmet");
+		btnDodaj = new JButton("Dodaj predmet");
 		btnDodaj.addActionListener(new DodajProfesoruPredmet());
-		JButton btnObrisi = new JButton("Ukloni predmet");
+		btnObrisi = new JButton("Ukloni predmet");
 		btnObrisi.addActionListener(new UkloniPredmetProfesoru());
 		btnPanel.add(Box.createHorizontalStrut(screenWidth/50));
 		btnPanel.add(btnDodaj);
@@ -70,5 +72,10 @@ public class PredmetePredajeProfesorPanel extends JPanel {
 		AbstractTableModelPredmeti model = (AbstractTableModelPredmeti)predmetiKojeProfesorPredaje.getModel();
 		model.fireTableDataChanged();
 		validate();
+	}
+	
+	public void predmetePredajeProfesorChangeLanguage() {
+		btnDodaj.setText(MainFrame.getInstance().getResourceBundle().getString("dodajPredmet"));
+		btnObrisi.setText(MainFrame.getInstance().getResourceBundle().getString("ukloniPredmet"));
 	}
 }

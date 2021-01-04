@@ -27,7 +27,7 @@ public class DodajPredmetuProfesoraListener implements ActionListener {
 		// TODO Auto-generated method stub
 		
 			
-		Object[] buttons= {"Potvrdi","Odustani"};
+		Object[] buttons= {"Potvrdi", "Odustani"};
 		ArrayList<Profesor> listaProfesora=BazaProfesora.getInstance().getProfesori();
 		DefaultListModel<String> dlm=new DefaultListModel<String>();
 		JList<String> list =new JList<String>(dlm);
@@ -39,12 +39,12 @@ public class DodajPredmetuProfesoraListener implements ActionListener {
 		
 		
 		if(list.getModel().getSize()==0) {
-			JOptionPane.showMessageDialog(null, "Unesite prvo profesore, spisak profesora je prazan!");
+			JOptionPane.showMessageDialog(null, "Nema dostupnih profesora!");
 			return;
 		}
 			
 		JScrollPane scrollPane= new JScrollPane(list);
-		int result=JOptionPane.showOptionDialog(PredmetiDodajDialog.getInstance(), scrollPane, "Odaberi profesora",
+		int result=JOptionPane.showOptionDialog(PredmetiDodajDialog.getInstance(), scrollPane, "Odaberite profesora!",
                 JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
                 null, buttons, null);
 		if (result == JOptionPane.YES_OPTION && list.getSelectedValue()!=null){

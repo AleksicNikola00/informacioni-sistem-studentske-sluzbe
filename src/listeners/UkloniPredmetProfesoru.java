@@ -16,9 +16,9 @@ public class UkloniPredmetProfesoru implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Odaberite predmet!");
 			return;
 		}
-		else
-			JOptionPane.showMessageDialog(null, "Predmet mora imati profesora, selektujte drugog profesora i dodajte mu predmet!");
-
+		else {
+			JOptionPane.showMessageDialog(null, "Predmet mora imati profesora, izaberite drugog profesora i dodajte mu predmet!");
+		}
 		//int code = JOptionPane.showConfirmDialog(MainFrame.getInstance(), "Da li ste sigurni da želite da uklonite predmet?",
 		//		"Ukloni predmet", JOptionPane.YES_NO_OPTION);
 		

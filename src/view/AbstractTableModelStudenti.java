@@ -10,7 +10,7 @@ public class AbstractTableModelStudenti extends AbstractTableModel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	@Override
 	public int getColumnCount() {
 		return BazaStudenta.getInstance().getColumnCount();

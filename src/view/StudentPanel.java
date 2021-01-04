@@ -40,6 +40,16 @@ public class StudentPanel extends JPanel {
 	private  ArrayList<JTextField> listaTxt;
 	private  JButton btnPotvrdi;//btn potvrde koji enable/disable u zavisnosti od validnosti txt polja
 	private  JButton btnOdustani;
+	private JLabel lblIme;
+	private JLabel lblPrezime;
+	private JLabel lblDatumRodj;
+	private JLabel lblAdresaStan;
+	private JLabel lblBrojTel;
+	private JLabel lblEmail;
+	private JLabel lblBrIndexa;
+	private JLabel lblGodUpisa;
+	private JLabel lblTrenutnaGodinaStudija;
+	private JLabel lblNacinFinansiranja;
 	private  JComboBox<String> trenutnaGodinaComboBox;//combo boxovi izdvojeni da bismo mogli da im pristupamo iz kontrolera
 	private  JComboBox<String> nacinFinasiranjaComboBox;
 	private boolean mode;//true-dodaj false-edituj
@@ -106,7 +116,7 @@ public class StudentPanel extends JPanel {
 		MyFocusListener proveraUnosa= new MyFocusListener(listaTxt,btnPotvrdi,btnOdustani);
 		//ime
 				JPanel panIme = new JPanel(new FlowLayout(FlowLayout.LEFT));
-				JLabel lblIme = new JLabel("Ime*");
+				lblIme = new JLabel("Ime*");
 				lblIme.setPreferredSize(dim);
 				JTextField txtIme = new JTextField();
 				txtIme.setPreferredSize(dim);
@@ -121,7 +131,7 @@ public class StudentPanel extends JPanel {
 			
 			//prz
 				JPanel panPrezime = new JPanel(new FlowLayout(FlowLayout.LEFT));
-				JLabel lblPrezime = new JLabel("Prezime*");
+				lblPrezime = new JLabel("Prezime*");
 				lblPrezime.setPreferredSize(dim);
 				JTextField txtPrezime = new JTextField();
 				txtPrezime.setPreferredSize(dim);
@@ -134,7 +144,7 @@ public class StudentPanel extends JPanel {
 		
 				//datRodj
 				JPanel panDatumRodj = new JPanel(new FlowLayout(FlowLayout.LEFT));
-				JLabel lblDatumRodj = new JLabel("Datum rođenja*");
+				lblDatumRodj = new JLabel("Datum rođenja*");
 				lblDatumRodj.setPreferredSize(dim);
 				JTextField txtDatumRodj = new JTextField();
 				txtDatumRodj.setPreferredSize(dim);
@@ -147,7 +157,7 @@ public class StudentPanel extends JPanel {
 				
 				//adresa
 				JPanel panAdresaStan = new JPanel(new FlowLayout(FlowLayout.LEFT));
-				JLabel lblAdresaStan = new JLabel("Adresa stanovanja*");
+				lblAdresaStan = new JLabel("Adresa stanovanja*");
 				lblAdresaStan.setPreferredSize(dim);
 				JTextField txtAdresaStan = new JTextField();
 				txtAdresaStan.setPreferredSize(dim);
@@ -160,7 +170,7 @@ public class StudentPanel extends JPanel {
 				
 				//telefon
 				JPanel panBrojTel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-				JLabel lblBrojTel = new JLabel("Broj telefona*");
+				lblBrojTel = new JLabel("Broj telefona*");
 				lblBrojTel.setPreferredSize(dim);
 				JTextField txtBrojTel = new JTextField();
 				txtBrojTel.setPreferredSize(dim);
@@ -173,7 +183,7 @@ public class StudentPanel extends JPanel {
 				
 				//email
 				JPanel panEmail = new JPanel(new FlowLayout(FlowLayout.LEFT));
-				JLabel lblEmail = new JLabel("E-mail adresa*");
+				lblEmail = new JLabel("E-mail adresa*");
 				lblEmail.setPreferredSize(dim);
 				JTextField txtEmail = new JTextField();
 				txtEmail.setPreferredSize(dim);
@@ -186,7 +196,7 @@ public class StudentPanel extends JPanel {
 				
 				//brIndexa
 				JPanel panBrIndexa = new JPanel(new FlowLayout(FlowLayout.LEFT));
-				JLabel lblBrIndexa= new JLabel("Broj indexa*");
+				lblBrIndexa= new JLabel("Broj indexa*");
 				lblBrIndexa.setPreferredSize(dim);
 				JTextField txtBrIndexa=new JTextField();
 				txtBrIndexa.setName("txtIndex");
@@ -202,7 +212,7 @@ public class StudentPanel extends JPanel {
 				
 				//godinaUpisa
 				JPanel panGodinaUpisa = new JPanel(new FlowLayout(FlowLayout.LEFT));
-				JLabel lblGodUpisa=new JLabel("Godina upisa*");
+				lblGodUpisa=new JLabel("Godina upisa*");
 				lblGodUpisa.setPreferredSize(dim);
 				JTextField txtGodinaUpisa=new JTextField();
 				txtGodinaUpisa.setPreferredSize(dim);
@@ -215,7 +225,7 @@ public class StudentPanel extends JPanel {
 				
 				//TrenutnaGodinaStudija
 				JPanel panTrenutnaGodinaStudija = new JPanel(new FlowLayout(FlowLayout.LEFT));
-				JLabel lblTrenutnaGodinaStudija=new JLabel("Trenutna godina studija*");
+				lblTrenutnaGodinaStudija=new JLabel("Trenutna godina studija*");
 				lblTrenutnaGodinaStudija.setPreferredSize(dim);
 				panTrenutnaGodinaStudija.add(lblTrenutnaGodinaStudija);
 				String[] godinaStudiranja= {"I (prva)","II (druga)","III (treća)","IV (četvrta)","Master","Doktorske"};
@@ -225,7 +235,7 @@ public class StudentPanel extends JPanel {
 				
 				//NacinFinansiranja
 				JPanel panNacinFinansiranja = new JPanel(new FlowLayout(FlowLayout.LEFT));
-				JLabel lblNacinFinansiranja=new JLabel("Način finansiranja*");
+				lblNacinFinansiranja=new JLabel("Način finansiranja*");
 				lblNacinFinansiranja.setPreferredSize(dim);
 				panNacinFinansiranja.add(lblNacinFinansiranja);
 				String[] nacinFinansiranja= {"Budžet","Samofinansiranje"};
@@ -260,7 +270,7 @@ public class StudentPanel extends JPanel {
 						if(proveraUnosa.validateTxtFields()) {
 							if(mode) {
 								if(!Validate.validateUniqueIndex(txtBrIndexa.getText())) {
-									JOptionPane.showMessageDialog(null, "Uneli ste već postojeći broj indexa!");
+									JOptionPane.showMessageDialog(null, "Uneli ste postojeći broj indeksa!");
 									return;
 								}
 								StudentiController.getInstance().dodajStudenta();
@@ -271,8 +281,8 @@ public class StudentPanel extends JPanel {
 								StudentiController.getInstance().izmeniStudenta(StudentiJTable.getInstance().getSelectedRow());
 								StudentiIzmenaDialog.getInstance().dispose();
 								}else {
-								JOptionPane.showMessageDialog(null, "Uneli ste već postojeći broj indexa!");
-								return;
+									JOptionPane.showMessageDialog(null, "Uneli ste postojeći broj indeksa!");
+									return;
 								}
 							}
 							return;
@@ -342,4 +352,5 @@ public class StudentPanel extends JPanel {
 		
 		return (listaTxt.get(6).getText().equals(student.getBrojIndexa()))?true:false;
 	}
+	
 }

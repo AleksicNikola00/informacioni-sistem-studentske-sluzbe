@@ -98,13 +98,20 @@ public class ProfesoriController {
 		adresaKanc = listaTxt.get(6).getText();
 		brojLK = listaTxt.get(7).getText();
 		 
-		if(zvanjaComboBox.getSelectedItem().equals("Docent"))
+		if(zvanjaComboBox.getSelectedItem().equals(MainFrame.getInstance().getResourceBundle().getString("docent")))
 			zvanje = "Docent";
-		else if(zvanjaComboBox.getSelectedItem().equals("Vanredni profesor"))
+		else if(zvanjaComboBox.getSelectedItem().equals(MainFrame.getInstance().getResourceBundle().getString("vanredni")))
 			zvanje = "Vanredni profesor";
 		else
 			zvanje = "Redovni profesor";
 		
 		titula = "Doktor nauka";
+	}
+	
+	public void bazaProfesoraChangeLanguage() {
+		ProfesoriJTable.getInstance().getColumnModel().getColumn(0).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("ime"));
+		ProfesoriJTable.getInstance().getColumnModel().getColumn(1).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("prezime"));
+		ProfesoriJTable.getInstance().getColumnModel().getColumn(2).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("zvanje"));
+		ProfesoriJTable.getInstance().getColumnModel().getColumn(3).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("titula"));
 	}
 }

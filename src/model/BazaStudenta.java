@@ -25,12 +25,12 @@ public class BazaStudenta {
 		initStudenti();
 		
 		this.kolone=new ArrayList<String>();
-		this.kolone.add("Indeks");
-		this.kolone.add("Ime");
-		this.kolone.add("Prezime");
-		this.kolone.add("Godina Studija");
-		this.kolone.add("Status");
-		this.kolone.add("Prosek");
+		this.kolone.add("INDEKS");
+		this.kolone.add("IME");
+		this.kolone.add("PREZIME");
+		this.kolone.add("GODINA STUDIJA");
+		this.kolone.add("STATUS");
+		this.kolone.add("PROSEK");
 	}
 	
 	private void initStudenti() {
@@ -134,7 +134,6 @@ public class BazaStudenta {
 			}
 		}
 	}
-	
 	
 }
 

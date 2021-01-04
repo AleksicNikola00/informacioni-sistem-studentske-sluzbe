@@ -27,6 +27,9 @@ public class NepolozeniPredmetiPanel extends JPanel {
 	
 	private static NepolozeniPredmetiPanel instance=null;
 	private JTable tabelaNepolozenihPredmeta;
+	private JButton btnDodaj;
+	private JButton btnObrisi;
+	private JButton btnPolaganje;
 	
 	public JTable getTabelaNepolozenihPredmeta() {
 		return tabelaNepolozenihPredmeta;
@@ -50,11 +53,11 @@ public class NepolozeniPredmetiPanel extends JPanel {
 	private void inicijalizacija(int screenWidth, int screenHeight) {
 		JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		btnPanel.setPreferredSize(new Dimension((3*screenWidth/7),75));
-		JButton btnDodaj = new JButton("Dodaj");
+		btnDodaj = new JButton("Dodaj");
 		btnDodaj.addActionListener(new DodajPredmetStudentu());
-		JButton btnObrisi = new JButton("Ukloni");
+		btnObrisi = new JButton("Ukloni");
 		btnObrisi.addActionListener(new UkloniPredmetStudentu());
-		JButton btnPolaganje = new JButton("Polaganje");
+		btnPolaganje = new JButton("Polaganje");
 		btnPolaganje.addActionListener(new UpisOceneListener());
 		btnPanel.add(Box.createHorizontalStrut(screenWidth/50));
 		btnPanel.add(btnDodaj);
@@ -76,5 +79,11 @@ public class NepolozeniPredmetiPanel extends JPanel {
 		AbstractTableModelPredmeti model = (AbstractTableModelPredmeti)tabelaNepolozenihPredmeta.getModel();
 		model.fireTableDataChanged();
 		validate();
+	}
+	
+	public void nepolozeniPredmetiChangeLanguage() {
+		btnDodaj.setText(MainFrame.getInstance().getResourceBundle().getString("dodaj"));
+		btnObrisi.setText(MainFrame.getInstance().getResourceBundle().getString("ukloni"));
+		btnPolaganje.setText(MainFrame.getInstance().getResourceBundle().getString("btnPolaganje"));
 	}
 }

@@ -21,6 +21,7 @@ public class StudentiIzmenaDialog extends JDialog {
 	private static StudentPanel firstPan;
 	private static PolozeniPredmetiPanel secondPan;
 	private static NepolozeniPredmetiPanel thirdPan;
+	private JTabbedPane panEntities;
 	//private StudentPanel firstPan;
 	
 	public static StudentiIzmenaDialog getInstance() {
@@ -66,7 +67,7 @@ public class StudentiIzmenaDialog extends JDialog {
 		thirdPan = NepolozeniPredmetiPanel.getInstance();
 
 		
-		JTabbedPane panEntities = new JTabbedPane();
+		panEntities = new JTabbedPane();
 		panEntities.add("Informacije",firstPan);
 		panEntities.add("Položeni", secondPan);
 		panEntities.add("Nepoloženi", thirdPan);

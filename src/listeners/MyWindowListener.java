@@ -17,8 +17,8 @@ import view.MainFrame;
 
 public class MyWindowListener implements WindowListener {
 
-private static MyWindowListener instance=null;
-	
+private static MyWindowListener instance=null;	
+
 	private MyWindowListener() {
 		
 	}
@@ -30,7 +30,7 @@ private static MyWindowListener instance=null;
 		}
 		return instance;
 	}
-	
+
 	@Override
 	public void windowActivated(WindowEvent arg0) {
 		// TODO Auto-generated method stub
@@ -46,8 +46,10 @@ private static MyWindowListener instance=null;
 	@Override
 	public void windowClosing(WindowEvent arg0) {
 		JFrame frame =MainFrame.getInstance();
-		int code = JOptionPane.showConfirmDialog(frame, "Da li ste sigurni da želite da zatvorite aplikaciju?",
-				"Zatvaranje aplikacije?", JOptionPane.YES_NO_OPTION);
+		String message = MainFrame.getInstance().getResourceBundle().getString("closeMsg");
+		String title = MainFrame.getInstance().getResourceBundle().getString("closeTitle");
+		int code = JOptionPane.showConfirmDialog(frame, message,
+				title, JOptionPane.YES_NO_OPTION);
 		if (code != JOptionPane.YES_OPTION) {
 			frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		} else {
