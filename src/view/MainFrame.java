@@ -15,8 +15,10 @@ import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import controller.OceneController;
 import controller.PredmetiController;
 import controller.ProfesoriController;
+import controller.StudentiController;
 import listeners.MyWindowListener;
  
 public class MainFrame extends JFrame {
@@ -161,12 +163,18 @@ public class MainFrame extends JFrame {
 		panEntities.setTitleAt(0, MainFrame.getInstance().getResourceBundle().getString("studenti"));
 		panEntities.setTitleAt(1, MainFrame.getInstance().getResourceBundle().getString("profesori"));
 		panEntities.setTitleAt(2, MainFrame.getInstance().getResourceBundle().getString("predmeti"));
-		
-		toolbar.toolbarChangeLanguage();
-		NepolozeniPredmetiPanel.getInstance().nepolozeniPredmetiChangeLanguage();
-		PredmetePredajeProfesorPanel.getInstance().predmetePredajeProfesorChangeLanguage();
-		ProfesoriDodajDialog.getInstance().profesoriDodajDialogChangeLanguage();
-		ProfesoriController.getInstance().bazaProfesoraChangeLanguage();
-		PredmetiController.getInstance().bazaPredmetaChangeLanguage();
+		//
+		myMenuBar.menuChangeLanguage();
+        toolbar.toolbarChangeLanguage();
+        myStatusBar.statusbarChangeLanguage();
+        NepolozeniPredmetiPanel.getInstance().nepolozeniPredmetiChangeLanguage();
+        PredmetePredajeProfesorPanel.getInstance().predmetePredajeProfesorChangeLanguage();
+        PredmetiDodajDialog.getInstance().predmetiDialogChangeLanguage();
+        ProfesoriDodajDialog.getInstance().profesoriDodajDialogChangeLanguage();
+        StudentiDodajDialog.getInstance().studentiDodajDialogChangeLanguage();
+        StudentiController.getInstance().bazaStudentaChangeLanguage();
+        ProfesoriController.getInstance().bazaProfesoraChangeLanguage();
+        OceneController.getInstance().bazaOcenaChangeLanguage();
+        PredmetiController.getInstance().bazaPredmetaChangeLanguage();
 	}
 }

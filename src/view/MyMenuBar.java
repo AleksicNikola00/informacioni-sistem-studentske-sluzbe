@@ -4,8 +4,11 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.Locale;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -37,6 +40,11 @@ public class MyMenuBar extends JMenuBar {
 	private JMenu help;
 	private JMenuItem hHelp;
 	private JMenuItem hAbout;
+	//
+	private JMenu jezici;
+    private JCheckBoxMenuItem jSrpski;
+    private JCheckBoxMenuItem jEngleski;
+	//
 	
 	public MyMenuBar() {
 		file= new JMenu("Fajl");
@@ -81,8 +89,54 @@ public class MyMenuBar extends JMenuBar {
 		add(file);
 		add(edit);
 		add(help);
+		//
+		jezici = new JMenu("Jezici");
+        add(jezici);
+
+        jSrpski = new JCheckBoxMenuItem("Srpski");
+        jSrpski.setSelected(true);
+        jSrpski.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                Locale.setDefault(new Locale("sr", "RS"));
+                MainFrame.getInstance().changeLanguage();
+            }
+        });
+        jezici.add(jSrpski);
+
+        jEngleski = new JCheckBoxMenuItem("Engleski");
+        jEngleski.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                Locale.setDefault(new Locale("en", "US"));
+                MainFrame.getInstance().changeLanguage();
+            }
+        });
+        jezici.add(jEngleski);
+
+        ButtonGroup bg = new ButtonGroup();
+        bg.add(jSrpski);
+        bg.add(jEngleski);
 		
 	}
+	
+	public void menuChangeLanguage() {
+        file.setText(MainFrame.getInstance().getResourceBundle().getString("file"));
+        fNew.setText(MainFrame.getInstance().getResourceBundle().getString("fNew"));
+        fClose.setText(MainFrame.getInstance().getResourceBundle().getString("fClose"));
+        edit.setText(MainFrame.getInstance().getResourceBundle().getString("edit"));
+        eEdit.setText(MainFrame.getInstance().getResourceBundle().getString("edit"));
+        eDelete.setText(MainFrame.getInstance().getResourceBundle().getString("eDelete"));
+        help.setText(MainFrame.getInstance().getResourceBundle().getString("help"));
+        hHelp.setText(MainFrame.getInstance().getResourceBundle().getString("help"));
+        hAbout.setText(MainFrame.getInstance().getResourceBundle().getString("hAbout"));
+        jezici.setText(MainFrame.getInstance().getResourceBundle().getString("jezici"));
+        jSrpski.setText(MainFrame.getInstance().getResourceBundle().getString("jSrpski"));
+        jEngleski.setText(MainFrame.getInstance().getResourceBundle().getString("jEngleski"));
+    }
+	
 	
 	public class MyActionListener1 implements ActionListener{
 		

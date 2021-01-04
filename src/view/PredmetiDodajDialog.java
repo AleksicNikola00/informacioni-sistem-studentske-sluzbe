@@ -241,16 +241,17 @@ public class PredmetiDodajDialog extends JDialog{
 					public void actionPerformed(ActionEvent arg0) {
 						// TODO Auto-generated method stub
 						if(proveraUnosa.validateTxtFields()) {
+							String message = MainFrame.getInstance().getResourceBundle().getString("postojecaSifraError");
 							if(getMode()) {
 								if(!Validate.validateUniqueSifra(txtSifra.getText())) {
-									JOptionPane.showMessageDialog(null, "Uneli ste postojeću šifru!");
+									JOptionPane.showMessageDialog(null, message);
 									return;
 								}
 									PredmetiController.getInstance().dodajPredmet();
 							}
 							else {
 								if(!isSifraSame() && !Validate.validateUniqueSifra(txtSifra.getText())) {
-									JOptionPane.showMessageDialog(null, "Uneli ste postojeću šifru!");
+									JOptionPane.showMessageDialog(null, message);
 									return;
 								}
 								PredmetiController.getInstance().izmeniPredmet(MainFrame.getInstance().getTabelaPredmeta().getSelectedRow());
@@ -259,7 +260,8 @@ public class PredmetiDodajDialog extends JDialog{
 							return;
 						}else {
 							if(txtProfesor.getText().equals("")) {
-								JOptionPane.showMessageDialog(null, "Odaberite profesora!");
+								String message = MainFrame.getInstance().getResourceBundle().getString("invalidProfesor");
+								JOptionPane.showMessageDialog(null, message);
 								btnPotvrdi.setEnabled(false);
 							}
 						}
@@ -301,7 +303,7 @@ public class PredmetiDodajDialog extends JDialog{
 		{
 			int indexPredmeta=MainFrame.getInstance().getTabelaPredmeta().getSelectedRow();
 			Predmet predmet=PredmetiController.getInstance().getPredmet(indexPredmeta);
-			setTitle("Izmen predmet");
+			setTitle(MainFrame.getInstance().getResourceBundle().getString("izmeniPredmet"));
 			listaTxt.get(0).setText(predmet.getSifraPredmeta());
 			listaTxt.get(1).setText(predmet.getNazivPredmeta());
 			listaTxt.get(2).setText(Integer.toString(predmet.getBrojESPB()));
@@ -315,7 +317,7 @@ public class PredmetiDodajDialog extends JDialog{
 				semestarComboBox.setSelectedIndex(1);
 		}
 		else
-			setTitle("Dodaj predmet");
+			setTitle(MainFrame.getInstance().getResourceBundle().getString("dodajPredmet"));
 
 	}
 	
@@ -326,5 +328,19 @@ public class PredmetiDodajDialog extends JDialog{
 		
 		return (listaTxt.get(0).getText().equals(predmet.getSifraPredmeta()))?true:false;
 	}
+	
+	public void predmetiDialogChangeLanguage() {
+        btnPotvrdi.setText(MainFrame.getInstance().getResourceBundle().getString("potvrdi"));
+        btnOdustani.setText(MainFrame.getInstance().getResourceBundle().getString("odustani"));
+        lblSifra.setText(MainFrame.getInstance().getResourceBundle().getString("sifraZvezda"));
+        lblIme.setText(MainFrame.getInstance().getResourceBundle().getString("nazivZvezda"));
+        lblGodinaStudija.setText(MainFrame.getInstance().getResourceBundle().getString("godinaZvezda"));
+        lblSemestar.setText(MainFrame.getInstance().getResourceBundle().getString("semestarZvezda"));
+        lblESPB.setText(MainFrame.getInstance().getResourceBundle().getString("espbZvezda"));
+        lblProfesor.setText(MainFrame.getInstance().getResourceBundle().getString("profesorZvezda"));
+        semestarComboBox.removeAllItems();
+        semestarComboBox.addItem(MainFrame.getInstance().getResourceBundle().getString("letnji"));
+        semestarComboBox.addItem(MainFrame.getInstance().getResourceBundle().getString("zimski"));
+    }
 	
 }

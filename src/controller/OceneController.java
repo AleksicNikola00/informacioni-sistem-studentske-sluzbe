@@ -8,6 +8,7 @@ import model.BazaPredmeta;
 import model.Ocena;
 import model.Predmet;
 import model.Student;
+import view.MainFrame;
 import view.OceneJTable;
 import view.StudentiJTable;
 
@@ -79,5 +80,13 @@ public class OceneController {
 		ocena.getPredmet().getStudentiKojiSuPoloziliPredmet().remove(student);
 		ocena.getPredmet().getStudentiKojiNisuPoloziliPredmet().add(student);
 	}
+	
+	public void bazaOcenaChangeLanguage() {
+        OceneJTable.getInstance().getColumnModel().getColumn(0).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("sifraOcena"));
+        OceneJTable.getInstance().getColumnModel().getColumn(1).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("nazivOcena"));
+        OceneJTable.getInstance().getColumnModel().getColumn(2).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("espb"));
+        OceneJTable.getInstance().getColumnModel().getColumn(3).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("ocena"));
+        OceneJTable.getInstance().getColumnModel().getColumn(4).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("datum"));
+    }
 	
 }

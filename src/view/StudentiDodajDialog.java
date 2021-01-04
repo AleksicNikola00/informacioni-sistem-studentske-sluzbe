@@ -53,4 +53,9 @@ public class StudentiDodajDialog extends JDialog{
 		add(panelDodaj);
 	}
 	
+	public void studentiDodajDialogChangeLanguage() {
+        setTitle(MainFrame.getInstance().getResourceBundle().getString("dodajStudenta"));
+        panelDodaj.studentPanelChangeLanguage();
+    }
+	
 }

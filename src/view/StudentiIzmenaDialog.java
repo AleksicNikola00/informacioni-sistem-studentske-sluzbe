@@ -46,6 +46,11 @@ public class StudentiIzmenaDialog extends JDialog {
 	}
 	
 	public void refreshStudentPanel() {
+		panEntities.setTitleAt(0, MainFrame.getInstance().getResourceBundle().getString("informacije"));
+        panEntities.setTitleAt(1, MainFrame.getInstance().getResourceBundle().getString("polozeni"));
+        panEntities.setTitleAt(2, MainFrame.getInstance().getResourceBundle().getString("nepolozeni"));
+        setTitle(MainFrame.getInstance().getResourceBundle().getString("izmeniStudenta"));
+        //
 		firstPan.refreshJTxtFields();
 		secondPan.refreshPanel();
 		thirdPan.refreshPanel();

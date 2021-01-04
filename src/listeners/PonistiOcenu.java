@@ -16,12 +16,13 @@ public class PonistiOcenu implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		int selectedRow=PolozeniPredmetiPanel.getInstance().getTabelaPolozenihPredmeta().getSelectedRow();
 		if(selectedRow==-1){
-			JOptionPane.showMessageDialog(null, "Odaberite ocenu!");
+			String message = MainFrame.getInstance().getResourceBundle().getString("invalidOcena");
+			JOptionPane.showMessageDialog(null, message);
 			return;
 		}
-		
-		int code = JOptionPane.showConfirmDialog(MainFrame.getInstance(), "Da li ste sigurni da želite poništiti ocenu?",
-					"Poništavanje ocene", JOptionPane.YES_NO_OPTION);
+		String message = MainFrame.getInstance().getResourceBundle().getString("ponistiOcenuMsg");
+        String title = MainFrame.getInstance().getResourceBundle().getString("ponistiOcenuTitle");
+		int code = JOptionPane.showConfirmDialog(MainFrame.getInstance(), message,title, JOptionPane.YES_NO_OPTION);
 		
 		if(code==JOptionPane.YES_OPTION) {
 			//Ocena ocena=OceneJTable.getInstance();

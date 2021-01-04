@@ -267,10 +267,11 @@ public class StudentPanel extends JPanel {
 					@Override
 					
 					public void actionPerformed(ActionEvent e) {
+						String message = MainFrame.getInstance().getResourceBundle().getString("postojeciBrojIndeksa");
 						if(proveraUnosa.validateTxtFields()) {
 							if(mode) {
 								if(!Validate.validateUniqueIndex(txtBrIndexa.getText())) {
-									JOptionPane.showMessageDialog(null, "Uneli ste postojeći broj indeksa!");
+									JOptionPane.showMessageDialog(null, message);
 									return;
 								}
 								StudentiController.getInstance().dodajStudenta();
@@ -281,7 +282,7 @@ public class StudentPanel extends JPanel {
 								StudentiController.getInstance().izmeniStudenta(StudentiJTable.getInstance().getSelectedRow());
 								StudentiIzmenaDialog.getInstance().dispose();
 								}else {
-									JOptionPane.showMessageDialog(null, "Uneli ste postojeći broj indeksa!");
+									JOptionPane.showMessageDialog(null, message);
 									return;
 								}
 							}
@@ -324,6 +325,8 @@ public class StudentPanel extends JPanel {
 	}
 	//pri editu
 	public void refreshJTxtFields() {
+		studentPanelChangeLanguage();
+		//
 		int selectedIndex=StudentiJTable.getInstance().getSelectedRow();
 		Student student=StudentiController.getInstance().getStudent(selectedIndex);
 		DateFormat dateFormat=new SimpleDateFormat("dd.mm.yyyy.");
@@ -353,4 +356,28 @@ public class StudentPanel extends JPanel {
 		return (listaTxt.get(6).getText().equals(student.getBrojIndexa()))?true:false;
 	}
 	
+	public void studentPanelChangeLanguage() {
+        btnPotvrdi.setText(MainFrame.getInstance().getResourceBundle().getString("potvrdi"));
+        btnOdustani.setText(MainFrame.getInstance().getResourceBundle().getString("odustani"));
+        lblIme.setText(MainFrame.getInstance().getResourceBundle().getString("imeZvezda"));
+        lblPrezime.setText(MainFrame.getInstance().getResourceBundle().getString("prezimeZvezda"));
+        lblDatumRodj.setText(MainFrame.getInstance().getResourceBundle().getString("datumRodjZvezda"));
+        lblAdresaStan.setText(MainFrame.getInstance().getResourceBundle().getString("adresaStanZvezda"));
+        lblBrojTel.setText(MainFrame.getInstance().getResourceBundle().getString("brojTelZvezda"));
+        lblEmail.setText(MainFrame.getInstance().getResourceBundle().getString("emailZvezda"));
+        lblBrIndexa.setText(MainFrame.getInstance().getResourceBundle().getString("brIndexZvezda"));
+        lblGodUpisa.setText(MainFrame.getInstance().getResourceBundle().getString("godUpisaZvezda"));
+        lblTrenutnaGodinaStudija.setText(MainFrame.getInstance().getResourceBundle().getString("trenutnaGodinaStudijaZvezda"));
+        lblNacinFinansiranja.setText(MainFrame.getInstance().getResourceBundle().getString("nacinFinansiranjaZvezda"));
+        trenutnaGodinaComboBox.removeAllItems();
+        trenutnaGodinaComboBox.addItem(MainFrame.getInstance().getResourceBundle().getString("prva"));
+        trenutnaGodinaComboBox.addItem(MainFrame.getInstance().getResourceBundle().getString("druga"));
+        trenutnaGodinaComboBox.addItem(MainFrame.getInstance().getResourceBundle().getString("treca"));
+        trenutnaGodinaComboBox.addItem(MainFrame.getInstance().getResourceBundle().getString("cetvrta"));
+        trenutnaGodinaComboBox.addItem(MainFrame.getInstance().getResourceBundle().getString("master"));
+        trenutnaGodinaComboBox.addItem(MainFrame.getInstance().getResourceBundle().getString("doktorske"));
+        nacinFinasiranjaComboBox.removeAllItems();
+        nacinFinasiranjaComboBox.addItem(MainFrame.getInstance().getResourceBundle().getString("budzet"));
+        nacinFinasiranjaComboBox.addItem(MainFrame.getInstance().getResourceBundle().getString("samofinansiranje"));
+    }
 }

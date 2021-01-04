@@ -11,6 +11,7 @@ import javax.swing.JScrollPane;
 
 import model.BazaProfesora;
 import model.Profesor;
+import view.MainFrame;
 import view.PredmetiDodajDialog;
 
 public class DodajPredmetuProfesoraListener implements ActionListener {
@@ -27,7 +28,7 @@ public class DodajPredmetuProfesoraListener implements ActionListener {
 		// TODO Auto-generated method stub
 		
 			
-		Object[] buttons= {"Potvrdi", "Odustani"};
+		Object[] buttons= {MainFrame.getInstance().getResourceBundle().getString("dodaj"), MainFrame.getInstance().getResourceBundle().getString("odustani")};
 		ArrayList<Profesor> listaProfesora=BazaProfesora.getInstance().getProfesori();
 		DefaultListModel<String> dlm=new DefaultListModel<String>();
 		JList<String> list =new JList<String>(dlm);
@@ -39,12 +40,14 @@ public class DodajPredmetuProfesoraListener implements ActionListener {
 		
 		
 		if(list.getModel().getSize()==0) {
-			JOptionPane.showMessageDialog(null, "Nema dostupnih profesora!");
+			String message = MainFrame.getInstance().getResourceBundle().getString("emptyProfesori");
+			JOptionPane.showMessageDialog(null, message);
 			return;
 		}
 			
 		JScrollPane scrollPane= new JScrollPane(list);
-		int result=JOptionPane.showOptionDialog(PredmetiDodajDialog.getInstance(), scrollPane, "Odaberite profesora!",
+		String message = MainFrame.getInstance().getResourceBundle().getString("invalidProfesor");
+		int result=JOptionPane.showOptionDialog(PredmetiDodajDialog.getInstance(), scrollPane, message,
                 JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
                 null, buttons, null);
 		if (result == JOptionPane.YES_OPTION && list.getSelectedValue()!=null){

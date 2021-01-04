@@ -3,8 +3,9 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.text.DateFormat;
+
+import java.util.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -41,9 +42,11 @@ public class MyStatusBar extends JPanel{
 			public void run() {
 				try {
 					while(true) {
-						DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd    HH:mm:ss");  
-						LocalDateTime now = LocalDateTime.now(); 
-						labela2.setText(dtf.format(now));
+						DateFormat df1 = DateFormat.getDateInstance();
+                        DateFormat df2 = DateFormat.getTimeInstance();
+                        String datum = df1.format(new Date());
+                        String vreme = df2.format(new Date());
+                        labela2.setText(datum + "    " + vreme);
 						sleep(1000);
 					}
 				} catch (InterruptedException e) {
@@ -53,5 +56,9 @@ public class MyStatusBar extends JPanel{
 		};
 		clock.start();
 	}
+	
+	public void statusbarChangeLanguage() {
+        labela1.setText(MainFrame.getInstance().getResourceBundle().getString("naslov"));
+    }
 	
 }

@@ -67,10 +67,12 @@ public class PolozeniPredmetiPanel extends JPanel {
 	public void refreshPanel() {
 		int selectedIndex=StudentiJTable.getInstance().getSelectedRow();
 		student=StudentiController.getInstance().getStudent(selectedIndex);
-		//
-		//BazaOcena.getInstance().setOcene(student.getSpisakPolozenihIspita());
 		//postavlja ocene trenutnog studenta
 		OceneController.getInstance().refreshOcene(student.getSpisakPolozenihIspita());
+		//
+		btnPonistiOcenu.setText(MainFrame.getInstance().getResourceBundle().getString("btnPonistiOcenu"));
+		lblProsecnaOcena.setText(MainFrame.getInstance().getResourceBundle().getString("lblProsecnaOcena") + " " +student.getProsecnaOcena());
+        lblESPB.setText(MainFrame.getInstance().getResourceBundle().getString("lblESPB") + " " + student.getBrojESPB());
 		//
 		AbstractTableModelOcene model= (AbstractTableModelOcene)tabelaPolozenihPredmeta.getModel();
 		model.fireTableDataChanged();

@@ -14,6 +14,7 @@ import model.BazaPredmeta;
 import model.Ocena;
 import model.Predmet;
 import model.Student;
+import view.MainFrame;
 import view.NepolozeniPredmetiPanel;
 import view.StudentiIzmenaDialog;
 import view.StudentiJTable;
@@ -28,7 +29,7 @@ public class DodajPredmetStudentu implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		Object[] buttons= {"Dodaj", "Odustani"};
+		Object[] buttons= {MainFrame.getInstance().getResourceBundle().getString("dodaj"), MainFrame.getInstance().getResourceBundle().getString("odustani")};
 		int rowIndex=StudentiJTable.getInstance().getSelectedRow();
 		//student=BazaStudenta.getInstance().getRow(rowIndex);
 		student=StudentiController.getInstance().getStudent(rowIndex);
@@ -45,12 +46,14 @@ public class DodajPredmetStudentu implements ActionListener {
 			}
 		}
 		if(list.getModel().getSize()==0) {
-			JOptionPane.showMessageDialog(null, "Nema dostupnih predmeta!");
+			String message = MainFrame.getInstance().getResourceBundle().getString("emptyPredmeti");
+            JOptionPane.showMessageDialog(null, message);
 			return;
 		}
 		
 		JScrollPane scrollPane= new JScrollPane(list);
-		int result=JOptionPane.showOptionDialog(StudentiIzmenaDialog.getInstance(), scrollPane, "Dodavanje predmeta",
+		String title = MainFrame.getInstance().getResourceBundle().getString("addPredmetTitle");
+		int result=JOptionPane.showOptionDialog(StudentiIzmenaDialog.getInstance(), scrollPane, title,
                 JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
                 null, buttons, null);
 		

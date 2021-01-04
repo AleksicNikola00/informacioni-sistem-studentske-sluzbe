@@ -19,7 +19,8 @@ public class EditActionListener implements ActionListener {
 		if(MainFrame.getInstance().getSelectedIndex() == 0) 
 		{
 			if(StudentiJTable.getInstance().getSelectedRow()==-1) {
-				JOptionPane.showMessageDialog(null, "Odaberite studenta!");
+				  String message = MainFrame.getInstance().getResourceBundle().getString("invalidStudent");
+				JOptionPane.showMessageDialog(null, message);
 			}
 			else {
 				StudentiIzmenaDialog.getInstance().refreshStudentPanel();
@@ -40,7 +41,8 @@ public class EditActionListener implements ActionListener {
 		}
 		else if(MainFrame.getInstance().getSelectedIndex() == 2) {
 			if(MainFrame.getInstance().getTabelaPredmeta().getSelectedRow()==-1){
-				JOptionPane.showMessageDialog(null, "Odaberite predmet!");
+				String message = MainFrame.getInstance().getResourceBundle().getString("invalidPredmet");
+				JOptionPane.showMessageDialog(null, message);
 			}
 			else {
 				PredmetiDodajDialog.getInstance();

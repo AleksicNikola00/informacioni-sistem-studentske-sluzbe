@@ -110,18 +110,28 @@ public class StudentiController {
 		else
 			status=Status.S;
 		
-		if(trenutnaGodinaComboBox.getSelectedItem().equals("I (prva)"))
-			trenutnaGodinaStudija=1;
-		else if(trenutnaGodinaComboBox.getSelectedItem().equals("II (druga)"))
-			trenutnaGodinaStudija=2;
-		else if(trenutnaGodinaComboBox.getSelectedItem().equals("III (treća)"))
-			trenutnaGodinaStudija=3;
-		else if(trenutnaGodinaComboBox.getSelectedItem().equals("IV (četvrta)"))
-			trenutnaGodinaStudija=4;
-		else if(trenutnaGodinaComboBox.getSelectedItem().equals("Master"))
-			trenutnaGodinaStudija=5;
-		else
-			trenutnaGodinaStudija=6;
+		if(trenutnaGodinaComboBox.getSelectedItem().equals(MainFrame.getInstance().getResourceBundle().getString("prva")))
+            trenutnaGodinaStudija=1;
+        else if(trenutnaGodinaComboBox.getSelectedItem().equals(MainFrame.getInstance().getResourceBundle().getString("druga")))
+            trenutnaGodinaStudija=2;
+        else if(trenutnaGodinaComboBox.getSelectedItem().equals(MainFrame.getInstance().getResourceBundle().getString("treca")))
+            trenutnaGodinaStudija=3;
+        else if(trenutnaGodinaComboBox.getSelectedItem().equals(MainFrame.getInstance().getResourceBundle().getString("cetvrta")))
+            trenutnaGodinaStudija=4;
+        else if(trenutnaGodinaComboBox.getSelectedItem().equals(MainFrame.getInstance().getResourceBundle().getString("master")))
+            trenutnaGodinaStudija=5;
+        else
+            trenutnaGodinaStudija=6;
+	
 	}
+	
+	public void bazaStudentaChangeLanguage() {
+        StudentiJTable.getInstance().getColumnModel().getColumn(0).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("indeks"));
+        StudentiJTable.getInstance().getColumnModel().getColumn(1).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("ime"));
+        StudentiJTable.getInstance().getColumnModel().getColumn(2).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("prezime"));
+        StudentiJTable.getInstance().getColumnModel().getColumn(3).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("godinaStudija"));
+        StudentiJTable.getInstance().getColumnModel().getColumn(4).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("status"));
+        StudentiJTable.getInstance().getColumnModel().getColumn(5).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("prosek"));
+    }
 	
 }
