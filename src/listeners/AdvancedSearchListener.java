@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.RowFilter.ComparisonType;
 import javax.swing.table.TableRowSorter;
@@ -49,7 +49,13 @@ public class AdvancedSearchListener implements ActionListener {
 				sorterStudenta.setRowFilter(null);
 			}else {
 			
-			addToList();
+				try {
+					addToList();
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Neispravan format upita! Obavezno unosenje razmaka izmedju elemenata!");
+					sorterStudenta.setRowFilter(null);
+					return;
+				}
 			System.out.println("And or value " + andOr);
 			if(andOr)
 				 serviceFilter = RowFilter.andFilter(Finalfilters);
