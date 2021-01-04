@@ -14,6 +14,7 @@ import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
 import listeners.AddActionListener;
+import listeners.AdvancedSearchListener;
 import listeners.DeleteActionListener;
 import listeners.EditActionListener;
 import listeners.SearchActionListener;
@@ -41,6 +42,8 @@ public class Toolbar extends JToolBar {
 	private JButton btnEdit;
 	private JButton btnDelete;
 	private JButton btnSearch;
+	private AdvancedSearchListener advSearch;
+	private SearchActionListener stdSearch;
 	
 	public JTextField getSearchBox() {
 		return searchBox;
@@ -52,7 +55,8 @@ public class Toolbar extends JToolBar {
 
 	private Toolbar() {
 		super(SwingConstants.HORIZONTAL);
-		
+		advSearch = new AdvancedSearchListener();
+		stdSearch = new SearchActionListener();
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		setLayout(new BorderLayout());
 		
@@ -91,7 +95,7 @@ public class Toolbar extends JToolBar {
         searchBox.setToolTipText("Unesi tekst");
 		
         btnSearch = new JButton();
-        btnSearch.addActionListener(new SearchActionListener());
+        btnSearch.addActionListener(stdSearch);
 		btnSearch.setToolTipText("Traži");
 		btnSearch.setIcon(new ImageIcon("images/pretrazi.jpg"));
 		
@@ -100,6 +104,17 @@ public class Toolbar extends JToolBar {
 		
 		add(toolbarRight, BorderLayout.EAST);
 		
+	}
+	
+	public void changeSearch(boolean mode) {
+		if(mode) {
+			btnSearch.removeActionListener(stdSearch);
+			btnSearch.addActionListener(advSearch);
+		}
+		else {
+			btnSearch.removeActionListener(advSearch);
+			btnSearch.addActionListener(stdSearch);
+		}
 	}
 
 	public void toolbarChangeLanguage() {
