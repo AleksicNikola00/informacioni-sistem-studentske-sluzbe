@@ -124,7 +124,10 @@ private static PredmetiController instance = null;
 			 semestarComboBox= PredmetiDodajDialog.getSemestarComboBox();
 			 sifraPredmeta=txtFieldArray.get(0).getText();
 			 nazivPredmeta=txtFieldArray.get(1).getText();
-			 semestar=(String)semestarComboBox.getSelectedItem();
+			 if(semestarComboBox.getSelectedItem().equals(MainFrame.getInstance().getResourceBundle().getString("letnji")))
+				 semestar = "letnji";
+			 else
+				 semestar = "zimski";
 			 godinaStudija= godinaStudijaComboBox.getSelectedIndex()+1;
 			 brojESPB=Integer.parseInt(txtFieldArray.get(2).getText());
 			 imePrezime=txtFieldArray.get(3).getText().split(" ");

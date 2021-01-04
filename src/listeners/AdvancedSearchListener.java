@@ -47,7 +47,6 @@ public class AdvancedSearchListener implements ActionListener {
 			//
 
 			 niz=Toolbar.getInstance().getSearchBox().getText().split(" ");
-			 System.out.println("Duzina niza "+niz.length);
 			iterator=findBracket(0)+1;
 			if(niz.length<3) {
 				sorterStudenta.setRowFilter(null);
@@ -60,7 +59,6 @@ public class AdvancedSearchListener implements ActionListener {
 					sorterStudenta.setRowFilter(null);
 					return;
 				}
-			System.out.println("And or value " + andOr);
 			if(andOr)
 				 serviceFilter = RowFilter.andFilter(Finalfilters);
 			else
@@ -78,7 +76,6 @@ public class AdvancedSearchListener implements ActionListener {
             Finalfilters = new ArrayList<RowFilter<Object, Object>>();
 
              niz=Toolbar.getInstance().getSearchBox().getText().split(" ");
-             System.out.println("Duzina niza "+niz.length);
             iterator=findBracket(0)+1;
             if(niz.length<3) {
                 sorterPredmeta.setRowFilter(null);
@@ -92,7 +89,6 @@ public class AdvancedSearchListener implements ActionListener {
                     return;
                 }
 
-            System.out.println("And or value " + andOr);
             if(andOr)
                  serviceFilter = RowFilter.andFilter(Finalfilters);
             else
@@ -124,7 +120,6 @@ public class AdvancedSearchListener implements ActionListener {
 					else
 						filter1=RowFilter.orFilter(filters);
 					
-					System.out.println("AndOrInner1: "+andOrInner);
 					Finalfilters.add(filter1);
 					//
 					iterator=i+1;
@@ -146,8 +141,7 @@ public class AdvancedSearchListener implements ActionListener {
 					filter1=RowFilter.andFilter(filters);
 				else
 					filter1=RowFilter.orFilter(filters);
-				
-				System.out.println("AndOrInner2: "+andOrInner);
+		
 				Finalfilters.add(filter1);
 				//
 				if(findBracket(i)==-1)
@@ -158,11 +152,6 @@ public class AdvancedSearchListener implements ActionListener {
 				addToList();
 				break;
 			}
-			
-			System.out.println("----------------------------------------");
-			System.out.println("NIIZ:");
-			System.out.println(niz[i] + "  " + niz[i+1] + " " + niz[i+2] + " ");
-			System.out.println("----------------------------------------");
 			
 			if(niz[i-1].equals("and"))
 				andOrInner=true;
@@ -201,7 +190,6 @@ public class AdvancedSearchListener implements ActionListener {
 		}
 		if(filterNum>0) {
 			filterNum-=filters.size();
-			System.out.println("AndOrInner3: "+andOrInner);
 			if(andOrInner)
 				filter1=RowFilter.andFilter(filters);
 			else
@@ -260,7 +248,6 @@ public class AdvancedSearchListener implements ActionListener {
 
 		}
 		
-		System.out.println("povratni: "+povratni);
 		return povratni;
 	}
 	
