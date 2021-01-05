@@ -53,7 +53,7 @@ private static MyWindowListener instance=null;
 		if (code != JOptionPane.YES_OPTION) {
 			frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		} else {
-			try {
+			/*try {
 				Serialization.sacuvajStudente(BazaStudenta.getInstance().getStudenti(), "student.txt");
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
@@ -79,7 +79,7 @@ private static MyWindowListener instance=null;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 			frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 			System.exit(0);
 		}

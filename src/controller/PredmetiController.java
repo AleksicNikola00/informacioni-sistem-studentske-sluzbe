@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
-
 import model.BazaPredmeta;
 import model.BazaProfesora;
+import model.BazaStudenta;
+import model.Ocena;
 import model.Predmet;
 import model.Profesor;
 import model.Student;
@@ -95,10 +96,20 @@ private static PredmetiController instance = null;
 		Profesor profesor = BazaProfesora.getInstance().getProfesor(predmet.getProfesor().getIme(), predmet.getProfesor().getPrezime());
 		profesor.getPredmeti().remove(predmet);
 		
+		for (Student student : BazaStudenta.getInstance().getStudenti()) {
+			if(student.getSpisakNepolozenihIspita().contains(predmet))
+				student.getSpisakNepolozenihIspita().remove(predmet);
+			System.out.println(student.getBrojIndexa() + " " + predmet.getSifraPredmeta());
+			
+			for(Ocena ocena : student.getSpisakPolozenihIspita())
+				if(ocena.getPredmet().equals(predmet)) {
+					student.getSpisakPolozenihIspita().remove(ocena);
+					break;
+				}
+		}
+		
 		if(mode == 1) 
 			MainFrame.getInstance().azurirajPrikaz();
-		else if(mode == 2)
-			OceneController.getInstance().setPredmet(predmet);
 			
 	}
 	

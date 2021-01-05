@@ -47,7 +47,6 @@ public class UpisOceneDialog extends JDialog {
 	private JTextField txtDatum;
 	private int ocena;
 	private Student student;
-	private int mode;
 	
 	public static UpisOceneDialog getInstance() {
 		if(instance==null)
@@ -85,7 +84,6 @@ public class UpisOceneDialog extends JDialog {
 		txtSifra = new JTextField();
 		txtIme = new JTextField();
 		txtDatum = new JTextField();
-		mode = PredmetiController.getInstance().getMode();
 		
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = kit.getScreenSize();
@@ -158,13 +156,12 @@ public class UpisOceneDialog extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 				if(proveraUnosa.validateTxtFields()) {
 					int row = NepolozeniPredmetiPanel.getInstance().getTabelaNepolozenihPredmeta().getSelectedRow();
-					PredmetiController.getInstance().setMode(2);
-					PredmetiController.getInstance().izbrisiPredmet(row);
-					PredmetiController.getInstance().setMode(mode);
-					Predmet predmet = OceneController.getInstance().getPredmet();
+					Predmet predmet = PredmetiController.getInstance().getPredmet(row);
+					OceneController.getInstance().setPredmet(predmet);
 					
 					int rowIndex=StudentiJTable.getInstance().getSelectedRow();
 					student = StudentiController.getInstance().getStudent(rowIndex);
+					student.getSpisakNepolozenihIspita().remove(predmet);
 					OceneController.getInstance().setStudent(student);
 					predmet.getStudentiKojiSuPoloziliPredmet().add(student);
 					predmet.getStudentiKojiNisuPoloziliPredmet().remove(student);
@@ -190,7 +187,6 @@ public class UpisOceneDialog extends JDialog {
 					OceneController.getInstance().dodajOcenu();
 					
 					StudentiIzmenaDialog.getInstance().refreshStudentPanel();
-					//MainFrame.getInstance().azurirajPrikaz();
 					dispose();
 					return;
 				}

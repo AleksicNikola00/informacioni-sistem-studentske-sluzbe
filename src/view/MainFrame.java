@@ -122,6 +122,7 @@ public class MainFrame extends JFrame {
 		        {
 		        	//BazaPredmeta.getInstance().setPredmeti(true);
 		        	PredmetiController.getInstance().changeList(1);
+		        	azurirajPrikaz();
 		        }
 			
 			}

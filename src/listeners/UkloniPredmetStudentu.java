@@ -33,7 +33,7 @@ public class UkloniPredmetStudentu implements ActionListener {
 		if(code==JOptionPane.YES_OPTION) {
 			Predmet predmet=PredmetiController.getInstance().getPredmet(index);
 			predmet.getStudentiKojiNisuPoloziliPredmet().remove(StudentiController.getInstance().getStudent(studentIndex));
-			PredmetiController.getInstance().izbrisiPredmet(index);
+			//PredmetiController.getInstance().izbrisiPredmet(index);
 			NepolozeniPredmetiPanel.getInstance().refreshPanel();
 		}
 		
