@@ -2,16 +2,12 @@ package listeners;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
-import model.BazaPredmeta;
-import model.BazaProfesora;
-import model.BazaStudenta;
 import serialization.Serialization;
 import view.MainFrame;
 
@@ -53,33 +49,11 @@ private static MyWindowListener instance=null;
 		if (code != JOptionPane.YES_OPTION) {
 			frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		} else {
-			/*try {
-				Serialization.sacuvajStudente(BazaStudenta.getInstance().getStudenti(), "student.txt");
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			try {
-				Serialization.sacuvajProfesore(BazaProfesora.getInstance().getProfesori(), "profesor.txt");
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			try {
-				Serialization.sacuvajPredmete(BazaPredmeta.getInstance().getSviPredmeti(), "predmet.txt");
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
+                Serialization.sacuvajObjekte("objekti.txt");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 			frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 			System.exit(0);
 		}
