@@ -2,19 +2,17 @@ package serialization;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.List;
+
 
 import model.BazaPredmeta;
 import model.BazaProfesora;
 import model.BazaSacuvaj;
 import model.BazaStudenta;
-import model.Predmet;
-import model.Profesor;
-import model.Student;
+
 
 public class Serialization {
 	

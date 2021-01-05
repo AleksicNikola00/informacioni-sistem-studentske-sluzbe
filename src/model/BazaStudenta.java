@@ -17,7 +17,7 @@ public class BazaStudenta {
 		return instance;
 	}
 	
-	private List<Student> studenti;
+	private ArrayList<Student> studenti;
 	private List<String> kolone;
 	
 	private BazaStudenta() {
@@ -44,11 +44,11 @@ public class BazaStudenta {
 		}
 		return null;
 	}
-	public List<Student> getStudenti() {
+	public ArrayList<Student> getStudenti() {
 		return studenti;
 	}
 
-	public void setStudenti(List<Student> studenti) {
+	public void setStudenti(ArrayList<Student> studenti) {
 		this.studenti = studenti;
 	}
 
