@@ -1,4 +1,5 @@
 /controller/
-/view/
-/model/
 /listeners/
+/model/
+/serialization/
+/view/

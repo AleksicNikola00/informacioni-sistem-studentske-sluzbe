@@ -57,7 +57,8 @@ public class DodajProfesoruPredmet implements ActionListener {
 		if (result == JOptionPane.YES_OPTION && list.getSelectedValue()!=null) {
 			String[] niz = list.getSelectedValue().split("-");
 			Predmet predmet = BazaPredmeta.getInstance().getSviPredmet(niz[0]);
-			predmet.getProfesor().getPredmeti().remove(predmet);
+			if(predmet.getProfesor() != null)
+				predmet.getProfesor().getPredmeti().remove(predmet);
 			int index = ProfesoriJTable.getInstance().getSelectedRow();
 			Profesor profesor = ProfesoriController.getInstance().getProfesor(index);
 			predmet.setProfesor(profesor);
