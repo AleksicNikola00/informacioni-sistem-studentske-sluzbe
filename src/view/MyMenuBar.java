@@ -94,6 +94,7 @@ public class MyMenuBar extends JMenuBar {
 		add(help);
 		//
 		jezici = new JMenu("Jezici");
+		jezici.setMnemonic(KeyEvent.VK_J);
         add(jezici);
 
         jSrpski = new JCheckBoxMenuItem("Srpski");
@@ -124,6 +125,8 @@ public class MyMenuBar extends JMenuBar {
         bg.add(jEngleski);
         //
         pretrazi=new JMenu("Vrste pretrage");
+        //hAbout.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,ActionEvent.CTRL_MASK));
+        pretrazi.setMnemonic(KeyEvent.VK_P);
         add(pretrazi);
         
         
