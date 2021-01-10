@@ -1,1 +1,6 @@
 /controller/
+/module-info.class
+/listeners/
+/model/
+/serialization/
+/view/
