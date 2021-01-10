@@ -119,7 +119,8 @@ private static PredmetiController instance = null;
 			return;
 		}
 		Predmet predmet = getPredmet(rowSelectedIndex);
-		predmet.getProfesor().getPredmeti().remove(predmet);
+		if(predmet.getProfesor()!=null)
+			predmet.getProfesor().getPredmeti().remove(predmet);
 		loadFromView();
 		BazaPredmeta.getInstance().izmeniPredmet(predmet.getSifraPredmeta(), sifraPredmeta, nazivPredmeta,
 				semestar, godinaStudija, profesor, brojESPB, 
@@ -141,8 +142,16 @@ private static PredmetiController instance = null;
 				 semestar = "zimski";
 			 godinaStudija= godinaStudijaComboBox.getSelectedIndex()+1;
 			 brojESPB=Integer.parseInt(txtFieldArray.get(2).getText());
-			 imePrezime=txtFieldArray.get(3).getText().split(" ");
-			 profesor=BazaProfesora.getInstance().getProfesor(imePrezime[0], imePrezime[1]);
+			 //
+			// System.out.println();
+			 String imePrezimeProfesora=PredmetiDodajDialog.getTxtProfesor().getText();
+			 if(imePrezimeProfesora.equals("")) {
+				// System.out.println("Jeste null");
+				 profesor=null;
+			 }else {
+				 imePrezime=imePrezimeProfesora.split(" ");
+				 profesor=BazaProfesora.getInstance().getProfesor(imePrezime[0], imePrezime[1]);
+			 }
 	}
 	
 	public void bazaPredmetaChangeLanguage() {

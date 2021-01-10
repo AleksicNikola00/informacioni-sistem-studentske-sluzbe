@@ -59,13 +59,17 @@ public class PredmetiDodajDialog extends JDialog{
 	public static JButton getBtnMinus() {
 		return btnMinus;
 	}
-	
+
 	public static JButton getBtnPlus() {
 		return btnPlus;
 	}
 	
 	public static JTextField getTxtProfesor() {
 		return txtProfesor;
+	}
+	
+	public static void setTxtProfesor(String imePrezime) {
+		txtProfesor.setText(imePrezime);
 	}
 	
 	public static  ArrayList<JTextField> getTxtFields(){
@@ -223,7 +227,7 @@ public class PredmetiDodajDialog extends JDialog{
 				JPanel panBtn = new JPanel();
 				panBtn.setLayout(new BoxLayout(panBtn, BoxLayout.X_AXIS));
 				//JButton btnOdustani = new JButton("Odustani");
-				btnPotvrdi.setEnabled(false);
+				btnPotvrdi.setEnabled(true);
 				panBtn.add(btnPotvrdi);
 				panBtn.add(Box.createHorizontalStrut(25));
 				panBtn.add(btnOdustani);
@@ -273,7 +277,7 @@ public class PredmetiDodajDialog extends JDialog{
 		listaTxt.add(txtSifra);
 		listaTxt.add(txtIme);
 		listaTxt.add(txtESPB);
-		listaTxt.add(txtProfesor);
+		//listaTxt.add(txtProfesor);
 		
 		//uredi view
 		Box box=Box.createVerticalBox();
@@ -307,10 +311,21 @@ public class PredmetiDodajDialog extends JDialog{
 			listaTxt.get(0).setText(predmet.getSifraPredmeta());
 			listaTxt.get(1).setText(predmet.getNazivPredmeta());
 			listaTxt.get(2).setText(Integer.toString(predmet.getBrojESPB()));
-			listaTxt.get(3).setText(predmet.getProfesor().getIme()+" "+predmet.getProfesor().getPrezime());
+			//listaTxt.get(3).setText(predmet.getProfesor().getIme()+" "+predmet.getProfesor().getPrezime());
+			if(predmet.getProfesor()!=null) {
+				setTxtProfesor(predmet.getProfesor().getIme()+" "+predmet.getProfesor().getPrezime());
+				btnPlus.setEnabled(false);
+				btnMinus.setEnabled(true);
+			}
+			else
+			{
+				setTxtProfesor("");
+				btnPlus.setEnabled(true);
+				btnMinus.setEnabled(false);
+			}
 			godinaStudijaComboBox.setSelectedIndex(predmet.getGodinaStudija()-1);
-			btnPlus.setEnabled(false);
-			btnMinus.setEnabled(true);
+			//btnPlus.setEnabled(false);
+			//btnMinus.setEnabled(true);
 			if(predmet.getSemestar().equals(MainFrame.getInstance().getResourceBundle().getString("letnji")))
 				semestarComboBox.setSelectedIndex(0);//letnji
 			else
