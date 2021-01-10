@@ -92,14 +92,14 @@ private static PredmetiController instance = null;
 		
 		Predmet predmet=getPredmet(rowSelectedIndex);
 		BazaPredmeta.getInstance().izbrisiPredmet(predmet.getSifraPredmeta());
-		
-		Profesor profesor = BazaProfesora.getInstance().getProfesor(predmet.getProfesor().getIme(), predmet.getProfesor().getPrezime());
-		profesor.getPredmeti().remove(predmet);
-		
+		if(predmet.getProfesor()!=null) {
+			Profesor profesor = BazaProfesora.getInstance().getProfesor(predmet.getProfesor().getIme(), predmet.getProfesor().getPrezime());
+			profesor.getPredmeti().remove(predmet);
+		}
 		for (Student student : BazaStudenta.getInstance().getStudenti()) {
 			if(student.getSpisakNepolozenihIspita().contains(predmet))
 				student.getSpisakNepolozenihIspita().remove(predmet);
-			System.out.println(student.getBrojIndexa() + " " + predmet.getSifraPredmeta());
+			//System.out.println(student.getBrojIndexa() + " " + predmet.getSifraPredmeta());
 			
 			for(Ocena ocena : student.getSpisakPolozenihIspita())
 				if(ocena.getPredmet().equals(predmet)) {

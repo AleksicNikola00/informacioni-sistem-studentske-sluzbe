@@ -27,11 +27,15 @@ public class Validate {
 	
 	public static boolean validateProfesorAddedToSubject(Profesor profesor) {
 		boolean exists=false;
+		if(profesor==null)
+			return exists;
 		ArrayList<Predmet> predmeti = BazaPredmeta.getInstance().getSviPredmeti();
 		for (Predmet predmet : predmeti) {
-			if(profesor.getIme().equals(predmet.getProfesor().getIme()) && profesor.getPrezime().equals(predmet.getProfesor().getPrezime())) {
-				exists=true;
-				break;
+			if(predmet.getProfesor()!=null) {
+				if(profesor.getIme().equals(predmet.getProfesor().getIme()) && profesor.getPrezime().equals(predmet.getProfesor().getPrezime())) {
+					exists=true;
+					break;
+				}
 			}
 		}
 		
