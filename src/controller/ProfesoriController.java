@@ -49,11 +49,12 @@ public class ProfesoriController {
 			return;
 		}
 		
-		Profesor profesor = this.getProfesor(rowSelectedIndex);
 		loadFromView(false);
 		
+		Profesor profesor = getProfesor(rowSelectedIndex);
+		
 		BazaProfesora.getInstance().izmeniProfesora(profesor.getIme(), profesor.getPrezime(), ime, prezime, zvanje, titula, datumRodj, 
-				adresaStan, telefon, email, adresaKanc, brojLK, new ArrayList<Predmet>());
+				adresaStan, telefon, email, adresaKanc, brojLK, profesor.getPredmeti());
 		
 		MainFrame.getInstance().azurirajPrikaz();
 	}
