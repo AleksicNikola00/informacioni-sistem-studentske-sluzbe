@@ -124,7 +124,7 @@ private static PredmetiController instance = null;
 		loadFromView();
 		BazaPredmeta.getInstance().izmeniPredmet(predmet.getSifraPredmeta(), sifraPredmeta, nazivPredmeta,
 				semestar, godinaStudija, profesor, brojESPB, 
-				new ArrayList<Student>(), new ArrayList<Student>());
+				predmet.getStudentiKojiSuPoloziliPredmet(), predmet.getStudentiKojiNisuPoloziliPredmet());
 		
 		MainFrame.getInstance().azurirajPrikaz();
 	}

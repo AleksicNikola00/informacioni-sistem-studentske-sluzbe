@@ -220,17 +220,17 @@ public class AdvancedSearchListener implements ActionListener {
 	public int getColumn(String string) {
 		
 		int column=-1;
-		if(string.equals("ime") || string.equals("naziv"))
+		if(string.equals("ime") || string.equals("name") || string.equals("naziv"))
 			column=1;
-		else if(string.equals("prezime") || string.equals("espb"))
+		else if(string.equals("prezime") || string.equals("surname") || string.equals("espb"))
 			column=2;
-		else if(string.equals("godina"))
+		else if(string.equals("year"))
 			column=3;
-		else if(string.equals("semestar"))
+		else if(string.equals("semestar") || string.equals("semester"))
             column=4;
-		else if(string.equals("prosek"))
+		else if(string.equals("prosek") ||string.equals("average") )
 			column =5;
-		else if(string.equals("indeks") || string.equals("sifra"))
+		else if(string.equals("indeks")||string.equals("index") || string.equals("sifra"))
 			column=0;
 		
 		return column;
