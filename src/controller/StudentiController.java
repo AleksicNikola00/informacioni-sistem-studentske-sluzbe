@@ -69,14 +69,14 @@ public class StudentiController {
 		if (rowSelectedIndex < 0) {
 			return;
 		}
-		String brIndex=(String)StudentiJTable.getInstance().getValueAt(rowSelectedIndex, 0);
+		//String brIndex=(String)StudentiJTable.getInstance().getValueAt(rowSelectedIndex, 0);
 		//
 		loadFromView(false);
 		//
-		BazaStudenta.getInstance().izmeniStudenta(brIndex, ime, prezime,datum,
-				adresa,brTelefona, email, brIndexa, godinaUpisa,trenutnaGodinaStudija,status, 0, new ArrayList<Ocena>(), 
-				new ArrayList<Predmet>());
-		
+		Student student=getStudent(rowSelectedIndex);
+		BazaStudenta.getInstance().izmeniStudenta(student.getBrojIndexa(), ime, prezime,datum,
+				adresa,brTelefona, email, brIndexa, godinaUpisa,trenutnaGodinaStudija,status, student.getProsecnaOcena(), student.getSpisakPolozenihIspita(), 
+				student.getSpisakNepolozenihIspita());
 		MainFrame.getInstance().azurirajPrikaz();
 	}
 	
