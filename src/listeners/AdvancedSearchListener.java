@@ -224,13 +224,13 @@ public class AdvancedSearchListener implements ActionListener {
 			column=1;
 		else if(string.equals("prezime") || string.equals("surname") || string.equals("espb"))
 			column=2;
-		else if(string.equals("year"))
+		else if(string.equals("godina") || string.equals("year"))
 			column=3;
 		else if(string.equals("semestar") || string.equals("semester"))
             column=4;
 		else if(string.equals("prosek") ||string.equals("average") )
 			column =5;
-		else if(string.equals("indeks")||string.equals("index") || string.equals("sifra"))
+		else if(string.equals("indeks")||string.equals("index") || string.equals("sifra") || string.equals("code"))
 			column=0;
 		
 		return column;
