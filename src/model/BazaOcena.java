@@ -78,9 +78,10 @@ public class BazaOcena {
 	
 	public Ocena ponistiOcenu(String brIndexa,String sifraPredmeta) {
 		for (Ocena ocena : ocene) {
-			if(ocena.getStudent().getBrojIndexa().equals(brIndexa) && ocena.getPredmet().getSifraPredmeta().equals(sifraPredmeta))
+			if(ocena.getStudent().getBrojIndexa().equals(brIndexa) && ocena.getPredmet().getSifraPredmeta().equals(sifraPredmeta)) {
 				this.ocene.remove(ocena);
 			return ocena;
+			}
 		}
 		return null;
 	}

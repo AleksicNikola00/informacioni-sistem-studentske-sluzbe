@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import controller.PredmetiController;
 import controller.StudentiController;
 import model.Predmet;
+import model.Student;
 import view.MainFrame;
 import view.NepolozeniPredmetiPanel;
 import view.StudentiJTable;
@@ -20,6 +21,7 @@ public class UkloniPredmetStudentu implements ActionListener {
 		// TODO Auto-generated method stub
 		int index=NepolozeniPredmetiPanel.getInstance().getTabelaNepolozenihPredmeta().getSelectedRow();
 		int studentIndex=StudentiJTable.getInstance().getSelectedRow();
+		Student student =StudentiController.getInstance().getStudent(studentIndex);
 		if(index==-1) {
 			String message = MainFrame.getInstance().getResourceBundle().getString("invalidPredmet");
             JOptionPane.showMessageDialog(null, message);
@@ -32,7 +34,8 @@ public class UkloniPredmetStudentu implements ActionListener {
 		
 		if(code==JOptionPane.YES_OPTION) {
 			Predmet predmet=PredmetiController.getInstance().getPredmet(index);
-			predmet.getStudentiKojiNisuPoloziliPredmet().remove(StudentiController.getInstance().getStudent(studentIndex));
+			predmet.getStudentiKojiNisuPoloziliPredmet().remove(student);
+			student.getSpisakNepolozenihIspita().remove(predmet);
 			//PredmetiController.getInstance().izbrisiPredmet(index);
 			NepolozeniPredmetiPanel.getInstance().refreshPanel();
 		}
